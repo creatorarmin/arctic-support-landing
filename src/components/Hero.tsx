@@ -1,68 +1,78 @@
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero pt-16">
-      <div className="container relative z-10 mx-auto px-6">
-        <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-2 text-sm text-muted-foreground"
-            >
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span>AI-Powered Customer Service</span>
-            </motion.div>
-            
-            {/* Headline */}
-            <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              Automate Support.
-              <br />
-              <span className="text-gradient">Delight Customers.</span>
-            </h1>
-            
-            {/* Subheadline */}
-            <p className="mb-10 max-w-xl text-lg text-muted-foreground sm:text-xl">
-              Resolve 80% of customer inquiries instantly with intelligent automation. 
-              Reduce response times, cut costs, and scale support effortlessly.
+    <section className="relative min-h-[90vh] flex items-center pt-16">
+      <div className="container mx-auto px-6">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+          {/* Left content */}
+          <div className="max-w-xl">
+            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-muted-foreground">
+              Customer Service Solutions
             </p>
             
-            {/* CTAs */}
+            <h1 className="mb-6 text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">
+              Better support for your growing business
+            </h1>
+            
+            <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
+              We help companies deliver exceptional customer experiences through 
+              smart automation and dedicated support teams. Less waiting, more solving.
+            </p>
+            
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button variant="hero" size="xl">
-                Start Free Trial
-                <ArrowRight className="ml-1 h-5 w-5" />
+              <Button size="lg">
+                Start a conversation
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="heroOutline" size="xl">
-                Watch Demo
+              <Button variant="outline" size="lg">
+                See how it works
               </Button>
             </div>
-            
-            {/* Social proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-              className="mt-16"
-            >
-              <p className="mb-4 text-sm text-muted-foreground">Trusted by 500+ companies worldwide</p>
-              <div className="flex flex-wrap items-center gap-8 opacity-50">
-                <div className="text-lg font-semibold text-foreground">Acme Inc</div>
-                <div className="text-lg font-semibold text-foreground">TechCorp</div>
-                <div className="text-lg font-semibold text-foreground">GlobalFin</div>
-                <div className="text-lg font-semibold text-foreground">CloudBase</div>
+          </div>
+
+          {/* Right side - Simple visual */}
+          <div className="hidden lg:block">
+            <div className="relative">
+              <div className="aspect-square max-w-md mx-auto rounded-2xl bg-card border border-border p-8">
+                <div className="h-full flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-primary/20" />
+                      <div className="space-y-1.5">
+                        <div className="h-3 w-24 rounded bg-muted" />
+                        <div className="h-2 w-16 rounded bg-muted/60" />
+                      </div>
+                    </div>
+                    <div className="rounded-lg bg-muted/50 p-4">
+                      <div className="h-2 w-3/4 rounded bg-muted" />
+                      <div className="mt-2 h-2 w-1/2 rounded bg-muted" />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 justify-end">
+                      <div className="space-y-1.5 text-right">
+                        <div className="h-3 w-20 rounded bg-primary/30 ml-auto" />
+                        <div className="h-2 w-14 rounded bg-primary/20 ml-auto" />
+                      </div>
+                      <div className="h-10 w-10 rounded-full bg-primary/30" />
+                    </div>
+                    <div className="rounded-lg bg-primary/10 p-4 ml-8">
+                      <div className="h-2 w-3/4 rounded bg-primary/20" />
+                      <div className="mt-2 h-2 w-full rounded bg-primary/20" />
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3 rounded-lg border border-border bg-background p-3">
+                    <div className="h-2 flex-1 rounded bg-muted/40" />
+                    <div className="h-8 w-8 rounded bg-primary/20" />
+                  </div>
+                </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
