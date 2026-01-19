@@ -13,9 +13,6 @@ const CTA = () => {
           transition={{ duration: 0.6 }}
           className="relative overflow-hidden rounded-3xl border border-border bg-gradient-card p-12 text-center sm:p-16"
         >
-          {/* Background glow */}
-          <div className="absolute inset-0 bg-primary/5" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px]" />
 
           <div className="relative z-10">
             <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">

@@ -53,8 +53,8 @@ const HowItWorks = () => {
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 } items-center gap-8`}
               >
-                {/* Number circle */}
-                <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-primary bg-background text-xl font-bold text-primary shadow-glow">
+              {/* Number circle */}
+                <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-primary bg-background text-xl font-bold text-primary">
                   {step.number}
                 </div>
 
