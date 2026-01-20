@@ -9,25 +9,25 @@ const Hero = () => {
           {/* Left content */}
           <div className="max-w-xl">
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-              Customer Service Solutions
+              Kundtjänstlösningar
             </p>
             
             <h1 className="mb-6 text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">
-              Better support for your growing business
+              Bättre support för växande företag
             </h1>
             
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              We help companies deliver exceptional customer experiences through 
-              smart automation and dedicated support teams. Less waiting, more solving.
+              Vi hjälper företag att leverera enastående kundupplevelser genom 
+              smart automatisering och dedikerade supportteam. Mindre väntan, fler lösningar.
             </p>
             
             <div className="flex flex-col gap-4 sm:flex-row">
               <Button size="lg">
-                Start a conversation
+                Boka ett samtal
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button variant="outline" size="lg">
-                See how it works
+                Se hur det fungerar
               </Button>
             </div>
           </div>

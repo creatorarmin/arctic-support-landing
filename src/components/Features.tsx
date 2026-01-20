@@ -3,31 +3,31 @@ import { Clock, Users, TrendingUp } from "lucide-react";
 const features = [
   {
     icon: Clock,
-    title: "Faster response times",
-    description: "Reduce average response time by 70%. Customers get answers quickly, whether through automation or your team.",
+    title: "Snabbare svarstider",
+    description: "Minska genomsnittlig svarstid med 70%. Era kunder får snabba svar, oavsett om det är genom automatisering eller ert team.",
   },
   {
     icon: Users,
-    title: "Happier customers",
-    description: "Consistent, helpful support builds loyalty. Our clients see a 40% improvement in satisfaction scores.",
+    title: "Nöjdare kunder",
+    description: "Konsekvent och hjälpsam support bygger lojalitet. Våra kunder ser i snitt 40% högre kundnöjdhet.",
   },
   {
     icon: TrendingUp,
-    title: "Scale with ease",
-    description: "Handle 10x more inquiries without 10x the cost. Grow your support capacity intelligently.",
+    title: "Skala enkelt",
+    description: "Hantera tio gånger fler ärenden utan tio gånger högre kostnader. Väx smart och hållbart.",
   },
 ];
 
 const Features = () => {
   return (
-    <section id="solutions" className="py-24 sm:py-32">
+    <section id="losningar" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Why companies choose us
+            Därför väljer företag oss
           </p>
           <h2 className="text-3xl text-foreground sm:text-4xl lg:text-5xl">
-            Support that actually works
+            Support som faktiskt fungerar
           </h2>
         </div>
 

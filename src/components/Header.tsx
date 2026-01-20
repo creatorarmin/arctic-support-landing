@@ -9,26 +9,26 @@ const Header = () => {
         </span>
         
         <nav className="hidden items-center gap-8 md:flex">
-          <a href="#solutions" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Solutions
+          <a href="#losningar" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Lösningar
           </a>
-          <a href="#about" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            About
+          <a href="#om-oss" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Om oss
           </a>
-          <a href="#pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Pricing
+          <a href="#priser" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Priser
           </a>
-          <a href="#contact" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Contact
+          <a href="#kontakt" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Kontakt
           </a>
         </nav>
         
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm">
-            Sign in
+            Logga in
           </Button>
           <Button size="sm">
-            Get in touch
+            Kontakta oss
           </Button>
         </div>
       </div>

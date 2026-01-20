@@ -1,28 +1,28 @@
 const About = () => {
   return (
-    <section id="about" className="py-24 sm:py-32">
+    <section id="om-oss" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
           <div>
             <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-              About us
+              Om oss
             </p>
             <h2 className="mb-6 text-3xl text-foreground sm:text-4xl lg:text-5xl">
-              Built by people who understand service
+              Byggd av människor som förstår service
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                We started AutoServe because we saw businesses struggling with the same 
-                problem: growing customer expectations and limited resources.
+                Vi startade AutoServe för att vi såg hur företag kämpade med samma 
+                utmaning: ökande kundförväntningar och begränsade resurser.
               </p>
               <p>
-                Our team combines decades of customer service experience with practical 
-                technology solutions. We're not about replacing people—we're about 
-                helping them do their best work.
+                Vårt team kombinerar decenniers erfarenhet inom kundservice med 
+                praktiska tekniklösningar. Vi handlar inte om att ersätta människor – 
+                vi handlar om att hjälpa dem göra sitt bästa arbete.
               </p>
               <p>
-                Today, we work with companies of all sizes to create support experiences 
-                that customers actually appreciate.
+                Idag arbetar vi med företag i alla storlekar för att skapa 
+                supportupplevelser som kunderna verkligen uppskattar.
               </p>
             </div>
           </div>
@@ -30,19 +30,19 @@ const About = () => {
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-xl bg-card border border-border p-6">
               <div className="text-2xl font-semibold text-foreground mb-1">2019</div>
-              <div className="text-sm text-muted-foreground">Founded</div>
+              <div className="text-sm text-muted-foreground">Grundat</div>
             </div>
             <div className="rounded-xl bg-card border border-border p-6">
               <div className="text-2xl font-semibold text-foreground mb-1">85</div>
-              <div className="text-sm text-muted-foreground">Team members</div>
+              <div className="text-sm text-muted-foreground">Medarbetare</div>
             </div>
             <div className="rounded-xl bg-card border border-border p-6">
               <div className="text-2xl font-semibold text-foreground mb-1">12</div>
-              <div className="text-sm text-muted-foreground">Countries</div>
+              <div className="text-sm text-muted-foreground">Länder</div>
             </div>
             <div className="rounded-xl bg-card border border-border p-6">
-              <div className="text-2xl font-semibold text-foreground mb-1">$50M+</div>
-              <div className="text-sm text-muted-foreground">Saved for clients</div>
+              <div className="text-2xl font-semibold text-foreground mb-1">500M+</div>
+              <div className="text-sm text-muted-foreground">Sparat för kunder</div>
             </div>
           </div>
         </div>
