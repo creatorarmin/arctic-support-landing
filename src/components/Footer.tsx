@@ -6,17 +6,17 @@ const Footer = () => {
           <span className="text-lg font-semibold text-foreground">AutoServe</span>
           
           <nav className="flex flex-wrap items-center justify-center gap-6">
-            <a href="#solutions" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              Solutions
+            <a href="#losningar" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Lösningar
             </a>
-            <a href="#about" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              About
+            <a href="#om-oss" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Om oss
             </a>
-            <a href="#contact" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              Contact
+            <a href="#kontakt" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Kontakt
             </a>
             <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              Privacy
+              Integritetspolicy
             </a>
           </nav>
           
