@@ -1,10 +1,10 @@
-import { Target, TrendingDown, Smile, Clock } from "lucide-react";
+import { Target, TrendingDown, Smile, CalendarClock } from "lucide-react";
 
 const stats = [
   { icon: Target, label: "Ökad noggrannhet" },
   { icon: TrendingDown, label: "Sänkta kostnader" },
   { icon: Smile, label: "Förbättrad kundupplevelse" },
-  { icon: Clock, label: "Support dygnet runt" },
+  { icon: CalendarClock, label: "Support dygnet runt" },
 ];
 
 const Stats = () => {
@@ -15,7 +15,7 @@ const Stats = () => {
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="flex justify-center">
-                <stat.icon className="h-10 w-10 text-primary" strokeWidth={1.5} />
+                <stat.icon className="h-10 w-10 text-foreground" strokeWidth={1.5} />
               </div>
               <div className="mt-3 text-sm text-muted-foreground">
                 {stat.label}
