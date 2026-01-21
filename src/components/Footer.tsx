@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-border py-12">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+        <div className="flex flex-col items-center gap-6">
           <div className="flex items-center gap-2">
             <Logo className="h-7 w-7" />
             <span className="text-lg font-semibold text-foreground">Kundra</span>
