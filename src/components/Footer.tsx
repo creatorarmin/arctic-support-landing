@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="flex items-center gap-2">
-            <Logo className="h-7 w-7" />
+            <Logo className="h-10 w-10" />
             <span className="text-lg font-semibold text-foreground">Kundra</span>
           </div>
           
