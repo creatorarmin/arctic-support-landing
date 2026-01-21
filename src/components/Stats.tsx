@@ -20,8 +20,8 @@ const AnimatedCounter = ({
   endValue, 
   suffix, 
   startValue = 0, 
-  duration = 2000 
-}: { 
+  duration = 3500 
+}: {
   endValue: number; 
   suffix: string; 
   startValue?: number; 
