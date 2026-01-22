@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import kundraAppImage from "@/assets/kundra-ai-assistant.png";
+import { Mic } from "lucide-react";
 
 const About = () => {
   return (
@@ -30,22 +30,8 @@ const About = () => {
             </div>
           </div>
           
-          {/* Smartphone mockup */}
+          {/* Smartphone mockup with live demo */}
           <div className="relative flex justify-center lg:justify-end">
-            {/* Glow effect behind the phone */}
-            <motion.div 
-              className="absolute inset-0 blur-3xl opacity-20 bg-gradient-to-br from-primary via-primary/50 to-transparent rounded-full"
-              animate={{ 
-                scale: [1, 1.1, 1],
-                opacity: [0.15, 0.25, 0.15]
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-            />
-            
             <motion.div 
               className="relative"
               initial={{ opacity: 0, y: 30 }}
@@ -58,38 +44,111 @@ const About = () => {
                 {/* Phone outer frame */}
                 <div className="relative rounded-[3rem] bg-gradient-to-b from-zinc-700 to-zinc-900 p-2 shadow-2xl">
                   {/* Phone inner bezel */}
-                  <div className="relative overflow-hidden rounded-[2.5rem] bg-black">
+                  <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0d1117]">
                     {/* Notch */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-6 w-28 rounded-b-2xl bg-black" />
                     
-                    {/* Screen content */}
-                    <div className="relative aspect-[9/19] overflow-hidden">
-                      {/* App screenshot */}
-                      <img 
-                        src={kundraAppImage} 
-                        alt="Kundra AI-Assistent Demo" 
-                        className="w-full h-full object-cover object-top"
-                      />
+                    {/* Screen content - Live Demo UI */}
+                    <div className="relative aspect-[9/19] p-6 pt-10 flex flex-col">
+                      {/* App header */}
+                      <div className="text-center mb-6">
+                        <motion.h3 
+                          className="text-primary font-semibold text-lg italic"
+                          animate={{ opacity: [0.8, 1, 0.8] }}
+                          transition={{ duration: 3, repeat: Infinity }}
+                        >
+                          AI-Assistent
+                        </motion.h3>
+                        <p className="text-muted-foreground text-xs mt-1">Demo</p>
+                      </div>
                       
-                      {/* Shimmer effect overlay */}
+                      {/* Status bar */}
                       <motion.div 
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12"
-                        animate={{ x: ["-200%", "200%"] }}
-                        transition={{ duration: 3, repeat: Infinity, repeatDelay: 3 }}
-                      />
+                        className="bg-muted/30 rounded-full py-2 px-4 mb-6 flex items-center justify-center gap-2"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        viewport={{ once: true }}
+                      >
+                        <motion.div 
+                          className="w-2 h-2 rounded-full bg-emerald-500"
+                          animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                        <span className="text-xs text-muted-foreground">Ansluten</span>
+                      </motion.div>
                       
-                      {/* Animated pulse on the mic button area */}
+                      {/* Audio waveform visualization */}
+                      <div className="flex-1 flex items-center justify-center">
+                        <div className="flex items-center gap-1">
+                          {[...Array(12)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className="w-1.5 bg-primary/80 rounded-full"
+                              animate={{
+                                height: [8, 24 + Math.random() * 20, 8],
+                              }}
+                              transition={{
+                                duration: 0.8 + Math.random() * 0.4,
+                                repeat: Infinity,
+                                delay: i * 0.1,
+                                ease: "easeInOut",
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Mic button */}
+                      <div className="flex justify-center mb-6">
+                        <motion.div 
+                          className="relative"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          {/* Pulse rings */}
+                          <motion.div
+                            className="absolute inset-0 rounded-full bg-primary/30"
+                            animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          />
+                          <motion.div
+                            className="absolute inset-0 rounded-full bg-primary/20"
+                            animate={{ scale: [1, 2.2], opacity: [0.3, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+                          />
+                          
+                          <motion.div 
+                            className="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center"
+                            animate={{ 
+                              boxShadow: [
+                                "0 0 20px hsl(var(--primary) / 0.4)",
+                                "0 0 40px hsl(var(--primary) / 0.6)",
+                                "0 0 20px hsl(var(--primary) / 0.4)"
+                              ]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
+                            <Mic className="w-7 h-7 text-primary-foreground" />
+                          </motion.div>
+                        </motion.div>
+                      </div>
+                      
+                      {/* Chat response area */}
                       <motion.div 
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 w-20 h-20 rounded-full"
-                        animate={{ 
-                          boxShadow: [
-                            "0 0 0 0 hsl(var(--primary) / 0.4)",
-                            "0 0 0 20px hsl(var(--primary) / 0)",
-                            "0 0 0 0 hsl(var(--primary) / 0)"
-                          ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-                      />
+                        className="bg-muted/20 rounded-xl p-4 border border-border/30"
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        viewport={{ once: true }}
+                      >
+                        <motion.p 
+                          className="text-sm text-muted-foreground"
+                          animate={{ opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          "Hur kan jag hjälpa dig idag?"
+                        </motion.p>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
