@@ -6,12 +6,14 @@ import About from "@/components/About";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import BackgroundTextures from "@/components/BackgroundTextures";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen bg-background">
+      <BackgroundTextures />
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Stats />
         <Features />
