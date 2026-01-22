@@ -42,7 +42,7 @@ const About = () => {
               {/* Phone frame */}
               <div className="relative mx-auto w-[280px] sm:w-[320px]">
                 {/* Phone outer frame */}
-                <div className="relative rounded-[3rem] bg-gradient-to-b from-white to-zinc-200 p-2 shadow-2xl">
+                <div className="relative rounded-[3rem] bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 p-2 shadow-2xl">
                   {/* Phone inner bezel */}
                   <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0d1117]">
                     {/* Notch */}
@@ -154,10 +154,10 @@ const About = () => {
                 </div>
                 
                 {/* Side buttons */}
-                <div className="absolute left-0 top-24 h-8 w-1 rounded-l-sm bg-zinc-300" />
-                <div className="absolute left-0 top-36 h-12 w-1 rounded-l-sm bg-zinc-300" />
-                <div className="absolute left-0 top-52 h-12 w-1 rounded-l-sm bg-zinc-300" />
-                <div className="absolute right-0 top-36 h-16 w-1 rounded-r-sm bg-zinc-300" />
+                <div className="absolute left-0 top-24 h-8 w-1 rounded-l-sm bg-zinc-600" />
+                <div className="absolute left-0 top-36 h-12 w-1 rounded-l-sm bg-zinc-600" />
+                <div className="absolute left-0 top-52 h-12 w-1 rounded-l-sm bg-zinc-600" />
+                <div className="absolute right-0 top-36 h-16 w-1 rounded-r-sm bg-zinc-600" />
               </div>
             </motion.div>
           </div>
