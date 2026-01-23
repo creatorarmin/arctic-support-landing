@@ -32,8 +32,113 @@ const About = () => {
           
           {/* Smartphone mockup with live demo */}
           <div className="relative flex justify-center lg:justify-end">
+            {/* Abstract network background */}
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+              <svg 
+                className="absolute w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] opacity-20"
+                viewBox="0 0 400 400"
+              >
+                {/* Network nodes */}
+                {[
+                  { cx: 50, cy: 100, delay: 0 },
+                  { cx: 120, cy: 50, delay: 0.2 },
+                  { cx: 200, cy: 80, delay: 0.4 },
+                  { cx: 280, cy: 40, delay: 0.6 },
+                  { cx: 350, cy: 90, delay: 0.8 },
+                  { cx: 30, cy: 200, delay: 0.3 },
+                  { cx: 370, cy: 180, delay: 0.5 },
+                  { cx: 60, cy: 300, delay: 0.7 },
+                  { cx: 140, cy: 350, delay: 0.9 },
+                  { cx: 250, cy: 330, delay: 0.1 },
+                  { cx: 320, cy: 280, delay: 0.4 },
+                  { cx: 380, cy: 320, delay: 0.6 },
+                ].map((node, i) => (
+                  <motion.circle
+                    key={i}
+                    cx={node.cx}
+                    cy={node.cy}
+                    r="4"
+                    fill="hsl(var(--primary))"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: [0.3, 0.7, 0.3], scale: 1 }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      delay: node.delay,
+                      ease: "easeInOut"
+                    }}
+                    viewport={{ once: true }}
+                  />
+                ))}
+                
+                {/* Network connections */}
+                {[
+                  { x1: 50, y1: 100, x2: 120, y2: 50, delay: 0 },
+                  { x1: 120, y1: 50, x2: 200, y2: 80, delay: 0.1 },
+                  { x1: 200, y1: 80, x2: 280, y2: 40, delay: 0.2 },
+                  { x1: 280, y1: 40, x2: 350, y2: 90, delay: 0.3 },
+                  { x1: 30, y1: 200, x2: 50, y2: 100, delay: 0.4 },
+                  { x1: 350, y1: 90, x2: 370, y2: 180, delay: 0.5 },
+                  { x1: 30, y1: 200, x2: 60, y2: 300, delay: 0.6 },
+                  { x1: 60, y1: 300, x2: 140, y2: 350, delay: 0.7 },
+                  { x1: 140, y1: 350, x2: 250, y2: 330, delay: 0.8 },
+                  { x1: 250, y1: 330, x2: 320, y2: 280, delay: 0.9 },
+                  { x1: 320, y1: 280, x2: 380, y2: 320, delay: 0.1 },
+                  { x1: 370, y1: 180, x2: 320, y2: 280, delay: 0.3 },
+                  { x1: 200, y1: 80, x2: 200, y2: 200, delay: 0.5 },
+                  { x1: 50, y1: 100, x2: 200, y2: 200, delay: 0.7 },
+                  { x1: 350, y1: 90, x2: 200, y2: 200, delay: 0.9 },
+                  { x1: 60, y1: 300, x2: 200, y2: 200, delay: 0.2 },
+                  { x1: 320, y1: 280, x2: 200, y2: 200, delay: 0.4 },
+                ].map((line, i) => (
+                  <motion.line
+                    key={i}
+                    x1={line.x1}
+                    y1={line.y1}
+                    x2={line.x2}
+                    y2={line.y2}
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="1"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: [0.1, 0.3, 0.1] }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity, 
+                      delay: line.delay,
+                      ease: "easeInOut"
+                    }}
+                    viewport={{ once: true }}
+                  />
+                ))}
+                
+                {/* Central glow node */}
+                <motion.circle
+                  cx="200"
+                  cy="200"
+                  r="8"
+                  fill="hsl(var(--primary))"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: [0.4, 0.8, 0.4] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  viewport={{ once: true }}
+                />
+                <motion.circle
+                  cx="200"
+                  cy="200"
+                  r="20"
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="1"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: [0.2, 0.4, 0.2], scale: [0.8, 1.2, 0.8] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  viewport={{ once: true }}
+                />
+              </svg>
+            </div>
+            
             <motion.div 
-              className="relative"
+              className="relative z-10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
