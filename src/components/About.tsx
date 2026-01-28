@@ -1,6 +1,18 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mic } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const About = () => {
+  const [showDashboard, setShowDashboard] = useState(false);
+
+  // Auto-cycle between views
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowDashboard(prev => !prev);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="om-oss" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
@@ -152,110 +164,190 @@ const About = () => {
                     {/* Notch */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-6 w-28 rounded-b-2xl bg-black" />
                     
-                    {/* Screen content - Admin Dashboard UI */}
-                    <div className="relative aspect-[9/19] p-4 pt-10 flex flex-col">
-                      {/* App header */}
-                      <div className="text-center mb-4">
-                        <h3 className="text-primary font-semibold text-base">
-                          Kundra AI-Assistent
-                        </h3>
-                        <p className="text-muted-foreground text-xs mt-1">Adminvy</p>
-                      </div>
-                      
-                      {/* Stats grid */}
-                      <div className="grid grid-cols-2 gap-3 flex-1">
-                        {/* Conversations */}
-                        <motion.div 
-                          className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.2 }}
-                          viewport={{ once: true }}
-                        >
-                          <p className="text-xs text-muted-foreground mb-1">Konversationer</p>
-                          <motion.p 
-                            className="text-xl font-bold text-foreground"
-                            animate={{ opacity: [0.8, 1, 0.8] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                    {/* Screen content with AnimatePresence for transitions */}
+                    <div className="relative aspect-[9/19] overflow-hidden">
+                      <AnimatePresence mode="wait">
+                        {!showDashboard ? (
+                          <motion.div
+                            key="voice"
+                            className="absolute inset-0 p-6 pt-10 flex flex-col"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.4 }}
                           >
-                            1,247
-                          </motion.p>
-                          <p className="text-xs text-emerald-500 mt-1">+12% ↑</p>
-                        </motion.div>
-                        
-                        {/* Response time */}
-                        <motion.div 
-                          className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.3 }}
-                          viewport={{ once: true }}
-                        >
-                          <p className="text-xs text-muted-foreground mb-1">Svarstid</p>
-                          <motion.p 
-                            className="text-xl font-bold text-foreground"
-                            animate={{ opacity: [0.8, 1, 0.8] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                            {/* App header */}
+                            <div className="text-center mb-6">
+                              <h3 className="text-primary font-semibold text-lg">
+                                Kundra AI-Assistent
+                              </h3>
+                              <p className="text-muted-foreground text-xs mt-1">Demo</p>
+                            </div>
+                            
+                            {/* Status bar */}
+                            <div className="bg-muted/30 rounded-full py-2 px-4 mb-6 flex items-center justify-center gap-2">
+                              <motion.div 
+                                className="w-2 h-2 rounded-full bg-emerald-500"
+                                animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                              />
+                              <span className="text-xs text-muted-foreground">Ansluten</span>
+                            </div>
+                            
+                            {/* Audio waveform visualization */}
+                            <div className="flex-1 flex items-center justify-center">
+                              <div className="flex items-center gap-1">
+                                {[...Array(12)].map((_, i) => (
+                                  <motion.div
+                                    key={i}
+                                    className="w-1.5 bg-primary/80 rounded-full"
+                                    animate={{
+                                      height: [8, 24 + Math.random() * 20, 8],
+                                    }}
+                                    transition={{
+                                      duration: 0.8 + Math.random() * 0.4,
+                                      repeat: Infinity,
+                                      delay: i * 0.1,
+                                      ease: "easeInOut",
+                                    }}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                            
+                            {/* Mic button - clickable to show dashboard */}
+                            <div className="flex justify-center mb-6">
+                              <motion.button 
+                                className="relative cursor-pointer"
+                                onClick={() => setShowDashboard(true)}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                              >
+                                {/* Pulse rings */}
+                                <motion.div
+                                  className="absolute inset-0 rounded-full bg-primary/30"
+                                  animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
+                                  transition={{ duration: 1.5, repeat: Infinity }}
+                                />
+                                <motion.div
+                                  className="absolute inset-0 rounded-full bg-primary/20"
+                                  animate={{ scale: [1, 2.2], opacity: [0.3, 0] }}
+                                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+                                />
+                                
+                                <motion.div 
+                                  className="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center"
+                                  animate={{ 
+                                    boxShadow: [
+                                      "0 0 20px hsl(var(--primary) / 0.4)",
+                                      "0 0 40px hsl(var(--primary) / 0.6)",
+                                      "0 0 20px hsl(var(--primary) / 0.4)"
+                                    ]
+                                  }}
+                                  transition={{ duration: 2, repeat: Infinity }}
+                                >
+                                  <Mic className="w-7 h-7 text-primary-foreground" />
+                                </motion.div>
+                              </motion.button>
+                            </div>
+                            
+                            {/* Chat response area */}
+                            <div className="bg-muted/20 rounded-xl p-4 border border-border/30">
+                              <motion.p 
+                                className="text-sm text-muted-foreground"
+                                animate={{ opacity: [0.5, 1, 0.5] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                              >
+                                "Hur kan jag hjälpa dig idag?"
+                              </motion.p>
+                            </div>
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            key="dashboard"
+                            className="absolute inset-0 p-4 pt-10 flex flex-col"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 20 }}
+                            transition={{ duration: 0.4 }}
                           >
-                            0.8s
-                          </motion.p>
-                          <p className="text-xs text-emerald-500 mt-1">-23% ↓</p>
-                        </motion.div>
-                        
-                        {/* Resolved cases */}
-                        <motion.div 
-                          className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.4 }}
-                          viewport={{ once: true }}
-                        >
-                          <p className="text-xs text-muted-foreground mb-1">Lösta ärenden</p>
-                          <motion.p 
-                            className="text-xl font-bold text-foreground"
-                            animate={{ opacity: [0.8, 1, 0.8] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                          >
-                            94%
-                          </motion.p>
-                          <p className="text-xs text-emerald-500 mt-1">+5% ↑</p>
-                        </motion.div>
-                        
-                        {/* Bookings */}
-                        <motion.div 
-                          className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.5 }}
-                          viewport={{ once: true }}
-                        >
-                          <p className="text-xs text-muted-foreground mb-1">Bokningar</p>
-                          <motion.p 
-                            className="text-xl font-bold text-foreground"
-                            animate={{ opacity: [0.8, 1, 0.8] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
-                          >
-                            89
-                          </motion.p>
-                          <p className="text-xs text-emerald-500 mt-1">+18% ↑</p>
-                        </motion.div>
-                      </div>
-                      
-                      {/* Status bar at bottom */}
-                      <motion.div 
-                        className="mt-3 bg-muted/20 rounded-full py-2 px-4 flex items-center justify-center gap-2"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                        viewport={{ once: true }}
-                      >
-                        <motion.div 
-                          className="w-2 h-2 rounded-full bg-emerald-500"
-                          animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        />
-                        <span className="text-xs text-muted-foreground">AI aktiv</span>
-                      </motion.div>
+                            {/* App header */}
+                            <div className="text-center mb-4">
+                              <h3 className="text-primary font-semibold text-base">
+                                Kundra AI-Assistent
+                              </h3>
+                              <p className="text-muted-foreground text-xs mt-1">Adminvy</p>
+                            </div>
+                            
+                            {/* Stats grid */}
+                            <div className="grid grid-cols-2 gap-3 flex-1">
+                              {/* Conversations */}
+                              <motion.div 
+                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.1 }}
+                              >
+                                <p className="text-xs text-muted-foreground mb-1">Konversationer</p>
+                                <p className="text-xl font-bold text-foreground">1,247</p>
+                                <p className="text-xs text-emerald-500 mt-1">+12% ↑</p>
+                              </motion.div>
+                              
+                              {/* Response time */}
+                              <motion.div 
+                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.2 }}
+                              >
+                                <p className="text-xs text-muted-foreground mb-1">Svarstid</p>
+                                <p className="text-xl font-bold text-foreground">0.8s</p>
+                                <p className="text-xs text-emerald-500 mt-1">-23% ↓</p>
+                              </motion.div>
+                              
+                              {/* Resolved cases */}
+                              <motion.div 
+                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.3 }}
+                              >
+                                <p className="text-xs text-muted-foreground mb-1">Lösta ärenden</p>
+                                <p className="text-xl font-bold text-foreground">94%</p>
+                                <p className="text-xs text-emerald-500 mt-1">+5% ↑</p>
+                              </motion.div>
+                              
+                              {/* Bookings */}
+                              <motion.div 
+                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.4 }}
+                              >
+                                <p className="text-xs text-muted-foreground mb-1">Bokningar</p>
+                                <p className="text-xl font-bold text-foreground">89</p>
+                                <p className="text-xs text-emerald-500 mt-1">+18% ↑</p>
+                              </motion.div>
+                            </div>
+                            
+                            {/* Back button */}
+                            <motion.button
+                              className="mt-3 bg-muted/20 rounded-full py-2 px-4 flex items-center justify-center gap-2 cursor-pointer hover:bg-muted/30 transition-colors"
+                              onClick={() => setShowDashboard(false)}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.5 }}
+                            >
+                              <motion.div 
+                                className="w-2 h-2 rounded-full bg-emerald-500"
+                                animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                              />
+                              <span className="text-xs text-muted-foreground">AI aktiv</span>
+                            </motion.button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
                 </div>
