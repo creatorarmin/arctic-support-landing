@@ -1,8 +1,59 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+
+interface ChatMessage {
+  id: number;
+  type: "user" | "ai";
+  text: string;
+}
+
+const conversationMessages: ChatMessage[] = [
+  { id: 1, type: "user", text: "Hej! Jag vill boka ett bord för två." },
+  { id: 2, type: "ai", text: "Hej! Självklart. Vilket datum och tid passar er?" },
+  { id: 3, type: "user", text: "Lördag kväll, runt 19:00" },
+  { id: 4, type: "ai", text: "Perfekt! Jag har ett bord för 2 pers kl 19:00. Vill du bekräfta?" },
+  { id: 5, type: "user", text: "Ja, boka det tack!" },
+  { id: 6, type: "ai", text: "Klart! Bekräftelse skickas till din e-post. Välkommen! 🍽️" },
+];
 
 const Hero = () => {
+  const [visibleMessages, setVisibleMessages] = useState<ChatMessage[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex >= conversationMessages.length) {
+      // Reset after a pause
+      const resetTimer = setTimeout(() => {
+        setVisibleMessages([]);
+        setCurrentIndex(0);
+      }, 4000);
+      return () => clearTimeout(resetTimer);
+    }
+
+    const nextMessage = conversationMessages[currentIndex];
+    
+    // Show typing indicator before AI messages
+    if (nextMessage.type === "ai") {
+      setIsTyping(true);
+      const typingTimer = setTimeout(() => {
+        setIsTyping(false);
+        setVisibleMessages(prev => [...prev, nextMessage]);
+        setCurrentIndex(prev => prev + 1);
+      }, 1500);
+      return () => clearTimeout(typingTimer);
+    } else {
+      // User messages appear after a delay
+      const messageTimer = setTimeout(() => {
+        setVisibleMessages(prev => [...prev, nextMessage]);
+        setCurrentIndex(prev => prev + 1);
+      }, 1200);
+      return () => clearTimeout(messageTimer);
+    }
+  }, [currentIndex]);
+
   return (
     <section className="relative min-h-[90vh] flex items-center pt-16">
       <div className="container mx-auto px-6">
@@ -38,7 +89,7 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Right side - Animated visual */}
+          {/* Right side - Live chat conversation */}
           <div className="hidden lg:block">
             <div className="relative">
               {/* Glow effect behind the card */}
@@ -56,7 +107,7 @@ const Hero = () => {
               />
               
               <motion.div 
-                className="aspect-square max-w-md mx-auto rounded-2xl bg-card border border-border p-8 relative overflow-hidden"
+                className="max-w-md mx-auto rounded-2xl bg-card border border-border overflow-hidden relative"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -68,102 +119,94 @@ const Hero = () => {
                   transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
                 />
                 
-                <div className="h-full flex flex-col justify-between relative z-10">
-                  {/* Incoming message */}
-                  <motion.div 
-                    className="space-y-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                  >
-                    <div className="flex items-center gap-3">
-                      <motion.div 
-                        className="h-10 w-10 rounded-full bg-primary/20"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      />
-                      <div className="space-y-1.5">
-                        <div className="h-3 w-24 rounded bg-muted" />
-                        <div className="h-2 w-16 rounded bg-muted/60" />
-                      </div>
+                {/* Chat header */}
+                <div className="bg-muted/30 border-b border-border px-4 py-3 flex items-center gap-3 relative z-10">
+                  <div className="relative">
+                    <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
+                      <span className="text-primary font-semibold text-sm">K</span>
                     </div>
                     <motion.div 
-                      className="rounded-lg bg-muted/50 p-4"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.4, delay: 0.6 }}
-                    >
-                      <div className="h-2 w-3/4 rounded bg-muted" />
-                      <div className="mt-2 h-2 w-1/2 rounded bg-muted" />
-                    </motion.div>
-                  </motion.div>
-                  
-                  {/* Outgoing message (AI response) */}
-                  <motion.div 
-                    className="space-y-4"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.8 }}
-                  >
-                    <div className="flex items-center gap-3 justify-end">
-                      <div className="space-y-1.5 text-right">
-                        <div className="h-3 w-20 rounded bg-primary/30 ml-auto" />
-                        <div className="h-2 w-14 rounded bg-primary/20 ml-auto" />
-                      </div>
-                      <motion.div 
-                        className="h-10 w-10 rounded-full bg-primary/30"
-                        animate={{ 
-                          boxShadow: [
-                            "0 0 0 0 hsl(var(--primary) / 0.4)",
-                            "0 0 0 8px hsl(var(--primary) / 0)",
-                            "0 0 0 0 hsl(var(--primary) / 0)"
-                          ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-                      />
-                    </div>
-                    <motion.div 
-                      className="rounded-lg bg-primary/10 p-4 ml-8"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.4, delay: 1 }}
-                    >
-                      <div className="h-2 w-3/4 rounded bg-primary/20" />
-                      <div className="mt-2 h-2 w-full rounded bg-primary/20" />
-                    </motion.div>
-                  </motion.div>
-                  
-                  {/* Typing indicator */}
-                  <motion.div 
-                    className="flex items-center gap-3 rounded-lg border border-border bg-background p-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 1.2 }}
-                  >
+                      className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-emerald-500 border-2 border-card"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">Kundra AI</p>
+                    <p className="text-xs text-muted-foreground">Online • Restaurang Bella</p>
+                  </div>
+                </div>
+                
+                {/* Chat messages */}
+                <div className="h-[320px] overflow-hidden px-4 py-4 relative z-10">
+                  <div className="flex flex-col gap-3 h-full">
+                    <AnimatePresence mode="popLayout">
+                      {visibleMessages.map((message) => (
+                        <motion.div
+                          key={message.id}
+                          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{ duration: 0.3 }}
+                          className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
+                        >
+                          <div 
+                            className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
+                              message.type === "user" 
+                                ? "bg-primary text-primary-foreground rounded-br-md" 
+                                : "bg-muted/50 text-foreground rounded-bl-md"
+                            }`}
+                          >
+                            <p className="text-sm leading-relaxed">{message.text}</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                      
+                      {/* Typing indicator */}
+                      {isTyping && (
+                        <motion.div
+                          key="typing"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="flex justify-start"
+                        >
+                          <div className="bg-muted/50 rounded-2xl rounded-bl-md px-4 py-3">
+                            <div className="flex gap-1.5">
+                              <motion.span 
+                                className="h-2 w-2 rounded-full bg-muted-foreground/60"
+                                animate={{ opacity: [0.4, 1, 0.4], y: [0, -4, 0] }}
+                                transition={{ duration: 0.8, repeat: Infinity, delay: 0 }}
+                              />
+                              <motion.span 
+                                className="h-2 w-2 rounded-full bg-muted-foreground/60"
+                                animate={{ opacity: [0.4, 1, 0.4], y: [0, -4, 0] }}
+                                transition={{ duration: 0.8, repeat: Infinity, delay: 0.15 }}
+                              />
+                              <motion.span 
+                                className="h-2 w-2 rounded-full bg-muted-foreground/60"
+                                animate={{ opacity: [0.4, 1, 0.4], y: [0, -4, 0] }}
+                                transition={{ duration: 0.8, repeat: Infinity, delay: 0.3 }}
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+                
+                {/* Chat input */}
+                <div className="border-t border-border px-4 py-3 relative z-10">
+                  <div className="flex items-center gap-3 rounded-full border border-border bg-background px-4 py-2">
                     <div className="h-2 flex-1 rounded bg-muted/40" />
                     <motion.div 
-                      className="h-8 w-8 rounded bg-primary/20 flex items-center justify-center"
+                      className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center"
                       whileHover={{ scale: 1.1 }}
                     >
-                      <motion.div 
-                        className="flex gap-0.5"
-                        animate={{ opacity: [0.4, 1, 0.4] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary/60" />
-                        <motion.span 
-                          className="h-1.5 w-1.5 rounded-full bg-primary/60"
-                          animate={{ opacity: [0.4, 1, 0.4] }}
-                          transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
-                        />
-                        <motion.span 
-                          className="h-1.5 w-1.5 rounded-full bg-primary/60"
-                          animate={{ opacity: [0.4, 1, 0.4] }}
-                          transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
-                        />
-                      </motion.div>
+                      <ArrowRight className="h-4 w-4 text-primary" />
                     </motion.div>
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             </div>
