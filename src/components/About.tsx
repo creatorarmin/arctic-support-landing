@@ -156,13 +156,40 @@ const About = () => {
               viewport={{ once: true, margin: "-100px" }}
             >
               {/* Phone frame */}
-              <div className="relative mx-auto w-[280px] sm:w-[320px]">
-                {/* Phone outer frame */}
+              <div className="relative mx-auto w-[300px] sm:w-[360px]">
+              {/* Phone outer frame */}
                 <div className="relative rounded-[3rem] bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 p-2 shadow-2xl">
                   {/* Phone inner bezel */}
                   <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0d1117]">
-                    {/* Notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-6 w-28 rounded-b-2xl bg-black" />
+                    {/* Dynamic Island */}
+                    <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 h-7 w-32 rounded-full bg-black flex items-center justify-center gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-zinc-800 ring-1 ring-zinc-700" />
+                    </div>
+                    
+                    {/* Status bar */}
+                    <div className="absolute top-1 left-0 right-0 z-10 flex items-center justify-between px-8 py-1.5">
+                      <span className="text-[10px] font-semibold text-white/90">9:41</span>
+                      <div className="flex items-center gap-1.5">
+                        {/* Signal bars */}
+                        <div className="flex items-end gap-[2px]">
+                          <div className="w-[3px] h-[4px] rounded-sm bg-white/90" />
+                          <div className="w-[3px] h-[6px] rounded-sm bg-white/90" />
+                          <div className="w-[3px] h-[8px] rounded-sm bg-white/90" />
+                          <div className="w-[3px] h-[10px] rounded-sm bg-white/90" />
+                        </div>
+                        {/* WiFi */}
+                        <svg className="w-3.5 h-3.5 text-white/90" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M1.29 7.05a1 1 0 0 1 .32-1.38A16.06 16.06 0 0 1 12 2a16.06 16.06 0 0 1 10.39 3.67 1 1 0 0 1-1.06 1.7A14.06 14.06 0 0 0 12 4 14.06 14.06 0 0 0 2.67 7.37a1 1 0 0 1-1.38-.32zM12 8a12.06 12.06 0 0 0-7.74 2.79 1 1 0 1 0 1.28 1.54A10.06 10.06 0 0 1 12 10a10.06 10.06 0 0 1 6.46 2.33 1 1 0 1 0 1.28-1.54A12.06 12.06 0 0 0 12 8zm0 6a8.06 8.06 0 0 0-5.13 1.82 1 1 0 1 0 1.26 1.56A6.06 6.06 0 0 1 12 16a6.06 6.06 0 0 1 3.87 1.38 1 1 0 1 0 1.26-1.56A8.06 8.06 0 0 0 12 14zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                        </svg>
+                        {/* Battery */}
+                        <div className="flex items-center gap-[2px]">
+                          <div className="w-5 h-2.5 rounded-[3px] border border-white/90 p-[1.5px]">
+                            <div className="w-3/4 h-full rounded-[1.5px] bg-white/90" />
+                          </div>
+                          <div className="w-[2px] h-1.5 rounded-r-sm bg-white/90" />
+                        </div>
+                      </div>
+                    </div>
                     
                     {/* Screen content with AnimatePresence for transitions */}
                     <div className="relative aspect-[9/19] overflow-hidden">
