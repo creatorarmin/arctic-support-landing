@@ -1,11 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic } from "lucide-react";
+import { Mic, BarChart3, Clock, CheckCircle, CalendarCheck } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const About = () => {
   const [showDashboard, setShowDashboard] = useState(false);
 
-  // Auto-cycle between views
   useEffect(() => {
     const interval = setInterval(() => {
       setShowDashboard(prev => !prev);
@@ -14,19 +13,33 @@ const About = () => {
   }, []);
 
   return (
-    <section id="om-oss" className="py-24 sm:py-32">
-      <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
-          <div>
-            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-              Om oss
-            </p>
-            <h2 className="mb-6 text-3xl text-foreground sm:text-4xl lg:text-5xl">
+    <section id="om-oss" className="py-28 sm:py-36 relative overflow-hidden">
+      {/* Subtle gradient background for modern feel */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/40 to-background" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
+          {/* Text content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 mb-6 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span className="text-xs font-medium uppercase tracking-widest text-primary">Om oss</span>
+            </div>
+            
+            <h2 className="mb-8 text-3xl text-foreground sm:text-4xl lg:text-5xl leading-tight">
               Byggd av människor som förstår service
             </h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            
+            <div className="space-y-5 text-muted-foreground leading-relaxed text-base sm:text-lg">
               <p>
-                Vi startade AutoServe för att vi såg hur företag kämpade med samma 
+                Vi startade Kundra för att vi såg hur företag kämpade med samma 
                 utmaning: ökande kundförväntningar och begränsade resurser.
               </p>
               <p>
@@ -39,175 +52,81 @@ const About = () => {
                 supportupplevelser som kunderna verkligen uppskattar.
               </p>
             </div>
-          </div>
+          </motion.div>
           
-          {/* Smartphone mockup with live demo */}
+          {/* Modern phone mockup — wider & bigger */}
           <div className="relative flex justify-center lg:justify-end">
-            {/* Abstract network background */}
-            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-              <svg 
-                className="absolute w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] opacity-20"
-                viewBox="0 0 400 400"
-              >
-                {/* Network nodes */}
-                {[
-                  { cx: 50, cy: 100, delay: 0 },
-                  { cx: 120, cy: 50, delay: 0.2 },
-                  { cx: 200, cy: 80, delay: 0.4 },
-                  { cx: 280, cy: 40, delay: 0.6 },
-                  { cx: 350, cy: 90, delay: 0.8 },
-                  { cx: 30, cy: 200, delay: 0.3 },
-                  { cx: 370, cy: 180, delay: 0.5 },
-                  { cx: 60, cy: 300, delay: 0.7 },
-                  { cx: 140, cy: 350, delay: 0.9 },
-                  { cx: 250, cy: 330, delay: 0.1 },
-                  { cx: 320, cy: 280, delay: 0.4 },
-                  { cx: 380, cy: 320, delay: 0.6 },
-                ].map((node, i) => (
-                  <motion.circle
-                    key={i}
-                    cx={node.cx}
-                    cy={node.cy}
-                    r="4"
-                    fill="hsl(var(--primary))"
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: [0.3, 0.7, 0.3], scale: 1 }}
-                    transition={{ 
-                      duration: 3, 
-                      repeat: Infinity, 
-                      delay: node.delay,
-                      ease: "easeInOut"
-                    }}
-                    viewport={{ once: true }}
-                  />
-                ))}
-                
-                {/* Network connections */}
-                {[
-                  { x1: 50, y1: 100, x2: 120, y2: 50, delay: 0 },
-                  { x1: 120, y1: 50, x2: 200, y2: 80, delay: 0.1 },
-                  { x1: 200, y1: 80, x2: 280, y2: 40, delay: 0.2 },
-                  { x1: 280, y1: 40, x2: 350, y2: 90, delay: 0.3 },
-                  { x1: 30, y1: 200, x2: 50, y2: 100, delay: 0.4 },
-                  { x1: 350, y1: 90, x2: 370, y2: 180, delay: 0.5 },
-                  { x1: 30, y1: 200, x2: 60, y2: 300, delay: 0.6 },
-                  { x1: 60, y1: 300, x2: 140, y2: 350, delay: 0.7 },
-                  { x1: 140, y1: 350, x2: 250, y2: 330, delay: 0.8 },
-                  { x1: 250, y1: 330, x2: 320, y2: 280, delay: 0.9 },
-                  { x1: 320, y1: 280, x2: 380, y2: 320, delay: 0.1 },
-                  { x1: 370, y1: 180, x2: 320, y2: 280, delay: 0.3 },
-                  { x1: 200, y1: 80, x2: 200, y2: 200, delay: 0.5 },
-                  { x1: 50, y1: 100, x2: 200, y2: 200, delay: 0.7 },
-                  { x1: 350, y1: 90, x2: 200, y2: 200, delay: 0.9 },
-                  { x1: 60, y1: 300, x2: 200, y2: 200, delay: 0.2 },
-                  { x1: 320, y1: 280, x2: 200, y2: 200, delay: 0.4 },
-                ].map((line, i) => (
-                  <motion.line
-                    key={i}
-                    x1={line.x1}
-                    y1={line.y1}
-                    x2={line.x2}
-                    y2={line.y2}
-                    stroke="hsl(var(--primary))"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    whileInView={{ pathLength: 1, opacity: [0.1, 0.3, 0.1] }}
-                    transition={{ 
-                      duration: 4, 
-                      repeat: Infinity, 
-                      delay: line.delay,
-                      ease: "easeInOut"
-                    }}
-                    viewport={{ once: true }}
-                  />
-                ))}
-                
-                {/* Central glow node */}
-                <motion.circle
-                  cx="200"
-                  cy="200"
-                  r="8"
-                  fill="hsl(var(--primary))"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: [0.4, 0.8, 0.4] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  viewport={{ once: true }}
-                />
-                <motion.circle
-                  cx="200"
-                  cy="200"
-                  r="20"
-                  fill="none"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="1"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: [0.2, 0.4, 0.2], scale: [0.8, 1.2, 0.8] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  viewport={{ once: true }}
-                />
-              </svg>
+            {/* Ambient glow */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div
+                className="w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] rounded-full bg-primary/8 blur-[100px]"
+                animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              />
             </div>
             
             <motion.div 
               className="relative z-10"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              {/* Phone frame */}
-              <div className="relative mx-auto w-[280px] sm:w-[320px]">
-                {/* Phone outer frame */}
-                <div className="relative rounded-[3rem] bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 p-2 shadow-2xl">
-                  {/* Phone inner bezel */}
-                  <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0d1117]">
-                    {/* Notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-6 w-28 rounded-b-2xl bg-black" />
+              {/* Phone frame — modern flat design, wider */}
+              <div className="relative mx-auto w-[320px] sm:w-[380px]">
+                {/* Phone outer shell */}
+                <div className="relative rounded-[2.8rem] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900 p-[3px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)]">
+                  {/* Inner bezel */}
+                  <div className="relative overflow-hidden rounded-[2.6rem] bg-background">
+                    {/* Dynamic Island */}
+                    <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 h-[26px] w-[100px] rounded-full bg-black flex items-center justify-center gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-zinc-800 ring-1 ring-zinc-700" />
+                    </div>
                     
-                    {/* Screen content with AnimatePresence for transitions */}
-                    <div className="relative aspect-[9/19] overflow-hidden">
+                    {/* Screen */}
+                    <div className="relative aspect-[9/18.5] overflow-hidden">
                       <AnimatePresence mode="wait">
                         {!showDashboard ? (
                           <motion.div
                             key="voice"
-                            className="absolute inset-0 p-6 pt-10 flex flex-col"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.4 }}
+                            className="absolute inset-0 p-5 pt-14 flex flex-col"
+                            initial={{ opacity: 0, scale: 0.96 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.96 }}
+                            transition={{ duration: 0.35 }}
                           >
-                            {/* App header */}
-                            <div className="text-center mb-6">
-                              <h3 className="text-primary font-semibold text-lg">
-                                Kundra AI-Assistent
+                            {/* Header */}
+                            <div className="text-center mb-5">
+                              <h3 className="text-primary font-semibold text-lg tracking-tight">
+                                Kundra AI
                               </h3>
-                              <p className="text-muted-foreground text-xs mt-1">Demo</p>
+                              <p className="text-muted-foreground text-[11px] mt-1 tracking-wide uppercase">Röstassistent</p>
                             </div>
                             
-                            {/* Status bar */}
-                            <div className="bg-muted/30 rounded-full py-2 px-4 mb-6 flex items-center justify-center gap-2">
+                            {/* Status pill */}
+                            <div className="mx-auto bg-secondary/60 backdrop-blur-sm rounded-full py-2 px-5 mb-8 flex items-center gap-2.5 border border-border/40">
                               <motion.div 
                                 className="w-2 h-2 rounded-full bg-emerald-500"
-                                animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                                animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
                                 transition={{ duration: 1.5, repeat: Infinity }}
                               />
-                              <span className="text-xs text-muted-foreground">Ansluten</span>
+                              <span className="text-xs text-foreground/70 font-medium">Ansluten</span>
                             </div>
                             
-                            {/* Audio waveform visualization */}
+                            {/* Waveform */}
                             <div className="flex-1 flex items-center justify-center">
-                              <div className="flex items-center gap-1">
-                                {[...Array(12)].map((_, i) => (
+                              <div className="flex items-center gap-[3px]">
+                                {[...Array(16)].map((_, i) => (
                                   <motion.div
                                     key={i}
-                                    className="w-1.5 bg-primary/80 rounded-full"
+                                    className="w-[3px] bg-primary/70 rounded-full"
                                     animate={{
-                                      height: [8, 24 + Math.random() * 20, 8],
+                                      height: [6, 20 + Math.random() * 24, 6],
                                     }}
                                     transition={{
-                                      duration: 0.8 + Math.random() * 0.4,
+                                      duration: 0.7 + Math.random() * 0.5,
                                       repeat: Infinity,
-                                      delay: i * 0.1,
+                                      delay: i * 0.08,
                                       ease: "easeInOut",
                                     }}
                                   />
@@ -215,48 +134,41 @@ const About = () => {
                               </div>
                             </div>
                             
-                            {/* Mic button - clickable to show dashboard */}
-                            <div className="flex justify-center mb-6">
+                            {/* Mic button */}
+                            <div className="flex justify-center mb-8">
                               <motion.button 
                                 className="relative cursor-pointer"
                                 onClick={() => setShowDashboard(true)}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                               >
-                                {/* Pulse rings */}
                                 <motion.div
-                                  className="absolute inset-0 rounded-full bg-primary/30"
-                                  animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
-                                  transition={{ duration: 1.5, repeat: Infinity }}
+                                  className="absolute inset-0 rounded-full bg-primary/25"
+                                  animate={{ scale: [1, 2], opacity: [0.4, 0] }}
+                                  transition={{ duration: 1.8, repeat: Infinity }}
                                 />
-                                <motion.div
-                                  className="absolute inset-0 rounded-full bg-primary/20"
-                                  animate={{ scale: [1, 2.2], opacity: [0.3, 0] }}
-                                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-                                />
-                                
                                 <motion.div 
-                                  className="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center"
+                                  className="relative w-[72px] h-[72px] rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg"
                                   animate={{ 
                                     boxShadow: [
-                                      "0 0 20px hsl(var(--primary) / 0.4)",
-                                      "0 0 40px hsl(var(--primary) / 0.6)",
-                                      "0 0 20px hsl(var(--primary) / 0.4)"
+                                      "0 0 24px hsl(var(--primary) / 0.3)",
+                                      "0 0 48px hsl(var(--primary) / 0.5)",
+                                      "0 0 24px hsl(var(--primary) / 0.3)"
                                     ]
                                   }}
-                                  transition={{ duration: 2, repeat: Infinity }}
+                                  transition={{ duration: 2.5, repeat: Infinity }}
                                 >
                                   <Mic className="w-7 h-7 text-primary-foreground" />
                                 </motion.div>
                               </motion.button>
                             </div>
                             
-                            {/* Chat response area */}
-                            <div className="bg-muted/20 rounded-xl p-4 border border-border/30">
+                            {/* Response area */}
+                            <div className="bg-secondary/40 backdrop-blur-sm rounded-2xl p-4 border border-border/30">
                               <motion.p 
-                                className="text-sm text-muted-foreground"
+                                className="text-sm text-muted-foreground text-center"
                                 animate={{ opacity: [0.5, 1, 0.5] }}
-                                transition={{ duration: 2, repeat: Infinity }}
+                                transition={{ duration: 2.5, repeat: Infinity }}
                               >
                                 "Hur kan jag hjälpa dig idag?"
                               </motion.p>
@@ -265,85 +177,57 @@ const About = () => {
                         ) : (
                           <motion.div
                             key="dashboard"
-                            className="absolute inset-0 p-4 pt-10 flex flex-col"
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 20 }}
-                            transition={{ duration: 0.4 }}
+                            className="absolute inset-0 p-5 pt-14 flex flex-col"
+                            initial={{ opacity: 0, scale: 0.96 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.96 }}
+                            transition={{ duration: 0.35 }}
                           >
-                            {/* App header */}
-                            <div className="text-center mb-4">
-                              <h3 className="text-primary font-semibold text-base">
-                                Kundra AI-Assistent
+                            {/* Header */}
+                            <div className="text-center mb-5">
+                              <h3 className="text-primary font-semibold text-lg tracking-tight">
+                                Kundra AI
                               </h3>
-                              <p className="text-muted-foreground text-xs mt-1">Adminvy</p>
+                              <p className="text-muted-foreground text-[11px] mt-1 tracking-wide uppercase">Dashboard</p>
                             </div>
                             
                             {/* Stats grid */}
-                            <div className="grid grid-cols-2 gap-3 flex-1">
-                              {/* Conversations */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.1 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Konversationer</p>
-                                <p className="text-xl font-bold text-foreground">1,247</p>
-                                <p className="text-xs text-emerald-500 mt-1">+12% ↑</p>
-                              </motion.div>
-                              
-                              {/* Response time */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.2 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Svarstid</p>
-                                <p className="text-xl font-bold text-foreground">0.8s</p>
-                                <p className="text-xs text-emerald-500 mt-1">-23% ↓</p>
-                              </motion.div>
-                              
-                              {/* Resolved cases */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.3 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Lösta ärenden</p>
-                                <p className="text-xl font-bold text-foreground">94%</p>
-                                <p className="text-xs text-emerald-500 mt-1">+5% ↑</p>
-                              </motion.div>
-                              
-                              {/* Bookings */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.4 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Bokningar</p>
-                                <p className="text-xl font-bold text-foreground">89</p>
-                                <p className="text-xs text-emerald-500 mt-1">+18% ↑</p>
-                              </motion.div>
+                            <div className="grid grid-cols-2 gap-3 flex-1 content-start">
+                              {[
+                                { icon: BarChart3, label: "Konversationer", value: "1,247", change: "+12%", delay: 0.1 },
+                                { icon: Clock, label: "Svarstid", value: "0.8s", change: "-23%", delay: 0.15 },
+                                { icon: CheckCircle, label: "Lösta ärenden", value: "94%", change: "+5%", delay: 0.2 },
+                                { icon: CalendarCheck, label: "Bokningar", value: "89", change: "+18%", delay: 0.25 },
+                              ].map((stat, i) => (
+                                <motion.div 
+                                  key={i}
+                                  className="bg-secondary/40 backdrop-blur-sm rounded-2xl p-3.5 border border-border/30"
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: stat.delay }}
+                                >
+                                  <stat.icon className="w-4 h-4 text-primary mb-2" />
+                                  <p className="text-[10px] text-muted-foreground mb-1">{stat.label}</p>
+                                  <p className="text-xl font-bold text-foreground">{stat.value}</p>
+                                  <p className="text-[10px] text-emerald-500 mt-1 font-medium">{stat.change}</p>
+                                </motion.div>
+                              ))}
                             </div>
                             
                             {/* Back button */}
                             <motion.button
-                              className="mt-3 bg-muted/20 rounded-full py-2 px-4 flex items-center justify-center gap-2 cursor-pointer hover:bg-muted/30 transition-colors"
+                              className="mt-4 bg-secondary/40 backdrop-blur-sm rounded-full py-2.5 px-5 flex items-center justify-center gap-2 cursor-pointer hover:bg-secondary/60 transition-colors border border-border/30"
                               onClick={() => setShowDashboard(false)}
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              transition={{ delay: 0.5 }}
+                              transition={{ delay: 0.35 }}
                             >
                               <motion.div 
                                 className="w-2 h-2 rounded-full bg-emerald-500"
                                 animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                                 transition={{ duration: 1.5, repeat: Infinity }}
                               />
-                              <span className="text-xs text-muted-foreground">AI aktiv</span>
+                              <span className="text-xs text-foreground/70 font-medium">AI aktiv</span>
                             </motion.button>
                           </motion.div>
                         )}
@@ -352,11 +236,11 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Side buttons */}
-                <div className="absolute left-0 top-24 h-8 w-1 rounded-l-sm bg-zinc-600" />
-                <div className="absolute left-0 top-36 h-12 w-1 rounded-l-sm bg-zinc-600" />
-                <div className="absolute left-0 top-52 h-12 w-1 rounded-l-sm bg-zinc-600" />
-                <div className="absolute right-0 top-36 h-16 w-1 rounded-r-sm bg-zinc-600" />
+                {/* Minimal side buttons */}
+                <div className="absolute left-0 top-28 h-8 w-[3px] rounded-l-sm bg-zinc-700" />
+                <div className="absolute left-0 top-40 h-14 w-[3px] rounded-l-sm bg-zinc-700" />
+                <div className="absolute left-0 top-58 h-14 w-[3px] rounded-l-sm bg-zinc-700" />
+                <div className="absolute right-0 top-40 h-16 w-[3px] rounded-r-sm bg-zinc-700" />
               </div>
             </motion.div>
           </div>
