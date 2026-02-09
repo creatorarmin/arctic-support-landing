@@ -156,7 +156,7 @@ const About = () => {
               viewport={{ once: true, margin: "-100px" }}
             >
               {/* Phone frame */}
-              <div className="relative mx-auto w-[300px] sm:w-[360px]">
+              <div className="relative mx-auto w-[320px] sm:w-[380px]">
               {/* Phone outer frame */}
                 <div className="relative rounded-[3rem] bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 p-2 shadow-2xl">
                   {/* Phone inner bezel */}
@@ -192,7 +192,7 @@ const About = () => {
                     </div>
                     
                     {/* Screen content with AnimatePresence for transitions */}
-                    <div className="relative aspect-[9/19] overflow-hidden">
+                    <div className="relative aspect-[9/16] overflow-hidden">
                       <AnimatePresence mode="wait">
                         {!showDashboard ? (
                           <motion.div
