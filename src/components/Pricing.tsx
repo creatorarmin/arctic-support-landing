@@ -67,7 +67,7 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
-              className={`relative rounded-xl border p-8 transition-all duration-300 ${
+              className={`relative rounded-xl border p-8 transition-all duration-300 flex flex-col ${
                 plan.popular
                   ? "border-foreground/20 bg-card elevation-2"
                   : "border-border bg-card/40 hover:border-muted-foreground/20 elevation-1"
@@ -114,7 +114,7 @@ const Pricing = () => {
               </ul>
 
               <Button
-                className="w-full"
+                className="w-full mt-auto"
                 variant={plan.popular ? "default" : "outline"}
               >
                 {plan.price === "Offert" ? "Kontakta oss" : "Kom igång"}
