@@ -176,7 +176,7 @@ const About = () => {
                           >
                             {/* App header */}
                             <div className="text-center mb-4">
-                              <h3 className="text-primary font-semibold text-base">
+                              <h3 className="text-foreground font-semibold text-base">
                                 Kundra AI-Assistent
                               </h3>
                               <p className="text-muted-foreground text-xs mt-1">Adminvy</p>
