@@ -16,13 +16,17 @@ const Index = () => {
           <Hero />
         </div>
         <Stats />
+        <div className="section-divider" />
         <div className="section-grain-alt">
           <Features />
         </div>
+        <div className="section-divider" />
         <About />
+        <div className="section-divider" />
         <div className="section-grain">
           <Pricing />
         </div>
+        <div className="section-divider" />
         <div className="section-grain-alt">
           <CTA />
         </div>
