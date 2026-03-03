@@ -40,9 +40,13 @@ const AnimatedCounter = ({
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       const currentValue = Math.round(startValue + difference * easeOutQuart);
+      
       setCount(currentValue);
+      
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
@@ -52,7 +56,7 @@ const AnimatedCounter = ({
   }, [isInView, endValue, startValue, duration]);
 
   return (
-    <div ref={ref} className="text-4xl font-bold text-foreground sm:text-5xl font-serif">
+    <div ref={ref} className="text-3xl font-bold text-foreground sm:text-4xl">
       {count}{suffix}
     </div>
   );
@@ -60,37 +64,24 @@ const AnimatedCounter = ({
 
 const Stats = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,rgba(255,255,255,0.02)_50%,transparent_100%)]" />
-      
-      {/* Top and bottom borders with gradient fade */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
+    <section className="border-y border-border bg-card py-16">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="relative text-center py-4"
+              className="text-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              {/* Vertical divider (not on first item) */}
-              {index > 0 && (
-                <div className="absolute left-0 top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent hidden md:block" />
-              )}
-              
               <AnimatedCounter
                 endValue={stat.endValue}
                 suffix={stat.suffix}
                 startValue={stat.startValue}
               />
-              <div className="mt-3 text-sm text-muted-foreground tracking-wide">
+              <div className="mt-2 text-sm text-muted-foreground">
                 {stat.label}
               </div>
             </motion.div>
