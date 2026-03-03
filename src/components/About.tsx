@@ -7,7 +7,7 @@ const About = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setShowDashboard(prev => !prev);
+      setShowDashboard((prev) => !prev);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -20,8 +20,8 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          >
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}>
+            
             <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
               Om oss
             </p>
@@ -47,13 +47,13 @@ const About = () => {
           
           {/* Smartphone mockup */}
           <div className="relative flex justify-center lg:justify-end">
-            <motion.div 
+            <motion.div
               className="relative z-10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
+              viewport={{ once: true, margin: "-100px" }}>
+              
               <div className="relative mx-auto w-[300px] sm:w-[340px]">
                 {/* Phone outer frame */}
                 <div className="relative rounded-[2.5rem] bg-gradient-to-b from-zinc-600 via-zinc-700 to-zinc-800 p-[3px] elevation-4">
@@ -83,15 +83,15 @@ const About = () => {
                     {/* Screen content */}
                     <div className="relative aspect-[9/16] overflow-hidden">
                       <AnimatePresence mode="wait">
-                        {!showDashboard ? (
-                          <motion.div
-                            key="voice"
-                            className="absolute inset-0 p-6 pt-12 flex flex-col"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                          >
+                        {!showDashboard ?
+                        <motion.div
+                          key="voice"
+                          className="absolute inset-0 p-6 pt-12 flex flex-col"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}>
+                          
                             <div className="text-center mb-6 mt-2">
                               <h3 className="font-sans text-foreground font-semibold text-base">
                                 Kundra AI-Assistent
@@ -107,32 +107,32 @@ const About = () => {
                             {/* Audio waveform */}
                             <div className="flex-1 flex items-center justify-center">
                               <div className="flex items-center gap-1">
-                                {[...Array(12)].map((_, i) => (
-                                  <motion.div
-                                    key={i}
-                                    className="w-1 bg-muted-foreground/40 rounded-full"
-                                    animate={{
-                                      height: [6, 20 + Math.random() * 16, 6],
-                                    }}
-                                    transition={{
-                                      duration: 0.8 + Math.random() * 0.4,
-                                      repeat: Infinity,
-                                      delay: i * 0.1,
-                                      ease: "easeInOut",
-                                    }}
-                                  />
-                                ))}
+                                {[...Array(12)].map((_, i) =>
+                              <motion.div
+                                key={i}
+                                className="w-1 bg-muted-foreground/40 rounded-full"
+                                animate={{
+                                  height: [6, 20 + Math.random() * 16, 6]
+                                }}
+                                transition={{
+                                  duration: 0.8 + Math.random() * 0.4,
+                                  repeat: Infinity,
+                                  delay: i * 0.1,
+                                  ease: "easeInOut"
+                                }} />
+
+                              )}
                               </div>
                             </div>
                             
                             {/* Mic button */}
                             <div className="flex justify-center mb-6">
-                              <motion.button 
-                                className="relative cursor-pointer"
-                                onClick={() => setShowDashboard(true)}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
+                              <motion.button
+                              className="relative cursor-pointer"
+                              onClick={() => setShowDashboard(true)}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}>
+                              
                                 <div className="relative w-14 h-14 rounded-full bg-foreground flex items-center justify-center">
                                   <Mic className="w-6 h-6 text-background" />
                                 </div>
@@ -140,24 +140,24 @@ const About = () => {
                             </div>
                             
                             <div className="bg-secondary/30 rounded-xl p-4 border border-border/30">
-                              <motion.p 
-                                className="text-sm text-muted-foreground font-light"
-                                animate={{ opacity: [0.4, 0.8, 0.4] }}
-                                transition={{ duration: 2.5, repeat: Infinity }}
-                              >
+                              <motion.p
+                              className="text-sm text-muted-foreground font-light"
+                              animate={{ opacity: [0.4, 0.8, 0.4] }}
+                              transition={{ duration: 2.5, repeat: Infinity }}>
+                              
                                 "Hur kan jag hjälpa dig idag?"
                               </motion.p>
                             </div>
-                          </motion.div>
-                        ) : (
-                          <motion.div
-                            key="dashboard"
-                            className="absolute inset-0 p-4 pt-12 flex flex-col"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                          >
+                          </motion.div> :
+
+                        <motion.div
+                          key="dashboard"
+                          className="absolute inset-0 p-4 pt-12 flex flex-col"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}>
+                          
                             <div className="text-center mb-4 mt-2">
                               <h3 className="font-sans text-foreground font-semibold text-sm">
                                 Kundra AI-Assistent
@@ -167,37 +167,37 @@ const About = () => {
                             
                             <div className="grid grid-cols-2 gap-2.5 flex-1">
                               {[
-                                { label: "Konversationer", value: "1,247", change: "+12%" },
-                                { label: "Svarstid", value: "0.8s", change: "-23%" },
-                                { label: "Lösta ärenden", value: "94%", change: "+5%" },
-                                { label: "Bokningar", value: "89", change: "+18%" },
-                              ].map((item, i) => (
-                                <motion.div 
-                                  key={item.label}
-                                  className="bg-secondary/30 rounded-xl p-3 border border-border/20"
-                                  initial={{ opacity: 0, scale: 0.95 }}
-                                  animate={{ opacity: 1, scale: 1 }}
-                                  transition={{ delay: i * 0.08 }}
-                                >
+                            { label: "Konversationer", value: "1,247", change: "+12%" },
+                            { label: "Svarstid", value: "0.8s", change: "-23%" },
+                            { label: "Lösta ärenden", value: "94%", change: "+5%" },
+                            { label: "Bokningar", value: "89", change: "+18%" }].
+                            map((item, i) =>
+                            <motion.div
+                              key={item.label}
+                              className="bg-secondary/30 rounded-xl p-3 border border-border/20"
+                              initial={{ opacity: 0, scale: 0.95 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: i * 0.08 }}>
+                              
                                   <p className="text-[10px] text-muted-foreground font-light mb-1">{item.label}</p>
                                   <p className="text-lg font-semibold text-foreground">{item.value}</p>
                                   <p className="text-[10px] text-emerald-500/80 mt-0.5">{item.change}</p>
                                 </motion.div>
-                              ))}
+                            )}
                             </div>
                             
                             <motion.button
-                              className="mt-3 bg-secondary/30 rounded-full py-2 px-4 flex items-center justify-center gap-2 cursor-pointer hover:bg-secondary/50 transition-colors duration-200"
-                              onClick={() => setShowDashboard(false)}
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ delay: 0.4 }}
-                            >
+                            className="mt-3 bg-secondary/30 rounded-full py-2 px-4 flex items-center justify-center gap-2 cursor-pointer hover:bg-secondary/50 transition-colors duration-200"
+                            onClick={() => setShowDashboard(false)}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}>
+                            
                               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                               <span className="text-xs text-muted-foreground font-light">AI aktiv</span>
                             </motion.button>
                           </motion.div>
-                        )}
+                        }
                       </AnimatePresence>
                     </div>
                   </div>
@@ -206,15 +206,15 @@ const About = () => {
                 {/* Side buttons */}
                 <div className="absolute left-0 top-24 h-7 w-[3px] rounded-l-sm bg-zinc-700" />
                 <div className="absolute left-0 top-36 h-10 w-[3px] rounded-l-sm bg-zinc-700" />
-                <div className="absolute left-0 top-50 h-10 w-[3px] rounded-l-sm bg-zinc-700" />
+                
                 <div className="absolute right-0 top-36 h-14 w-[3px] rounded-r-sm bg-zinc-700" />
               </div>
             </motion.div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default About;
