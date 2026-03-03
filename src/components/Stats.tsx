@@ -40,8 +40,6 @@ const AnimatedCounter = ({
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       const currentValue = Math.round(startValue + difference * easeOutQuart);
       
@@ -56,7 +54,7 @@ const AnimatedCounter = ({
   }, [isInView, endValue, startValue, duration]);
 
   return (
-    <div ref={ref} className="text-3xl font-bold text-foreground sm:text-4xl">
+    <div ref={ref} className="font-serif text-3xl text-foreground sm:text-4xl tracking-tight">
       {count}{suffix}
     </div>
   );
@@ -64,30 +62,32 @@ const AnimatedCounter = ({
 
 const Stats = () => {
   return (
-    <section className="border-y border-border bg-card py-16">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <section className="py-16 relative">
+      <div className="gradient-divider" />
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 gap-12 md:grid-cols-4">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               className="text-center"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <AnimatedCounter
                 endValue={stat.endValue}
                 suffix={stat.suffix}
                 startValue={stat.startValue}
               />
-              <div className="mt-2 text-sm text-muted-foreground">
+              <div className="mt-2 text-sm font-light text-muted-foreground">
                 {stat.label}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+      <div className="gradient-divider" />
     </section>
   );
 };
