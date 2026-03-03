@@ -83,31 +83,31 @@ const Hero = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-16">
       <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 items-center">
           {/* Left content */}
           <motion.div 
             className="max-w-xl"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            <p className="mb-5 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
               Kundtjänstlösningar
             </p>
             
-            <h1 className="mb-6 text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="mb-6 text-foreground">
               Bättre support för växande företag
             </h1>
             
-            <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
+            <p className="mb-10 text-lg font-light text-muted-foreground leading-relaxed max-w-md">
               Vi hjälper företag att leverera enastående kundupplevelser genom 
-              smart automatisering och dedikerade supportteam. Mindre väntan, fler lösningar.
+              smart automatisering och dedikerade supportteam.
             </p>
             
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button size="lg">
+              <Button size="lg" className="group">
                 Boka ett samtal
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Button>
               <Button variant="outline" size="lg">
                 Se hur det fungerar
@@ -119,13 +119,13 @@ const Hero = () => {
           <div className="hidden lg:block">
             <div className="relative">
               <motion.div 
-                className="max-w-md mx-auto rounded-2xl bg-card border border-border overflow-hidden relative"
-                initial={{ opacity: 0, y: 10 }}
+                className="max-w-md mx-auto rounded-2xl bg-card border border-border overflow-hidden elevation-3"
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               >
                 {/* Chat header */}
-                <div className="bg-muted/30 border-b border-border px-4 py-3 flex items-center gap-3">
+                <div className="bg-secondary/40 border-b border-border px-5 py-3.5 flex items-center gap-3">
                   <div className="relative">
                     <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center">
                       <span className="text-foreground font-semibold text-sm">K</span>
@@ -134,7 +134,7 @@ const Hero = () => {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-foreground">Kundra AI</p>
-                    <p className="text-xs text-muted-foreground">Online</p>
+                    <p className="text-xs text-muted-foreground font-light">Online</p>
                   </div>
                 </div>
                 
@@ -145,17 +145,17 @@ const Hero = () => {
                       {visibleMessages.map((message) => (
                         <motion.div
                           key={`${currentConversationIndex}-${message.id}`}
-                          initial={{ opacity: 0, y: 12 }}
+                          initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0 }}
-                          transition={{ duration: 0.25 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
                           className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
                         >
                           <div 
                             className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
                               message.type === "user" 
                                 ? "bg-foreground text-background rounded-br-md" 
-                                : "bg-muted text-foreground rounded-bl-md"
+                                : "bg-secondary text-foreground rounded-bl-md"
                             }`}
                           >
                             <p className="text-sm leading-relaxed">{message.text}</p>
@@ -167,18 +167,18 @@ const Hero = () => {
                       {isTyping && (
                         <motion.div
                           key="typing"
-                          initial={{ opacity: 0, y: 10 }}
+                          initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0 }}
                           className="flex justify-start"
                         >
-                          <div className="bg-muted rounded-2xl rounded-bl-md px-4 py-3">
+                          <div className="bg-secondary rounded-2xl rounded-bl-md px-4 py-3">
                             <div className="flex gap-1.5">
                               {[0, 0.15, 0.3].map((delay, i) => (
                                 <motion.span 
                                   key={i}
-                                  className="h-2 w-2 rounded-full bg-muted-foreground/60"
-                                  animate={{ opacity: [0.4, 1, 0.4] }}
+                                  className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50"
+                                  animate={{ opacity: [0.3, 1, 0.3] }}
                                   transition={{ duration: 0.8, repeat: Infinity, delay }}
                                 />
                               ))}
@@ -194,11 +194,11 @@ const Hero = () => {
                 <div className="border-t border-border px-4 py-3">
                   <button 
                     onClick={scrollToContact}
-                    className="w-full flex items-center gap-3 rounded-full border border-border bg-background px-4 py-2 cursor-pointer hover:border-muted-foreground/30 transition-colors group"
+                    className="w-full flex items-center gap-3 rounded-full border border-border bg-background px-4 py-2.5 cursor-pointer hover:border-muted-foreground/30 transition-all duration-200 group"
                   >
-                    <span className="text-sm text-muted-foreground flex-1 text-left">Skriv ett meddelande...</span>
-                    <div className="h-8 w-8 rounded-full bg-accent flex items-center justify-center">
-                      <ArrowRight className="h-4 w-4 text-foreground" />
+                    <span className="text-sm text-muted-foreground font-light flex-1 text-left">Skriv ett meddelande...</span>
+                    <div className="h-7 w-7 rounded-full bg-accent flex items-center justify-center group-hover:bg-foreground transition-colors duration-200">
+                      <ArrowRight className="h-3.5 w-3.5 text-foreground group-hover:text-background transition-colors duration-200" />
                     </div>
                   </button>
                 </div>

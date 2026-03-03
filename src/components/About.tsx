@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 const About = () => {
   const [showDashboard, setShowDashboard] = useState(false);
 
-  // Auto-cycle between views
   useEffect(() => {
     const interval = setInterval(() => {
       setShowDashboard(prev => !prev);
@@ -16,15 +15,20 @@ const About = () => {
   return (
     <section id="om-oss" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
-          <div>
-            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
               Om oss
             </p>
-            <h2 className="mb-6 text-3xl text-foreground sm:text-4xl lg:text-5xl">
+            <h2 className="mb-6 text-foreground">
               Byggd av människor som förstår service
             </h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className="space-y-5 text-muted-foreground font-light leading-relaxed">
               <p>
                 Vi startade AutoServe för att vi såg hur företag kämpade med samma 
                 utmaning: ökande kundförväntningar och begränsade resurser.
@@ -39,93 +43,76 @@ const About = () => {
                 supportupplevelser som kunderna verkligen uppskattar.
               </p>
             </div>
-          </div>
+          </motion.div>
           
-          {/* Smartphone mockup with live demo */}
+          {/* Smartphone mockup */}
           <div className="relative flex justify-center lg:justify-end">
-            
             <motion.div 
               className="relative z-10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              {/* Phone frame */}
-              <div className="relative mx-auto w-[320px] sm:w-[380px]">
-              {/* Phone outer frame */}
-                <div className="relative rounded-[3rem] bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 p-2 shadow-2xl">
-                  {/* Phone inner bezel */}
-                  <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0d1117]">
+              <div className="relative mx-auto w-[300px] sm:w-[340px]">
+                {/* Phone outer frame */}
+                <div className="relative rounded-[2.5rem] bg-gradient-to-b from-zinc-600 via-zinc-700 to-zinc-800 p-[3px] elevation-4">
+                  {/* Phone inner */}
+                  <div className="relative overflow-hidden rounded-[2.4rem] bg-background">
                     {/* Dynamic Island */}
-                    <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 h-7 w-32 rounded-full bg-black flex items-center justify-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-zinc-800 ring-1 ring-zinc-700" />
-                    </div>
+                    <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-20 h-6 w-28 rounded-full bg-foreground/90" />
                     
                     {/* Status bar */}
                     <div className="absolute top-1 left-0 right-0 z-10 flex items-center justify-between px-8 py-1.5">
-                      <span className="text-[10px] font-semibold text-white/90">9:41</span>
+                      <span className="text-[10px] font-medium text-foreground/80">9:41</span>
                       <div className="flex items-center gap-1.5">
-                        {/* Signal bars */}
                         <div className="flex items-end gap-[2px]">
-                          <div className="w-[3px] h-[4px] rounded-sm bg-white/90" />
-                          <div className="w-[3px] h-[6px] rounded-sm bg-white/90" />
-                          <div className="w-[3px] h-[8px] rounded-sm bg-white/90" />
-                          <div className="w-[3px] h-[10px] rounded-sm bg-white/90" />
+                          <div className="w-[3px] h-[4px] rounded-sm bg-foreground/70" />
+                          <div className="w-[3px] h-[6px] rounded-sm bg-foreground/70" />
+                          <div className="w-[3px] h-[8px] rounded-sm bg-foreground/70" />
+                          <div className="w-[3px] h-[10px] rounded-sm bg-foreground/70" />
                         </div>
-                        {/* WiFi */}
-                        <svg className="w-3.5 h-3.5 text-white/90" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M1.29 7.05a1 1 0 0 1 .32-1.38A16.06 16.06 0 0 1 12 2a16.06 16.06 0 0 1 10.39 3.67 1 1 0 0 1-1.06 1.7A14.06 14.06 0 0 0 12 4 14.06 14.06 0 0 0 2.67 7.37a1 1 0 0 1-1.38-.32zM12 8a12.06 12.06 0 0 0-7.74 2.79 1 1 0 1 0 1.28 1.54A10.06 10.06 0 0 1 12 10a10.06 10.06 0 0 1 6.46 2.33 1 1 0 1 0 1.28-1.54A12.06 12.06 0 0 0 12 8zm0 6a8.06 8.06 0 0 0-5.13 1.82 1 1 0 1 0 1.26 1.56A6.06 6.06 0 0 1 12 16a6.06 6.06 0 0 1 3.87 1.38 1 1 0 1 0 1.26-1.56A8.06 8.06 0 0 0 12 14zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-                        </svg>
-                        {/* Battery */}
                         <div className="flex items-center gap-[2px]">
-                          <div className="w-5 h-2.5 rounded-[3px] border border-white/90 p-[1.5px]">
-                            <div className="w-3/4 h-full rounded-[1.5px] bg-white/90" />
+                          <div className="w-5 h-2.5 rounded-[3px] border border-foreground/70 p-[1.5px]">
+                            <div className="w-3/4 h-full rounded-[1.5px] bg-foreground/70" />
                           </div>
-                          <div className="w-[2px] h-1.5 rounded-r-sm bg-white/90" />
                         </div>
                       </div>
                     </div>
                     
-                    {/* Screen content with AnimatePresence for transitions */}
+                    {/* Screen content */}
                     <div className="relative aspect-[9/16] overflow-hidden">
                       <AnimatePresence mode="wait">
                         {!showDashboard ? (
                           <motion.div
                             key="voice"
-                            className="absolute inset-0 p-6 pt-10 flex flex-col"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.4 }}
+                            className="absolute inset-0 p-6 pt-12 flex flex-col"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
                           >
-                            {/* App header */}
-                            <div className="text-center mb-6">
-                              <h3 className="text-foreground font-semibold text-lg">
+                            <div className="text-center mb-6 mt-2">
+                              <h3 className="font-sans text-foreground font-semibold text-base">
                                 Kundra AI-Assistent
                               </h3>
-                              <p className="text-muted-foreground text-xs mt-1">Demo</p>
+                              <p className="text-muted-foreground text-xs mt-1 font-light">Demo</p>
                             </div>
                             
-                            {/* Status bar */}
-                            <div className="bg-muted/30 rounded-full py-2 px-4 mb-6 flex items-center justify-center gap-2">
-                              <motion.div 
-                                className="w-2 h-2 rounded-full bg-emerald-500"
-                                animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                              />
-                              <span className="text-xs text-muted-foreground">Ansluten</span>
+                            <div className="bg-secondary/50 rounded-full py-2 px-4 mb-6 flex items-center justify-center gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                              <span className="text-xs text-muted-foreground font-light">Ansluten</span>
                             </div>
                             
-                            {/* Audio waveform visualization */}
+                            {/* Audio waveform */}
                             <div className="flex-1 flex items-center justify-center">
                               <div className="flex items-center gap-1">
                                 {[...Array(12)].map((_, i) => (
                                   <motion.div
                                     key={i}
-                                    className="w-1.5 bg-muted-foreground rounded-full"
+                                    className="w-1 bg-muted-foreground/40 rounded-full"
                                     animate={{
-                                      height: [8, 24 + Math.random() * 20, 8],
+                                      height: [6, 20 + Math.random() * 16, 6],
                                     }}
                                     transition={{
                                       duration: 0.8 + Math.random() * 0.4,
@@ -138,7 +125,7 @@ const About = () => {
                               </div>
                             </div>
                             
-                            {/* Mic button - clickable to show dashboard */}
+                            {/* Mic button */}
                             <div className="flex justify-center mb-6">
                               <motion.button 
                                 className="relative cursor-pointer"
@@ -146,20 +133,17 @@ const About = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                               >
-                                {/* Pulse rings */}
-                                
-                                <div className="relative w-16 h-16 rounded-full bg-foreground flex items-center justify-center">
-                                  <Mic className="w-7 h-7 text-background" />
+                                <div className="relative w-14 h-14 rounded-full bg-foreground flex items-center justify-center">
+                                  <Mic className="w-6 h-6 text-background" />
                                 </div>
                               </motion.button>
                             </div>
                             
-                            {/* Chat response area */}
-                            <div className="bg-muted/20 rounded-xl p-4 border border-border/30">
+                            <div className="bg-secondary/30 rounded-xl p-4 border border-border/30">
                               <motion.p 
-                                className="text-sm text-muted-foreground"
-                                animate={{ opacity: [0.5, 1, 0.5] }}
-                                transition={{ duration: 2, repeat: Infinity }}
+                                className="text-sm text-muted-foreground font-light"
+                                animate={{ opacity: [0.4, 0.8, 0.4] }}
+                                transition={{ duration: 2.5, repeat: Infinity }}
                               >
                                 "Hur kan jag hjälpa dig idag?"
                               </motion.p>
@@ -168,85 +152,49 @@ const About = () => {
                         ) : (
                           <motion.div
                             key="dashboard"
-                            className="absolute inset-0 p-4 pt-10 flex flex-col"
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 20 }}
-                            transition={{ duration: 0.4 }}
+                            className="absolute inset-0 p-4 pt-12 flex flex-col"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
                           >
-                            {/* App header */}
-                            <div className="text-center mb-4">
-                              <h3 className="text-foreground font-semibold text-base">
+                            <div className="text-center mb-4 mt-2">
+                              <h3 className="font-sans text-foreground font-semibold text-sm">
                                 Kundra AI-Assistent
                               </h3>
-                              <p className="text-muted-foreground text-xs mt-1">Adminvy</p>
+                              <p className="text-muted-foreground text-xs mt-1 font-light">Adminvy</p>
                             </div>
                             
-                            {/* Stats grid */}
-                            <div className="grid grid-cols-2 gap-3 flex-1">
-                              {/* Conversations */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.1 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Konversationer</p>
-                                <p className="text-xl font-bold text-foreground">1,247</p>
-                                <p className="text-xs text-emerald-500 mt-1">+12% ↑</p>
-                              </motion.div>
-                              
-                              {/* Response time */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.2 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Svarstid</p>
-                                <p className="text-xl font-bold text-foreground">0.8s</p>
-                                <p className="text-xs text-emerald-500 mt-1">-23% ↓</p>
-                              </motion.div>
-                              
-                              {/* Resolved cases */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.3 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Lösta ärenden</p>
-                                <p className="text-xl font-bold text-foreground">94%</p>
-                                <p className="text-xs text-emerald-500 mt-1">+5% ↑</p>
-                              </motion.div>
-                              
-                              {/* Bookings */}
-                              <motion.div 
-                                className="bg-muted/30 rounded-xl p-3 border border-border/30"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.4 }}
-                              >
-                                <p className="text-xs text-muted-foreground mb-1">Bokningar</p>
-                                <p className="text-xl font-bold text-foreground">89</p>
-                                <p className="text-xs text-emerald-500 mt-1">+18% ↑</p>
-                              </motion.div>
+                            <div className="grid grid-cols-2 gap-2.5 flex-1">
+                              {[
+                                { label: "Konversationer", value: "1,247", change: "+12%" },
+                                { label: "Svarstid", value: "0.8s", change: "-23%" },
+                                { label: "Lösta ärenden", value: "94%", change: "+5%" },
+                                { label: "Bokningar", value: "89", change: "+18%" },
+                              ].map((item, i) => (
+                                <motion.div 
+                                  key={item.label}
+                                  className="bg-secondary/30 rounded-xl p-3 border border-border/20"
+                                  initial={{ opacity: 0, scale: 0.95 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: i * 0.08 }}
+                                >
+                                  <p className="text-[10px] text-muted-foreground font-light mb-1">{item.label}</p>
+                                  <p className="text-lg font-semibold text-foreground">{item.value}</p>
+                                  <p className="text-[10px] text-emerald-500/80 mt-0.5">{item.change}</p>
+                                </motion.div>
+                              ))}
                             </div>
                             
-                            {/* Back button */}
                             <motion.button
-                              className="mt-3 bg-muted/20 rounded-full py-2 px-4 flex items-center justify-center gap-2 cursor-pointer hover:bg-muted/30 transition-colors"
+                              className="mt-3 bg-secondary/30 rounded-full py-2 px-4 flex items-center justify-center gap-2 cursor-pointer hover:bg-secondary/50 transition-colors duration-200"
                               onClick={() => setShowDashboard(false)}
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              transition={{ delay: 0.5 }}
+                              transition={{ delay: 0.4 }}
                             >
-                              <motion.div 
-                                className="w-2 h-2 rounded-full bg-emerald-500"
-                                animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                              />
-                              <span className="text-xs text-muted-foreground">AI aktiv</span>
+                              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                              <span className="text-xs text-muted-foreground font-light">AI aktiv</span>
                             </motion.button>
                           </motion.div>
                         )}
@@ -256,10 +204,10 @@ const About = () => {
                 </div>
                 
                 {/* Side buttons */}
-                <div className="absolute left-0 top-24 h-8 w-1 rounded-l-sm bg-zinc-600" />
-                <div className="absolute left-0 top-36 h-12 w-1 rounded-l-sm bg-zinc-600" />
-                <div className="absolute left-0 top-52 h-12 w-1 rounded-l-sm bg-zinc-600" />
-                <div className="absolute right-0 top-36 h-16 w-1 rounded-r-sm bg-zinc-600" />
+                <div className="absolute left-0 top-24 h-7 w-[3px] rounded-l-sm bg-zinc-700" />
+                <div className="absolute left-0 top-36 h-10 w-[3px] rounded-l-sm bg-zinc-700" />
+                <div className="absolute left-0 top-50 h-10 w-[3px] rounded-l-sm bg-zinc-700" />
+                <div className="absolute right-0 top-36 h-14 w-[3px] rounded-r-sm bg-zinc-700" />
               </div>
             </motion.div>
           </div>

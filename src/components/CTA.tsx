@@ -39,7 +39,6 @@ const CTA = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
     toast({
@@ -53,71 +52,67 @@ const CTA = () => {
   return (
     <section id="kontakt" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left side - Text content */}
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+          {/* Left side */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
             className="flex flex-col justify-center"
           >
-            <h2 className="mb-4 text-3xl text-foreground sm:text-4xl lg:text-5xl">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+              Kontakt
+            </p>
+            <h2 className="mb-5 text-foreground">
               Redo att förbättra er kundservice?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
-              Låt oss diskutera hur vi kan hjälpa ert team att leverera bättre kundupplevelser med AI-driven support.
+            <p className="mb-10 text-lg font-light text-muted-foreground leading-relaxed">
+              Låt oss diskutera hur vi kan hjälpa ert team att leverera bättre kundupplevelser.
             </p>
             
             <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <ArrowRight className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-foreground">Snabb implementation</h3>
-                  <p className="text-sm text-muted-foreground">Kom igång på några dagar, inte månader</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <ArrowRight className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-foreground">Personlig demo</h3>
-                  <p className="text-sm text-muted-foreground">Se hur Kundra fungerar för just er bransch</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <ArrowRight className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-foreground">Ingen bindningstid</h3>
-                  <p className="text-sm text-muted-foreground">Testa riskfritt med vår 14-dagars provperiod</p>
-                </div>
-              </div>
+              {[
+                { title: "Snabb implementation", desc: "Kom igång på några dagar, inte månader" },
+                { title: "Personlig demo", desc: "Se hur Kundra fungerar för just er bransch" },
+                { title: "Ingen bindningstid", desc: "Testa riskfritt med vår 14-dagars provperiod" },
+              ].map((item, i) => (
+                <motion.div 
+                  key={item.title}
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary border border-border/50">
+                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-sans text-sm font-semibold text-foreground">{item.title}</h3>
+                    <p className="text-sm font-light text-muted-foreground mt-0.5">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
           {/* Right side - Contact form */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
           >
-            <div className="rounded-2xl border border-border bg-card p-8 sm:p-10">
-              <h3 className="mb-6 text-xl font-medium text-foreground">Kontakta oss</h3>
+            <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 elevation-2">
+              <h3 className="mb-6 font-sans text-lg font-semibold text-foreground">Kontakta oss</h3>
               
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="flex items-center gap-2 text-muted-foreground">
-                      <User className="h-4 w-4" />
-                      Namn *
+                    <Label htmlFor="name" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                      <User className="h-3.5 w-3.5" />
+                      Namn
                     </Label>
                     <Input
                       id="name"
@@ -126,14 +121,14 @@ const CTA = () => {
                       className="bg-background"
                     />
                     {errors.name && (
-                      <p className="text-sm text-destructive">{errors.name.message}</p>
+                      <p className="text-xs text-destructive">{errors.name.message}</p>
                     )}
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="flex items-center gap-2 text-muted-foreground">
-                      <Mail className="h-4 w-4" />
-                      E-post *
+                    <Label htmlFor="email" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                      <Mail className="h-3.5 w-3.5" />
+                      E-post
                     </Label>
                     <Input
                       id="email"
@@ -143,15 +138,15 @@ const CTA = () => {
                       className="bg-background"
                     />
                     {errors.email && (
-                      <p className="text-sm text-destructive">{errors.email.message}</p>
+                      <p className="text-xs text-destructive">{errors.email.message}</p>
                     )}
                   </div>
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="company" className="flex items-center gap-2 text-muted-foreground">
-                      <Building2 className="h-4 w-4" />
+                    <Label htmlFor="company" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                      <Building2 className="h-3.5 w-3.5" />
                       Företag
                     </Label>
                     <Input
@@ -160,14 +155,11 @@ const CTA = () => {
                       {...register("company")}
                       className="bg-background"
                     />
-                    {errors.company && (
-                      <p className="text-sm text-destructive">{errors.company.message}</p>
-                    )}
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="interest" className="flex items-center gap-2 text-muted-foreground">
-                      <MessageSquare className="h-4 w-4" />
+                    <Label htmlFor="interest" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                      <MessageSquare className="h-3.5 w-3.5" />
                       Intresse
                     </Label>
                     <Select onValueChange={(value) => setValue("interest", value)}>
@@ -186,9 +178,9 @@ const CTA = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="flex items-center gap-2 text-muted-foreground">
-                    <MessageSquare className="h-4 w-4" />
-                    Meddelande *
+                  <Label htmlFor="message" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                    <MessageSquare className="h-3.5 w-3.5" />
+                    Meddelande
                   </Label>
                   <Textarea
                     id="message"
@@ -198,14 +190,14 @@ const CTA = () => {
                     className="bg-background resize-none"
                   />
                   {errors.message && (
-                    <p className="text-sm text-destructive">{errors.message.message}</p>
+                    <p className="text-xs text-destructive">{errors.message.message}</p>
                   )}
                 </div>
 
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="w-full"
+                  className="w-full group"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -213,12 +205,12 @@ const CTA = () => {
                   ) : (
                     <>
                       Skicka meddelande
-                      <Send className="ml-2 h-4 w-4" />
+                      <Send className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </>
                   )}
                 </Button>
                 
-                <p className="text-center text-xs text-muted-foreground">
+                <p className="text-center text-xs text-muted-foreground font-light">
                   Genom att skicka godkänner du vår integritetspolicy
                 </p>
               </form>

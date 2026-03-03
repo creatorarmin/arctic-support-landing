@@ -1,4 +1,5 @@
 import { Clock, Users, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -23,30 +24,34 @@ const Features = () => {
     <section id="losningar" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
             Därför väljer företag oss
           </p>
-          <h2 className="text-3xl text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="text-foreground">
             Support som faktiskt fungerar
           </h2>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {features.map((feature) => (
-            <div
+        <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+          {features.map((feature, index) => (
+            <motion.div
               key={feature.title}
-              className="group rounded-xl border border-border bg-card p-8 transition-colors hover:bg-secondary/30"
+              className="group rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:border-muted-foreground/20 hover:bg-secondary/20 elevation-1 hover:elevation-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                <feature.icon className="h-5 w-5 text-foreground" />
+              <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-lg bg-secondary border border-border/50">
+                <feature.icon className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
               </div>
-              <h3 className="mb-3 text-xl font-medium text-foreground">
+              <h3 className="mb-3 font-sans text-lg font-semibold text-foreground">
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm font-light text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
