@@ -101,7 +101,7 @@ const About = () => {
                           >
                             {/* App header */}
                             <div className="text-center mb-6">
-                              <h3 className="text-primary font-semibold text-lg">
+                              <h3 className="text-foreground font-semibold text-lg">
                                 Kundra AI-Assistent
                               </h3>
                               <p className="text-muted-foreground text-xs mt-1">Demo</p>
@@ -123,7 +123,7 @@ const About = () => {
                                 {[...Array(12)].map((_, i) => (
                                   <motion.div
                                     key={i}
-                                    className="w-1.5 bg-primary/80 rounded-full"
+                                    className="w-1.5 bg-muted-foreground rounded-full"
                                     animate={{
                                       height: [8, 24 + Math.random() * 20, 8],
                                     }}
