@@ -139,7 +139,7 @@ const Hero = () => {
                 </div>
                 
                 {/* Chat messages */}
-                <div className="h-[320px] overflow-hidden px-4 py-4">
+                <div className="h-[420px] overflow-hidden px-4 py-4">
                   <div className="flex flex-col gap-3 h-full">
                     <AnimatePresence mode="popLayout">
                       {visibleMessages.map((message) => (
