@@ -36,6 +36,31 @@ const conversations: ChatMessage[][] = [
   ],
 ];
 
+const FloatingShape = ({ 
+  className, 
+  delay = 0, 
+  duration = 20 
+}: { 
+  className: string; 
+  delay?: number; 
+  duration?: number;
+}) => (
+  <motion.div
+    className={className}
+    animate={{
+      y: [0, -30, 10, -20, 0],
+      x: [0, 15, -10, 20, 0],
+      rotate: [0, 5, -3, 7, 0],
+    }}
+    transition={{
+      duration,
+      repeat: Infinity,
+      delay,
+      ease: "easeInOut",
+    }}
+  />
+);
+
 const Hero = () => {
   const [visibleMessages, setVisibleMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -81,8 +106,28 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-16">
-      <div className="container mx-auto px-6">
+    <section className="relative min-h-[90vh] flex items-center pt-16 overflow-hidden">
+      {/* Ambient floating shapes */}
+      <FloatingShape 
+        className="absolute top-20 -left-20 w-72 h-72 rounded-full bg-gradient-to-br from-white/[0.03] to-transparent blur-2xl"
+        delay={0}
+        duration={25}
+      />
+      <FloatingShape 
+        className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-gradient-to-tl from-white/[0.02] to-transparent blur-3xl"
+        delay={3}
+        duration={30}
+      />
+      <FloatingShape 
+        className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full bg-gradient-to-b from-white/[0.04] to-transparent blur-xl"
+        delay={6}
+        duration={18}
+      />
+      
+      {/* Diagonal line accent */}
+      <div className="absolute top-0 right-0 w-px h-[60vh] bg-gradient-to-b from-transparent via-white/10 to-transparent transform rotate-12 origin-top-right" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left content */}
           <motion.div 
@@ -91,9 +136,14 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            <motion.p 
+              className="mb-4 text-sm font-medium uppercase tracking-widest text-muted-foreground"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               Kundtjänstlösningar
-            </p>
+            </motion.p>
             
             <h1 className="mb-6 text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">
               Bättre support för växande företag
@@ -105,27 +155,47 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button size="lg">
+              <Button size="lg" className="group">
                 Boka ett samtal
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button variant="outline" size="lg">
                 Se hur det fungerar
               </Button>
             </div>
+            
+            {/* Trust line */}
+            <motion.div 
+              className="mt-12 flex items-center gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <div className="flex -space-x-2">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-background bg-accent" />
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground">
+                <span className="text-foreground font-medium">200+</span> företag litar på oss
+              </p>
+            </motion.div>
           </motion.div>
 
           {/* Right side - Live chat conversation */}
           <div className="hidden lg:block">
             <div className="relative">
+              {/* Shadow/depth behind card */}
+              <div className="absolute inset-4 -bottom-2 rounded-2xl bg-white/[0.03] blur-xl" />
+              
               <motion.div 
-                className="max-w-md mx-auto rounded-2xl bg-card border border-border overflow-hidden relative"
+                className="max-w-md mx-auto rounded-2xl bg-card/80 backdrop-blur-sm border border-white/[0.08] overflow-hidden relative shadow-2xl shadow-black/20"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 {/* Chat header */}
-                <div className="bg-muted/30 border-b border-border px-4 py-3 flex items-center gap-3">
+                <div className="bg-white/[0.03] border-b border-white/[0.06] px-4 py-3 flex items-center gap-3">
                   <div className="relative">
                     <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center">
                       <span className="text-foreground font-semibold text-sm">K</span>
@@ -155,7 +225,7 @@ const Hero = () => {
                             className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
                               message.type === "user" 
                                 ? "bg-foreground text-background rounded-br-md" 
-                                : "bg-muted text-foreground rounded-bl-md"
+                                : "bg-white/[0.06] text-foreground rounded-bl-md border border-white/[0.04]"
                             }`}
                           >
                             <p className="text-sm leading-relaxed">{message.text}</p>
@@ -163,7 +233,6 @@ const Hero = () => {
                         </motion.div>
                       ))}
                       
-                      {/* Typing indicator */}
                       {isTyping && (
                         <motion.div
                           key="typing"
@@ -172,7 +241,7 @@ const Hero = () => {
                           exit={{ opacity: 0 }}
                           className="flex justify-start"
                         >
-                          <div className="bg-muted rounded-2xl rounded-bl-md px-4 py-3">
+                          <div className="bg-white/[0.06] rounded-2xl rounded-bl-md px-4 py-3 border border-white/[0.04]">
                             <div className="flex gap-1.5">
                               {[0, 0.15, 0.3].map((delay, i) => (
                                 <motion.span 
@@ -191,10 +260,10 @@ const Hero = () => {
                 </div>
                 
                 {/* Chat input */}
-                <div className="border-t border-border px-4 py-3">
+                <div className="border-t border-white/[0.06] px-4 py-3">
                   <button 
                     onClick={scrollToContact}
-                    className="w-full flex items-center gap-3 rounded-full border border-border bg-background px-4 py-2 cursor-pointer hover:border-muted-foreground/30 transition-colors group"
+                    className="w-full flex items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.02] px-4 py-2 cursor-pointer hover:bg-white/[0.05] transition-colors group"
                   >
                     <span className="text-sm text-muted-foreground flex-1 text-left">Skriv ett meddelande...</span>
                     <div className="h-8 w-8 rounded-full bg-accent flex items-center justify-center">
