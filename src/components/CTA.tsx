@@ -14,14 +14,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { motion } from "framer-motion";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Namn krävs").max(100, "Namn får max vara 100 tecken"),
-  email: z.string().trim().email("Ogiltig e-postadress").max(255, "E-post får max vara 255 tecken"),
-  company: z.string().trim().max(100, "Företagsnamn får max vara 100 tecken").optional(),
+  name: z.string().trim().min(1, "Namn krävs").max(100),
+  email: z.string().trim().email("Ogiltig e-postadress").max(255),
+  company: z.string().trim().max(100).optional(),
   interest: z.string().optional(),
-  message: z.string().trim().min(1, "Meddelande krävs").max(1000, "Meddelande får max vara 1000 tecken"),
+  message: z.string().trim().min(1, "Meddelande krävs").max(1000),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -38,14 +37,12 @@ const CTA = () => {
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (_data: ContactFormData) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    
     toast({
       title: "Tack för ditt meddelande!",
       description: "Vi återkommer till dig inom kort.",
     });
-    
     reset();
   };
 
@@ -53,21 +50,15 @@ const CTA = () => {
     <section id="kontakt" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
-          {/* Left side */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-center"
-          >
-            <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+          {/* Left */}
+          <div className="flex flex-col justify-center">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-accent">
               Kontakt
             </p>
             <h2 className="mb-5 text-foreground">
               Redo att förbättra er kundservice?
             </h2>
-            <p className="mb-10 text-lg font-light text-muted-foreground leading-relaxed">
+            <p className="mb-10 text-lg text-muted-foreground leading-relaxed">
               Låt oss diskutera hur vi kan hjälpa ert team att leverera bättre kundupplevelser.
             </p>
             
@@ -76,91 +67,53 @@ const CTA = () => {
                 { title: "Snabb implementation", desc: "Kom igång på några dagar, inte månader" },
                 { title: "Personlig demo", desc: "Se hur Kundra fungerar för just er bransch" },
                 { title: "Ingen bindningstid", desc: "Testa riskfritt med vår 14-dagars provperiod" },
-              ].map((item, i) => (
-                <motion.div 
-                  key={item.title}
-                  className="flex items-start gap-4"
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary border border-border/50">
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-4">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10">
+                    <ArrowRight className="h-4 w-4 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-sans text-sm font-semibold text-foreground">{item.title}</h3>
-                    <p className="text-sm font-light text-muted-foreground mt-0.5">{item.desc}</p>
+                    <p className="text-sm text-muted-foreground mt-0.5">{item.desc}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Right side - Contact form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-          >
-            <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 elevation-2">
+          {/* Right - Form */}
+          <div>
+            <div className="rounded-lg border border-border bg-card p-8 sm:p-10 elevation-2">
               <h3 className="mb-6 font-sans text-lg font-semibold text-foreground">Kontakta oss</h3>
               
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
-                      <User className="h-3.5 w-3.5" />
-                      Namn
+                      <User className="h-3.5 w-3.5" /> Namn
                     </Label>
-                    <Input
-                      id="name"
-                      placeholder="Ditt namn"
-                      {...register("name")}
-                      className="bg-background"
-                    />
-                    {errors.name && (
-                      <p className="text-xs text-destructive">{errors.name.message}</p>
-                    )}
+                    <Input id="name" placeholder="Ditt namn" {...register("name")} className="bg-background" />
+                    {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
                   </div>
-                  
                   <div className="space-y-2">
                     <Label htmlFor="email" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
-                      <Mail className="h-3.5 w-3.5" />
-                      E-post
+                      <Mail className="h-3.5 w-3.5" /> E-post
                     </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="din@epost.se"
-                      {...register("email")}
-                      className="bg-background"
-                    />
-                    {errors.email && (
-                      <p className="text-xs text-destructive">{errors.email.message}</p>
-                    )}
+                    <Input id="email" type="email" placeholder="din@epost.se" {...register("email")} className="bg-background" />
+                    {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
                   </div>
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="company" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
-                      <Building2 className="h-3.5 w-3.5" />
-                      Företag
+                      <Building2 className="h-3.5 w-3.5" /> Företag
                     </Label>
-                    <Input
-                      id="company"
-                      placeholder="Ditt företag"
-                      {...register("company")}
-                      className="bg-background"
-                    />
+                    <Input id="company" placeholder="Ditt företag" {...register("company")} className="bg-background" />
                   </div>
-                  
                   <div className="space-y-2">
                     <Label htmlFor="interest" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
-                      <MessageSquare className="h-3.5 w-3.5" />
-                      Intresse
+                      <MessageSquare className="h-3.5 w-3.5" /> Intresse
                     </Label>
                     <Select onValueChange={(value) => setValue("interest", value)}>
                       <SelectTrigger className="bg-background">
@@ -179,30 +132,14 @@ const CTA = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="message" className="flex items-center gap-2 text-muted-foreground text-xs font-medium uppercase tracking-wider">
-                    <MessageSquare className="h-3.5 w-3.5" />
-                    Meddelande
+                    <MessageSquare className="h-3.5 w-3.5" /> Meddelande
                   </Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Berätta hur vi kan hjälpa dig..."
-                    rows={4}
-                    {...register("message")}
-                    className="bg-background resize-none"
-                  />
-                  {errors.message && (
-                    <p className="text-xs text-destructive">{errors.message.message}</p>
-                  )}
+                  <Textarea id="message" placeholder="Berätta hur vi kan hjälpa dig..." rows={4} {...register("message")} className="bg-background resize-none" />
+                  {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
                 </div>
 
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  className="w-full group"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    "Skickar..."
-                  ) : (
+                <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
+                  {isSubmitting ? "Skickar..." : (
                     <>
                       Skicka meddelande
                       <Send className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -210,12 +147,12 @@ const CTA = () => {
                   )}
                 </Button>
                 
-                <p className="text-center text-xs text-muted-foreground font-light">
+                <p className="text-center text-xs text-muted-foreground">
                   Genom att skicka godkänner du vår integritetspolicy
                 </p>
               </form>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

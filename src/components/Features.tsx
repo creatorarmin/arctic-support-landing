@@ -1,5 +1,4 @@
 import { Clock, Users, TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
 
 const features = [
   {
@@ -24,7 +23,7 @@ const Features = () => {
     <section id="losningar" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-accent">
             Därför väljer företag oss
           </p>
           <h2 className="text-foreground">
@@ -33,25 +32,21 @@ const Features = () => {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-          {features.map((feature, index) => (
-            <motion.div
+          {features.map((feature) => (
+            <div
               key={feature.title}
-              className="group rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:border-muted-foreground/20 hover:bg-secondary/20 elevation-1 hover:elevation-2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+              className="group rounded-lg border border-border bg-card p-8 transition-colors duration-200 hover:border-accent/40 elevation-1"
             >
-              <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-lg bg-secondary border border-border/50">
-                <feature.icon className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
+              <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
+                <feature.icon className="h-5 w-5 text-primary" />
               </div>
               <h3 className="mb-3 font-sans text-lg font-semibold text-foreground">
                 {feature.title}
               </h3>
-              <p className="text-sm font-light text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

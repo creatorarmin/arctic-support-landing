@@ -16,14 +16,14 @@ const Footer = () => {
               <a 
                 key={item}
                 href={`#${item === "Lösningar" ? "losningar" : item === "Om oss" ? "om-oss" : item === "Kontakt" ? "kontakt" : ""}`} 
-                className="text-sm font-light text-muted-foreground transition-colors duration-200 hover:text-foreground"
+                className="text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
               >
                 {item}
               </a>
             ))}
           </nav>
           
-          <p className="text-xs font-light text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             © 2025 Kundra
           </p>
         </div>
