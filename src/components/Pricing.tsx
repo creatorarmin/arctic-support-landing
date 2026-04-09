@@ -6,7 +6,7 @@ const plans = [
   {
     name: "Start",
     price: "490",
-    description: "Perfekt för mindre team som vill komma igång",
+    description: "Perfekt för mindre team som vill komma igång med automatisering",
     features: [
       "Upp till 500 konversationer/månad",
       "Mailsupport",
@@ -49,15 +49,17 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section id="priser" className="py-28 sm:py-36 relative">
+    <section id="priser" className="py-24 sm:py-32 bg-background">
       <div className="container mx-auto px-6">
-        <div className="max-w-lg mb-20">
+        <div className="max-w-2xl mb-16">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+            Priser
+          </p>
           <h2 className="text-foreground mb-4">
-            Enkla priser,<br />
-            <span className="italic font-normal text-muted-foreground/60">inga överraskningar</span>
+            Enkla och tydliga priser
           </h2>
-          <p className="text-muted-foreground font-light">
-            Välj den plan som passar ert företag.
+          <p className="text-muted-foreground font-light text-lg">
+            Välj den plan som passar ert företag. Inga dolda avgifter.
           </p>
         </div>
 
@@ -65,27 +67,27 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
-              className={`relative rounded-2xl border p-8 lg:p-10 transition-all duration-500 flex flex-col ${
+              className={`relative rounded-xl border p-8 transition-all duration-300 flex flex-col ${
                 plan.popular
-                  ? "border-foreground/15 bg-card elevation-2 scale-[1.02]"
-                  : "border-border/40 bg-card/30 hover:border-border/60 hover:bg-card/50"
+                  ? "border-foreground/20 bg-card elevation-2"
+                  : "border-border bg-card/40 hover:border-muted-foreground/20 elevation-1"
               }`}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             >
               {plan.popular && (
-                <span className="absolute -top-3 left-8 bg-foreground text-background text-xs font-medium px-4 py-1 rounded-full">
+                <span className="absolute -top-3 left-6 bg-foreground text-background text-xs font-medium px-3 py-1 rounded-full">
                   Mest populär
                 </span>
               )}
 
               <div className="mb-8">
-                <h3 className="font-sans text-base font-semibold text-foreground mb-2 tracking-wide">
+                <h3 className="font-sans text-lg font-semibold text-foreground mb-2">
                   {plan.name}
                 </h3>
-                <p className="text-muted-foreground text-sm font-light mb-6">
+                <p className="text-muted-foreground text-sm font-light mb-5">
                   {plan.description}
                 </p>
                 <div className="flex items-baseline gap-1">
@@ -93,14 +95,14 @@ const Pricing = () => {
                     {plan.price}
                   </span>
                   {plan.price !== "Offert" && (
-                    <span className="text-muted-foreground text-sm font-light ml-1">kr/mån</span>
+                    <span className="text-muted-foreground text-sm font-light"> kr/mån</span>
                   )}
                 </div>
               </div>
 
-              <div className="organic-divider mb-8" />
+              <div className="gradient-divider mb-8" />
 
-              <ul className="space-y-3.5 mb-10 flex-1">
+              <ul className="space-y-3.5 mb-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
                     <Check className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
@@ -112,7 +114,7 @@ const Pricing = () => {
               </ul>
 
               <Button
-                className="w-full rounded-full"
+                className="w-full mt-auto"
                 variant={plan.popular ? "default" : "outline"}
               >
                 {plan.price === "Offert" ? "Kontakta oss" : "Kom igång"}

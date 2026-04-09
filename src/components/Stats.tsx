@@ -54,7 +54,7 @@ const AnimatedCounter = ({
   }, [isInView, endValue, startValue, duration]);
 
   return (
-    <div ref={ref} className="font-serif text-4xl text-foreground sm:text-5xl tracking-tight">
+    <div ref={ref} className="font-serif text-3xl text-foreground sm:text-4xl tracking-tight">
       {count}{suffix}
     </div>
   );
@@ -62,33 +62,32 @@ const AnimatedCounter = ({
 
 const Stats = () => {
   return (
-    <section className="py-20 relative">
-      <div className="organic-divider" />
-      <div className="container mx-auto px-6 py-20">
-        {/* Staggered layout instead of uniform grid */}
-        <div className="grid grid-cols-2 gap-y-16 gap-x-8 md:grid-cols-4 md:gap-x-12">
+    <section className="py-16 relative">
+      <div className="gradient-divider" />
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 gap-12 md:grid-cols-4">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className={`${index % 2 === 1 ? 'pt-6' : ''}`}
-              initial={{ opacity: 0, y: 20 }}
+              className="text-center"
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <AnimatedCounter
                 endValue={stat.endValue}
                 suffix={stat.suffix}
                 startValue={stat.startValue}
               />
-              <div className="mt-3 text-sm font-light text-muted-foreground">
+              <div className="mt-2 text-sm font-light text-muted-foreground">
                 {stat.label}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-      <div className="organic-divider" />
+      <div className="gradient-divider" />
     </section>
   );
 };

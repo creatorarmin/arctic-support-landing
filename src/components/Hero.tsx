@@ -81,65 +81,53 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[92vh] flex items-center pt-20 overflow-hidden">
-      {/* Organic background shape */}
-      <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full bg-accent/20 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-secondary/30 blur-[100px] pointer-events-none" />
-      
+    <section className="relative min-h-[90vh] flex items-center pt-16">
       <div className="container mx-auto px-6">
-        <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24 items-center">
-          {/* Left content - offset for organic feel */}
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 items-center">
+          {/* Left content */}
           <motion.div 
-            className="max-w-xl lg:py-8"
-            initial={{ opacity: 0, y: 30 }}
+            className="max-w-xl"
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <motion.div 
-              className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-border/60 bg-card/50"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
-              <span className="text-xs text-muted-foreground tracking-wide">Kundtjänstlösningar</span>
-            </motion.div>
+            <p className="mb-5 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+              Kundtjänstlösningar
+            </p>
             
-            <h1 className="mb-7 text-foreground">
-              Bättre support<br />
-              <span className="italic font-normal text-muted-foreground/70">för växande företag</span>
+            <h1 className="mb-6 text-foreground">
+              Bättre support för växande företag
             </h1>
             
-            <p className="mb-10 text-base font-light text-muted-foreground leading-relaxed max-w-md">
+            <p className="mb-10 text-lg font-light text-muted-foreground leading-relaxed max-w-md">
               Vi hjälper företag att leverera enastående kundupplevelser genom 
               smart automatisering och dedikerade supportteam.
             </p>
             
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button size="lg" className="group rounded-full px-8">
+              <Button size="lg" className="group">
                 Boka ett samtal
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Button>
-              <Button variant="outline" size="lg" className="rounded-full px-8">
+              <Button variant="outline" size="lg">
                 Se hur det fungerar
               </Button>
             </div>
           </motion.div>
 
-          {/* Right side - Chat with organic tilt */}
+          {/* Right side - Live chat conversation */}
           <div className="hidden lg:block">
             <div className="relative">
               <motion.div 
-                className="max-w-md mx-auto rounded-2xl bg-card border border-border/60 overflow-hidden elevation-3"
-                style={{ rotate: -1 }}
-                initial={{ opacity: 0, y: 20, rotate: -1 }}
-                animate={{ opacity: 1, y: 0, rotate: -1 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-md mx-auto rounded-2xl bg-card border border-border overflow-hidden elevation-3"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               >
                 {/* Chat header */}
-                <div className="bg-secondary/30 border-b border-border/40 px-5 py-3.5 flex items-center gap-3">
+                <div className="bg-secondary/40 border-b border-border px-5 py-3.5 flex items-center gap-3">
                   <div className="relative">
-                    <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center organic-blob">
+                    <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center">
                       <span className="text-foreground font-semibold text-sm">K</span>
                     </div>
                     <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-emerald-500 border-2 border-card" />
@@ -170,11 +158,12 @@ const Hero = () => {
                                 : "bg-[#e5e5ea] text-[#1c1c1e] rounded-bl-md"
                             }`}
                           >
-                            <p className="text-sm leading-relaxed font-sans">{message.text}</p>
+                            <p className="text-sm leading-relaxed">{message.text}</p>
                           </div>
                         </motion.div>
                       ))}
                       
+                      {/* Typing indicator */}
                       {isTyping && (
                         <motion.div
                           key="typing"
@@ -202,7 +191,7 @@ const Hero = () => {
                 </div>
                 
                 {/* Chat input */}
-                <div className="border-t border-border/40 px-4 py-3">
+                <div className="border-t border-border px-4 py-3">
                   <button 
                     onClick={scrollToContact}
                     className="w-full flex items-center gap-3 rounded-full border border-border bg-background px-4 py-2.5 cursor-pointer hover:border-muted-foreground/30 transition-all duration-200 group"

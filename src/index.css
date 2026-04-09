@@ -2,78 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap');
 
 @layer base {
   :root {
-    --background: 30 5% 7%;
-    --foreground: 40 10% 93%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 96%;
 
-    --card: 30 4% 10%;
-    --card-foreground: 40 10% 93%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 30 4% 10%;
-    --popover-foreground: 40 10% 93%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 40 10% 93%;
-    --primary-foreground: 30 5% 7%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 7%;
 
-    --secondary: 30 3% 13%;
-    --secondary-foreground: 40 6% 85%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 88%;
 
-    --muted: 30 3% 14%;
-    --muted-foreground: 30 4% 48%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 50%;
 
-    --accent: 30 4% 18%;
-    --accent-foreground: 40 10% 93%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 96%;
 
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 30 4% 15%;
-    --input: 30 4% 15%;
-    --ring: 30 4% 40%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 40%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 30 5% 7%;
-    --sidebar-foreground: 40 10% 93%;
-    --sidebar-primary: 40 10% 93%;
-    --sidebar-primary-foreground: 30 5% 7%;
-    --sidebar-accent: 30 3% 13%;
-    --sidebar-accent-foreground: 40 6% 85%;
-    --sidebar-border: 30 4% 15%;
-    --sidebar-ring: 30 4% 40%;
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 0 0% 96%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 0 0% 13%;
+    --sidebar-accent-foreground: 0 0% 88%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 0% 40%;
   }
 
   .dark {
-    --background: 30 5% 7%;
-    --foreground: 40 10% 93%;
-    --card: 30 4% 10%;
-    --card-foreground: 40 10% 93%;
-    --popover: 30 4% 10%;
-    --popover-foreground: 40 10% 93%;
-    --primary: 40 10% 93%;
-    --primary-foreground: 30 5% 7%;
-    --secondary: 30 3% 13%;
-    --secondary-foreground: 40 6% 85%;
-    --muted: 30 3% 14%;
-    --muted-foreground: 30 4% 48%;
-    --accent: 30 4% 18%;
-    --accent-foreground: 40 10% 93%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 88%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 50%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 96%;
     --destructive: 0 60% 40%;
     --destructive-foreground: 0 0% 98%;
-    --border: 30 4% 15%;
-    --input: 30 4% 15%;
-    --ring: 30 4% 40%;
-    --sidebar-background: 30 5% 7%;
-    --sidebar-foreground: 40 10% 93%;
-    --sidebar-primary: 40 10% 93%;
-    --sidebar-primary-foreground: 30 5% 7%;
-    --sidebar-accent: 30 3% 13%;
-    --sidebar-accent-foreground: 40 6% 85%;
-    --sidebar-border: 30 4% 15%;
-    --sidebar-ring: 30 4% 40%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 40%;
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 0 0% 96%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 0 0% 13%;
+    --sidebar-accent-foreground: 0 0% 88%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 0% 40%;
   }
 }
 
@@ -93,17 +93,17 @@
   }
 
   h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    font-family: 'DM Serif Display', serif;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   h1 {
-    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
   }
 
   h2 {
-    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-size: clamp(1.875rem, 4vw, 2.875rem);
   }
 
   h3 {
@@ -111,25 +111,28 @@
   }
 
   p {
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
+  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 
+  /* Better focus styles */
   :focus-visible {
-    outline: 2px solid hsl(30 4% 40%);
+    outline: 2px solid hsl(0 0% 40%);
     outline-offset: 2px;
   }
 
+  /* Selection */
   ::selection {
-    background: hsl(30 8% 28%);
-    color: hsl(40 10% 93%);
+    background: hsl(0 0% 30%);
+    color: hsl(0 0% 96%);
   }
 }
 
-/* Organic noise texture */
+/* Noise texture overlay */
 .noise-texture {
   position: relative;
 }
@@ -139,91 +142,60 @@
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  background-size: 256px 256px;
+  background-size: 200px 200px;
 }
 
-/* Organic flowing backgrounds */
-.section-organic {
+/* Section gradients for depth */
+.section-grain {
   position: relative;
-  overflow: hidden;
-}
-.section-organic::before {
-  content: '';
-  position: absolute;
-  width: 140%;
-  height: 600px;
-  top: -200px;
-  left: -20%;
-  background: radial-gradient(ellipse at 30% 50%, hsl(30 6% 11% / 0.6), transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, hsl(0 0% 13% / 0.4), transparent),
+    linear-gradient(to bottom, transparent, hsl(0 0% 5% / 0.2) 50%, transparent);
 }
 
-.section-organic-alt {
+.section-grain-alt {
   position: relative;
-  overflow: hidden;
-}
-.section-organic-alt::before {
-  content: '';
-  position: absolute;
-  width: 120%;
-  height: 500px;
-  bottom: -150px;
-  right: -15%;
-  background: radial-gradient(ellipse at 70% 50%, hsl(25 5% 10% / 0.5), transparent 65%);
-  border-radius: 50%;
-  pointer-events: none;
+  background-image: 
+    radial-gradient(ellipse 60% 40% at 80% 100%, hsl(0 0% 12% / 0.3), transparent),
+    radial-gradient(ellipse 40% 30% at 10% 0%, hsl(0 0% 10% / 0.2), transparent);
 }
 
-/* Organic divider - wavy line */
-.organic-divider {
+/* Gradient dividers */
+.gradient-divider {
   height: 1px;
-  position: relative;
-  overflow: hidden;
-}
-.organic-divider::after {
-  content: '';
-  position: absolute;
-  inset: 0;
   background: linear-gradient(
     90deg,
-    transparent 0%,
-    hsl(30 5% 20%) 15%,
-    hsl(30 6% 24%) 35%,
-    hsl(30 5% 22%) 55%,
-    hsl(30 5% 20%) 75%,
-    transparent 100%
+    transparent,
+    hsl(0 0% 20%) 20%,
+    hsl(0 0% 25%) 50%,
+    hsl(0 0% 20%) 80%,
+    transparent
   );
 }
 
 /* Elevation system */
 .elevation-1 {
-  box-shadow: 0 1px 3px 0 hsl(30 5% 0% / 0.25), 0 1px 2px 0 hsl(30 5% 0% / 0.12);
+  box-shadow: 0 1px 2px 0 hsl(0 0% 0% / 0.3), 0 1px 3px 0 hsl(0 0% 0% / 0.15);
 }
 
 .elevation-2 {
-  box-shadow: 0 4px 8px -2px hsl(30 5% 0% / 0.3), 0 2px 4px -2px hsl(30 5% 0% / 0.12);
+  box-shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.15);
 }
 
 .elevation-3 {
-  box-shadow: 0 12px 24px -4px hsl(30 5% 0% / 0.35), 0 4px 8px -4px hsl(30 5% 0% / 0.15);
+  box-shadow: 0 10px 15px -3px hsl(0 0% 0% / 0.35), 0 4px 6px -4px hsl(0 0% 0% / 0.2);
 }
 
 .elevation-4 {
-  box-shadow: 0 24px 48px -8px hsl(30 5% 0% / 0.4), 0 8px 16px -8px hsl(30 5% 0% / 0.2);
+  box-shadow: 0 20px 25px -5px hsl(0 0% 0% / 0.4), 0 8px 10px -6px hsl(0 0% 0% / 0.2);
 }
 
-/* Glass effect - warmer */
+/* Glass effect */
 .glass {
-  background: hsl(30 5% 7% / 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-/* Organic blob shape for decorative use */
-.organic-blob {
-  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  background: hsl(0 0% 7% / 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }

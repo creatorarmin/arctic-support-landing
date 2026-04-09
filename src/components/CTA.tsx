@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Send, Building2, Mail, User, MessageSquare } from "lucide-react";
+import { ArrowRight, Send, Building2, Mail, User, MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -50,29 +50,28 @@ const CTA = () => {
   };
 
   return (
-    <section id="kontakt" className="py-28 sm:py-36 relative overflow-hidden">
-      {/* Organic background accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-accent/15 blur-[150px] pointer-events-none" />
-      
-      <div className="container mx-auto px-6 relative">
-        <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+    <section id="kontakt" className="py-24 sm:py-32">
+      <div className="container mx-auto px-6">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
           {/* Left side */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
             className="flex flex-col justify-center"
           >
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+              Kontakt
+            </p>
             <h2 className="mb-5 text-foreground">
-              Redo att förbättra<br />
-              <span className="italic font-normal text-muted-foreground/60">er kundservice?</span>
+              Redo att förbättra er kundservice?
             </h2>
-            <p className="mb-12 text-base font-light text-muted-foreground leading-relaxed max-w-md">
+            <p className="mb-10 text-lg font-light text-muted-foreground leading-relaxed">
               Låt oss diskutera hur vi kan hjälpa ert team att leverera bättre kundupplevelser.
             </p>
             
-            <div className="space-y-8">
+            <div className="space-y-6">
               {[
                 { title: "Snabb implementation", desc: "Kom igång på några dagar, inte månader" },
                 { title: "Personlig demo", desc: "Se hur Kundra fungerar för just er bransch" },
@@ -80,16 +79,18 @@ const CTA = () => {
               ].map((item, i) => (
                 <motion.div 
                   key={item.title}
-                  className="flex items-start gap-5"
-                  initial={{ opacity: 0, x: -16 }}
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, x: -12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
                 >
-                  <div className="w-8 h-[1px] bg-muted-foreground/30 mt-3 shrink-0" />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary border border-border/50">
+                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                  </div>
                   <div>
                     <h3 className="font-sans text-sm font-semibold text-foreground">{item.title}</h3>
-                    <p className="text-sm font-light text-muted-foreground mt-1">{item.desc}</p>
+                    <p className="text-sm font-light text-muted-foreground mt-0.5">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -98,13 +99,13 @@ const CTA = () => {
 
           {/* Right side - Contact form */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
           >
-            <div className="rounded-2xl border border-border/40 bg-card/50 p-8 sm:p-10 elevation-2">
-              <h3 className="mb-8 font-serif text-2xl text-foreground">Kontakta oss</h3>
+            <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 elevation-2">
+              <h3 className="mb-6 font-sans text-lg font-semibold text-foreground">Kontakta oss</h3>
               
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -117,7 +118,7 @@ const CTA = () => {
                       id="name"
                       placeholder="Ditt namn"
                       {...register("name")}
-                      className="bg-background/50 rounded-xl border-border/40"
+                      className="bg-background"
                     />
                     {errors.name && (
                       <p className="text-xs text-destructive">{errors.name.message}</p>
@@ -134,7 +135,7 @@ const CTA = () => {
                       type="email"
                       placeholder="din@epost.se"
                       {...register("email")}
-                      className="bg-background/50 rounded-xl border-border/40"
+                      className="bg-background"
                     />
                     {errors.email && (
                       <p className="text-xs text-destructive">{errors.email.message}</p>
@@ -152,7 +153,7 @@ const CTA = () => {
                       id="company"
                       placeholder="Ditt företag"
                       {...register("company")}
-                      className="bg-background/50 rounded-xl border-border/40"
+                      className="bg-background"
                     />
                   </div>
                   
@@ -162,7 +163,7 @@ const CTA = () => {
                       Intresse
                     </Label>
                     <Select onValueChange={(value) => setValue("interest", value)}>
-                      <SelectTrigger className="bg-background/50 rounded-xl border-border/40">
+                      <SelectTrigger className="bg-background">
                         <SelectValue placeholder="Välj ett alternativ" />
                       </SelectTrigger>
                       <SelectContent>
@@ -186,7 +187,7 @@ const CTA = () => {
                     placeholder="Berätta hur vi kan hjälpa dig..."
                     rows={4}
                     {...register("message")}
-                    className="bg-background/50 resize-none rounded-xl border-border/40"
+                    className="bg-background resize-none"
                   />
                   {errors.message && (
                     <p className="text-xs text-destructive">{errors.message.message}</p>
@@ -196,7 +197,7 @@ const CTA = () => {
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="w-full group rounded-full"
+                  className="w-full group"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
