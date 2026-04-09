@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['DM Sans', 'system-ui', 'sans-serif'],
-        serif: ['DM Serif Display', 'serif'],
+        serif: ['Playfair Display', 'serif'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.4' }],
