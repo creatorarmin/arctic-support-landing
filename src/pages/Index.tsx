@@ -12,20 +12,16 @@ const Index = () => {
     <div className="min-h-screen bg-background noise-texture">
       <Header />
       <main>
-        <div className="section-grain">
-          <Hero />
-        </div>
+        <Hero />
         <Stats />
-        <div className="section-grain-alt">
+        <div className="section-organic">
           <Features />
         </div>
         <About />
-        <div className="section-grain">
+        <div className="section-organic-alt">
           <Pricing />
         </div>
-        <div className="section-grain-alt">
-          <CTA />
-        </div>
+        <CTA />
       </main>
       <Footer />
     </div>
