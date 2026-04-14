@@ -27,7 +27,7 @@ const conversations: ChatMessage[][] = [
   ],
 ];
 
-const Hero = () => {
+export const useChat = () => {
   const [visibleMessages, setVisibleMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
@@ -63,6 +63,12 @@ const Hero = () => {
       return () => clearTimeout(messageTimer);
     }
   }, [currentMessageIndex, currentConversation]);
+
+  return { visibleMessages, isTyping, currentConversationIndex };
+};
+
+const Hero = () => {
+  const { visibleMessages, isTyping, currentConversationIndex } = useChat();
 
   const scrollToContact = () => {
     const el = document.getElementById("kontakt");
@@ -111,96 +117,67 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Phone mockup with real chat */}
-          <div className="hidden lg:flex justify-center">
-            <div className="relative mx-auto w-[300px]">
-              {/* Phone frame */}
-              <div className="relative rounded-[2.5rem] bg-foreground/10 p-[3px] elevation-4">
-                <div className="relative overflow-hidden rounded-[2.4rem] bg-card">
-                  {/* Dynamic Island */}
-                  <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-20 h-6 w-28 rounded-full bg-foreground/90" />
-
-                  {/* Status bar */}
-                  <div className="absolute top-1 left-0 right-0 z-10 flex items-center justify-between px-8 py-1.5">
-                    <span className="text-[10px] font-medium text-foreground/70 font-mono">9:41</span>
-                    <div className="flex items-center gap-1.5">
-                      <div className="flex items-end gap-[2px]">
-                        <div className="w-[3px] h-[4px] rounded-sm bg-foreground/60" />
-                        <div className="w-[3px] h-[6px] rounded-sm bg-foreground/60" />
-                        <div className="w-[3px] h-[8px] rounded-sm bg-foreground/60" />
-                        <div className="w-[3px] h-[10px] rounded-sm bg-foreground/60" />
-                      </div>
-                      <div className="w-5 h-2.5 rounded-[3px] border border-foreground/60 p-[1.5px]">
-                        <div className="w-3/4 h-full rounded-[1.5px] bg-foreground/60" />
-                      </div>
-                    </div>
+          {/* Chat window */}
+          <div className="hidden lg:block">
+            <div className="relative">
+              <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
+              <div className="relative border border-border bg-card overflow-hidden elevation-3">
+                {/* Chat header */}
+                <div className="border-b border-border px-5 py-3 flex items-center gap-3">
+                  <div className="h-8 w-8 rounded-full bg-foreground/10 flex items-center justify-center">
+                    <span className="text-xs font-bold text-foreground font-mono">K</span>
                   </div>
-
-                  {/* Screen content */}
-                  <div className="relative aspect-[9/19.5]">
-                    {/* Chat header */}
-                    <div className="pt-10 pb-2 px-4 border-b border-border flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="h-8 w-8 rounded-full bg-foreground/10 mx-auto mb-1 flex items-center justify-center">
-                          <span className="text-xs font-bold text-foreground font-mono">K</span>
-                        </div>
-                        <p className="text-[11px] font-semibold text-foreground">Kundra</p>
-                        <p className="text-[9px] text-muted-foreground">Online</p>
-                      </div>
-                    </div>
-
-                    {/* Messages */}
-                    <div className="flex-1 overflow-hidden px-3 py-3">
-                      <div className="flex flex-col gap-1.5">
-                        {visibleMessages.map((message) => (
-                          <div
-                            key={`${currentConversationIndex}-${message.id}`}
-                            className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
-                          >
-                            <div
-                              className={`max-w-[80%] px-3 py-1.5 ${
-                                message.type === "user"
-                                  ? "bg-primary text-primary-foreground rounded-[18px] rounded-br-[4px]"
-                                  : "bg-secondary text-secondary-foreground rounded-[18px] rounded-bl-[4px]"
-                              }`}
-                            >
-                              <p className="text-[11px] leading-snug">{message.text}</p>
-                            </div>
-                          </div>
-                        ))}
-
-                        {isTyping && (
-                          <div className="flex justify-start">
-                            <div className="bg-secondary rounded-[18px] rounded-bl-[4px] px-3.5 py-2.5">
-                              <div className="flex gap-1">
-                                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse" />
-                                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse [animation-delay:150ms]" />
-                                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse [animation-delay:300ms]" />
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Input bar */}
-                    <div className="absolute bottom-4 left-0 right-0 px-3">
-                      <button
-                        onClick={scrollToContact}
-                        className="w-full flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 cursor-pointer hover:border-muted-foreground/40 transition-colors"
-                      >
-                        <span className="text-[11px] text-muted-foreground flex-1 text-left">Skriv ett meddelande...</span>
-                        <ArrowRight className="h-3 w-3 text-muted-foreground" />
-                      </button>
-                    </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Kundra</p>
+                    <p className="text-[10px] text-muted-foreground">Online</p>
                   </div>
                 </div>
-              </div>
 
-              {/* Side buttons */}
-              <div className="absolute left-0 top-24 h-7 w-[3px] rounded-l-sm bg-foreground/10" />
-              <div className="absolute left-0 top-36 h-10 w-[3px] rounded-l-sm bg-foreground/10" />
-              <div className="absolute right-0 top-36 h-14 w-[3px] rounded-r-sm bg-foreground/10" />
+                {/* Messages */}
+                <div className="h-[420px] overflow-hidden px-4 py-4">
+                  <div className="flex flex-col gap-2">
+                    {visibleMessages.map((message) => (
+                      <div
+                        key={`${currentConversationIndex}-${message.id}`}
+                        className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
+                      >
+                        <div
+                          className={`max-w-[80%] px-3.5 py-2 ${
+                            message.type === "user"
+                              ? "bg-primary text-primary-foreground rounded-2xl rounded-br-sm"
+                              : "bg-secondary text-secondary-foreground rounded-2xl rounded-bl-sm"
+                          }`}
+                        >
+                          <p className="text-[13px] leading-relaxed">{message.text}</p>
+                        </div>
+                      </div>
+                    ))}
+
+                    {isTyping && (
+                      <div className="flex justify-start">
+                        <div className="bg-secondary rounded-2xl rounded-bl-sm px-4 py-3">
+                          <div className="flex gap-1">
+                            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse [animation-delay:150ms]" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse [animation-delay:300ms]" />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Input */}
+                <div className="border-t border-border px-4 py-3">
+                  <button
+                    onClick={scrollToContact}
+                    className="w-full flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 cursor-pointer hover:border-muted-foreground/40 transition-colors"
+                  >
+                    <span className="text-sm text-muted-foreground flex-1 text-left">Skriv ett meddelande...</span>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
