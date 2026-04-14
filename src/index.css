@@ -213,3 +213,105 @@
 .reveal-up {
   animation: reveal-up 0.6s ease-out both;
 }
+
+/* Grid / network texture backgrounds */
+.texture-grid {
+  position: relative;
+}
+
+.texture-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(hsl(0 0% 0% / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(0 0% 0% / 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .texture-grid::before {
+  background-image:
+    linear-gradient(hsl(0 0% 100% / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(0 0% 100% / 0.03) 1px, transparent 1px);
+}
+
+/* Dot matrix pattern */
+.texture-dots {
+  position: relative;
+}
+
+.texture-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, hsl(0 0% 0% / 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .texture-dots::before {
+  background-image: radial-gradient(circle, hsl(0 0% 100% / 0.04) 1px, transparent 1px);
+}
+
+/* Network / node connection pattern */
+.texture-network {
+  position: relative;
+}
+
+.texture-network::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, hsl(0 0% 0% / 0.05) 1.5px, transparent 1.5px),
+    linear-gradient(45deg, hsl(0 0% 0% / 0.015) 1px, transparent 1px),
+    linear-gradient(-45deg, hsl(0 0% 0% / 0.015) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .texture-network::before {
+  background-image:
+    radial-gradient(circle, hsl(0 0% 100% / 0.05) 1.5px, transparent 1.5px),
+    linear-gradient(45deg, hsl(0 0% 100% / 0.02) 1px, transparent 1px),
+    linear-gradient(-45deg, hsl(0 0% 100% / 0.02) 1px, transparent 1px);
+}
+
+/* Circuit trace pattern */
+.texture-circuit {
+  position: relative;
+}
+
+.texture-circuit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(0deg, hsl(0 0% 0% / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(0 0% 0% / 0.025) 1px, transparent 1px),
+    linear-gradient(0deg, hsl(0 0% 0% / 0.015) 2px, transparent 2px),
+    linear-gradient(90deg, hsl(0 0% 0% / 0.015) 2px, transparent 2px);
+  background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .texture-circuit::before {
+  background-image:
+    linear-gradient(0deg, hsl(0 0% 100% / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(0 0% 100% / 0.025) 1px, transparent 1px),
+    linear-gradient(0deg, hsl(0 0% 100% / 0.02) 2px, transparent 2px),
+    linear-gradient(90deg, hsl(0 0% 100% / 0.02) 2px, transparent 2px);
+}
+
+.texture-grid > *,
+.texture-dots > *,
+.texture-network > *,
+.texture-circuit > * {
+  position: relative;
+  z-index: 1;
+}
