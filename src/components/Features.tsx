@@ -25,14 +25,14 @@ const Features = () => {
   return (
     <section id="losningar" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
-        <div className="mb-16 text-center">
+        <div className="mb-16">
           <div className="inline-block border border-border px-3 py-1 mb-4">
             <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
               Funktioner
             </span>
           </div>
           <h2 className="text-foreground">Mätbara resultat</h2>
-          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+          <p className="mt-4 text-sm text-muted-foreground max-w-md leading-relaxed">
             Varje funktion är designad för att ge konkret, mätbar påverkan på er verksamhet.
           </p>
         </div>

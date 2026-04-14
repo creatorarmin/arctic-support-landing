@@ -46,14 +46,14 @@ const Pricing = () => {
   return (
     <section id="priser" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
-        <div className="mb-16 text-center">
+        <div className="mb-16">
           <div className="inline-block border border-border px-3 py-1 mb-4">
             <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
               Priser
             </span>
           </div>
           <h2 className="text-foreground">Tydlig prissättning</h2>
-          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
+          <p className="mt-4 text-sm text-muted-foreground max-w-md">
             Inga dolda avgifter. Skala upp eller ner efter behov.
           </p>
         </div>
