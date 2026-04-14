@@ -118,7 +118,7 @@ const Hero = () => {
           <div className="hidden lg:block">
             <div className="relative">
               <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
-              <div className="relative border border-border card-gradient overflow-hidden elevation-3">
+              <div className="relative border border-border bg-card overflow-hidden elevation-3">
                 {/* Chat header */}
                 <div className="border-b border-border px-5 py-3 flex items-center gap-3">
                   <div className="h-8 w-8 rounded-full bg-foreground/10 flex items-center justify-center">

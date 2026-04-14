@@ -102,7 +102,7 @@ const Features = () => {
               <div
                 key={feature.title}
                 ref={ref}
-                className="group border border-border card-gradient p-8 transition-all duration-300 hover:elevation-3 hover:-translate-y-1"
+                className="group border border-border bg-card p-8 transition-all duration-300 hover:elevation-3 hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between mb-8">
                   <feature.icon className="h-5 w-5 text-muted-foreground" />
