@@ -164,12 +164,14 @@
 
 /* Network texture backgrounds */
 .texture-network-1,
-.texture-network-2 {
+.texture-network-2,
+.texture-network-3 {
   position: relative;
 }
 
 .texture-network-1::before,
-.texture-network-2::before {
+.texture-network-2::before,
+.texture-network-3::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -191,8 +193,13 @@
   background-image: url('/images/texture-digital.webp');
 }
 
+.texture-network-3::before {
+  background-image: url('/images/texture-globe.jpg');
+}
+
 .texture-network-1 > *,
-.texture-network-2 > * {
+.texture-network-2 > *,
+.texture-network-3 > * {
   position: relative;
   z-index: 1;
 }
