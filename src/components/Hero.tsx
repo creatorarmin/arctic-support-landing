@@ -141,7 +141,7 @@ const Hero = () => {
                         <div
                           className={`max-w-[80%] px-3.5 py-2 ${
                             message.type === "user"
-                              ? "bg-accent text-accent-foreground rounded-2xl rounded-br-sm"
+                              ? "bg-accent/40 text-foreground rounded-2xl rounded-br-sm"
                               : "bg-primary text-primary-foreground rounded-2xl rounded-bl-sm"
                           }`}
                         >
