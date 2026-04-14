@@ -108,7 +108,6 @@ const Features = () => {
                 <div className="absolute top-0 right-0 w-32 h-32 pointer-events-none" style={{
                   background: `radial-gradient(circle at top right, ${i === 0 ? 'hsl(34 73% 78% / 0.15)' : i === 1 ? 'hsl(355 48% 16% / 0.08)' : 'hsl(34 73% 78% / 0.1)'}, transparent 70%)`,
                 }} />
-              >
                 <div className="flex items-center justify-between mb-8">
                   <feature.icon className="h-5 w-5 text-muted-foreground" />
                   <span className="font-mono text-[10px] text-muted-foreground/40">
