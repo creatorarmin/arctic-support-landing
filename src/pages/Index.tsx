@@ -19,9 +19,7 @@ const Index = () => {
           <About />
         </div>
         <Pricing />
-        <div className="texture-network-1">
-          <CTA />
-        </div>
+        <CTA />
       </main>
       <Footer />
     </div>
