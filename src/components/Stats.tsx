@@ -8,10 +8,10 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { endValue: 7, startValue: 1, suffix: "/10", label: "kunder_föredrar" },
-  { endValue: 95, suffix: "%", label: "noggrannhet" },
-  { endValue: 30, suffix: "%", label: "kostnadsminskning" },
-  { endValue: 24, suffix: "/7", label: "tillgänglighet", startValue: 24 },
+  { endValue: 7, startValue: 1, suffix: "/10", label: "Kunder föredrar" },
+  { endValue: 95, suffix: "%", label: "Noggrannhet" },
+  { endValue: 30, suffix: "%", label: "Kostnadsminskning" },
+  { endValue: 24, suffix: "/7", label: "Tillgänglighet", startValue: 24 },
 ];
 
 const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 2500 }: {
@@ -44,7 +44,7 @@ const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 2500 }: 
   }, [hasAnimated, endValue, startValue, duration]);
 
   return (
-    <div ref={ref} className="font-mono text-2xl font-bold text-foreground tabular-nums">
+    <div ref={ref} className="font-mono text-4xl sm:text-5xl font-bold text-foreground tabular-nums tracking-tighter">
       {count}{suffix}
     </div>
   );
@@ -52,19 +52,35 @@ const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 2500 }: 
 
 const Stats = () => {
   return (
-    <section className="py-12">
-      <div className="gradient-divider" />
-      <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <AnimatedCounter endValue={stat.endValue} suffix={stat.suffix} startValue={stat.startValue} />
-              <div className="mt-1 font-mono text-[10px] text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+    <section className="py-20 overflow-hidden">
+      {/* Marquee strip */}
+      <div className="border-y border-border py-4 mb-16">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(2)].map((_, setIdx) => (
+            <div key={setIdx} className="flex items-center gap-12 mr-12">
+              {["Automatisering", "Kundservice", "AI-driven", "Skalbart", "Effektivt", "24/7 Support", "Datadriven", "Integration"].map((word) => (
+                <span key={`${setIdx}-${word}`} className="font-mono text-xs text-muted-foreground/40 uppercase tracking-[0.3em]">
+                  {word}
+                </span>
+              ))}
             </div>
           ))}
         </div>
       </div>
-      <div className="gradient-divider" />
+
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-2 gap-y-12 gap-x-8 md:grid-cols-4">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className="relative">
+              <span className="font-mono text-[10px] text-muted-foreground/30 absolute -top-4 left-0">
+                0{i + 1}
+              </span>
+              <AnimatedCounter endValue={stat.endValue} suffix={stat.suffix} startValue={stat.startValue} />
+              <div className="mt-2 text-xs text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

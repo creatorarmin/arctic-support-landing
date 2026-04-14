@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 const plans = [
   {
-    name: "start",
+    name: "Start",
     price: "490",
     description: "Mindre team, grundläggande automatisering",
     features: [
@@ -14,7 +14,7 @@ const plans = [
     popular: false,
   },
   {
-    name: "pro",
+    name: "Pro",
     price: "1 490",
     description: "Växande företag, högre volym",
     features: [
@@ -28,7 +28,7 @@ const plans = [
     popular: true,
   },
   {
-    name: "enterprise",
+    name: "Enterprise",
     price: "Offert",
     description: "Skräddarsytt för större verksamheter",
     features: [
@@ -44,64 +44,80 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section id="priser" className="py-20 sm:py-24">
+    <section id="priser" className="py-24 sm:py-32 relative">
+      <div className="absolute top-12 left-8 font-mono text-[12rem] font-bold text-foreground/[0.02] leading-none select-none pointer-events-none hidden lg:block">
+        04
+      </div>
+
       <div className="container mx-auto px-6">
-        <div className="mb-12">
-          <p className="mb-3 font-mono text-xs text-muted-foreground tracking-wider">
-            // priser
+        <div className="flex items-end justify-between mb-16">
+          <div>
+            <div className="inline-block border border-border px-3 py-1 mb-4">
+              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+                Priser
+              </span>
+            </div>
+            <h2 className="text-foreground">
+              Tydlig<br />prissättning
+            </h2>
+          </div>
+          <p className="hidden md:block text-sm text-muted-foreground max-w-xs text-right">
+            Inga dolda avgifter. Skala upp eller ner efter behov.
           </p>
-          <h2 className="text-foreground">
-            Tydlig prissättning
-          </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-px border border-border">
+        <div className="grid md:grid-cols-3 gap-6">
           {plans.map((plan, i) => (
             <div
               key={plan.name}
-              className={`bg-card p-8 flex flex-col ${i < 2 ? "md:border-r md:border-border" : ""}`}
+              className={`relative group border bg-card p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:elevation-3 ${
+                plan.popular ? "border-foreground" : "border-border"
+              }`}
             >
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="font-mono text-sm font-semibold text-foreground">
+              {plan.popular && (
+                <div className="absolute -top-px left-0 right-0 h-[2px] bg-foreground" />
+              )}
+
+              <div className="mb-8">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-mono text-sm font-bold text-foreground uppercase tracking-wide">
                     {plan.name}
                   </h3>
                   {plan.popular && (
-                    <span className="font-mono text-[10px] text-muted-foreground border border-border px-1.5 py-0.5">
-                      rec
+                    <span className="text-[10px] text-muted-foreground border border-foreground/20 px-2 py-0.5 uppercase tracking-wider">
+                      Populär
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground mb-4">
+                <p className="text-xs text-muted-foreground mb-6">
                   {plan.description}
                 </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="font-mono text-2xl font-bold text-foreground tabular-nums">
+                  <span className="font-mono text-4xl font-bold text-foreground tabular-nums tracking-tighter">
                     {plan.price}
                   </span>
                   {plan.price !== "Offert" && (
-                    <span className="text-xs text-muted-foreground">kr/mån</span>
+                    <span className="text-xs text-muted-foreground ml-1">kr/mån</span>
                   )}
                 </div>
               </div>
 
               <div className="gradient-divider mb-6" />
 
-              <ul className="space-y-2.5 mb-8 flex-1">
+              <ul className="space-y-3 mb-8 flex-1">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2">
-                    <span className="font-mono text-xs text-muted-foreground/50">—</span>
+                  <li key={feature} className="flex items-center gap-3">
+                    <span className="h-1 w-1 rounded-full bg-foreground/30 shrink-0" />
                     <span className="text-xs text-muted-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Button
-                className="w-full font-mono text-xs"
+                className="w-full text-xs"
                 variant={plan.popular ? "default" : "outline"}
-                size="sm"
               >
-                {plan.price === "Offert" ? "kontakt" : "kom_igång"}
+                {plan.price === "Offert" ? "Kontakta oss" : "Kom igång"}
               </Button>
             </div>
           ))}

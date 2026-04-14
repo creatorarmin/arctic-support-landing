@@ -1,51 +1,61 @@
 const About = () => {
   return (
-    <section id="om-oss" className="py-20 sm:py-24">
+    <section id="om-oss" className="py-24 sm:py-32 relative">
+      <div className="absolute top-12 right-8 font-mono text-[12rem] font-bold text-foreground/[0.02] leading-none select-none pointer-events-none hidden lg:block">
+        03
+      </div>
+
       <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-start">
+        <div className="grid gap-16 lg:grid-cols-2 items-start">
           <div>
-            <p className="mb-3 font-mono text-xs text-muted-foreground tracking-wider">
-              // om_oss
-            </p>
-            <h2 className="mb-5 text-foreground">
-              Byggt av praktiker
+            <div className="inline-block border border-border px-3 py-1 mb-4">
+              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+                Om oss
+              </span>
+            </div>
+            <h2 className="mb-6 text-foreground">
+              Byggt av<br />praktiker
             </h2>
-            <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+            <div className="space-y-5 text-sm text-muted-foreground leading-relaxed max-w-md">
               <p>
                 Vi startade Kundra för att vi såg hur företag kämpade med samma 
-                utmaning: ökande kundförväntningar och begränsade resurser.
+                utmaning — ökande kundförväntningar och begränsade resurser.
               </p>
               <p>
                 Vårt team kombinerar erfarenhet inom kundservice med 
-                tekniklösningar. Vi ersätter inte människor — vi gör dem effektivare.
-              </p>
-              <p>
-                Idag arbetar vi med företag i alla storlekar.
+                tekniklösningar. Vi ersätter inte människor, vi gör dem effektivare.
               </p>
             </div>
           </div>
           
-          {/* Data display */}
-          <div className="border border-border">
-            <div className="border-b border-border px-4 py-2">
-              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">system_status</span>
-            </div>
-            <div className="divide-y divide-border">
-              {[
-                { key: "konversationer", val: "1,247", delta: "+12%" },
-                { key: "svarstid", val: "0.8s", delta: "-23%" },
-                { key: "lösta_ärenden", val: "94%", delta: "+5%" },
-                { key: "aktiva_agenter", val: "12", delta: "—" },
-                { key: "uptime", val: "99.97%", delta: "—" },
-              ].map((row) => (
-                <div key={row.key} className="flex items-center justify-between px-4 py-3">
-                  <span className="font-mono text-xs text-muted-foreground">{row.key}</span>
-                  <div className="flex items-center gap-4">
-                    <span className="font-mono text-sm font-semibold text-foreground tabular-nums">{row.val}</span>
-                    <span className="font-mono text-[10px] text-muted-foreground tabular-nums w-8 text-right">{row.delta}</span>
-                  </div>
+          {/* Data table with creative layout */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
+            <div className="relative border border-border bg-card">
+              <div className="border-b border-border px-5 py-3 flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">Systemstatus</span>
+                <div className="flex items-center gap-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-foreground/40" />
+                  <span className="font-mono text-[10px] text-muted-foreground">Live</span>
                 </div>
-              ))}
+              </div>
+              <div className="divide-y divide-border">
+                {[
+                  { key: "Konversationer", val: "1,247", delta: "+12%" },
+                  { key: "Svarstid", val: "0.8s", delta: "−23%" },
+                  { key: "Lösta ärenden", val: "94%", delta: "+5%" },
+                  { key: "Aktiva agenter", val: "12", delta: "—" },
+                  { key: "Uptime", val: "99.97%", delta: "—" },
+                ].map((row) => (
+                  <div key={row.key} className="flex items-center justify-between px-5 py-4 group hover:bg-muted/30 transition-colors">
+                    <span className="text-xs text-muted-foreground">{row.key}</span>
+                    <div className="flex items-center gap-6">
+                      <span className="font-mono text-sm font-bold text-foreground tabular-nums">{row.val}</span>
+                      <span className="font-mono text-[10px] text-muted-foreground tabular-nums w-10 text-right">{row.delta}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
