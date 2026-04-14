@@ -195,6 +195,7 @@
 
 .texture-network-3::before {
   background-image: url('/images/texture-globe.jpg');
+  opacity: 0.12;
 }
 
 .texture-network-1 > *,
