@@ -97,7 +97,7 @@ const Features = () => {
 
         <div className="grid md:grid-cols-3 gap-6">
           {features.map((feature, i) => {
-            const { count, ref } = useCountUp(feature.value, 2200);
+            const { count, ref } = useCountUp(feature.value, feature.duration);
             return (
               <div
                 key={feature.title}
