@@ -56,51 +56,51 @@ const CTA = () => {
             </span>
           </div>
           <h2 className="text-foreground">Redo att börja?</h2>
-          <p className="mt-4 text-base text-muted-foreground max-w-lg mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Berätta om ert behov. Vi återkommer med en anpassad lösning.
           </p>
         </div>
 
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <div className="relative">
             <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
             <div className="relative border border-border bg-card">
-              <div className="border-b border-border px-6 py-3 flex items-center justify-between">
-                <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">Kontaktformulär</span>
-                <ArrowRight className="h-3 w-3 text-muted-foreground/40" />
+              <div className="border-b border-border px-8 py-4 flex items-center justify-between">
+                <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.2em]">Kontaktformulär</span>
+                <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
               </div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="name" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+              <form onSubmit={handleSubmit(onSubmit)} className="p-8 space-y-6">
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Namn
                     </Label>
-                    <Input id="name" {...register("name")} className="bg-background text-sm h-9" />
-                    {errors.name && <p className="text-[10px] text-destructive">{errors.name.message}</p>}
+                    <Input id="name" {...register("name")} className="bg-background text-base h-11" />
+                    {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
                   </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="email" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       E-post
                     </Label>
-                    <Input id="email" type="email" {...register("email")} className="bg-background text-sm h-9" />
-                    {errors.email && <p className="text-[10px] text-destructive">{errors.email.message}</p>}
+                    <Input id="email" type="email" {...register("email")} className="bg-background text-base h-11" />
+                    {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
                   </div>
                 </div>
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="company" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="company" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Företag
                     </Label>
-                    <Input id="company" {...register("company")} className="bg-background text-sm h-9" />
+                    <Input id="company" {...register("company")} className="bg-background text-base h-11" />
                   </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="interest" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                  <div className="space-y-2">
+                    <Label htmlFor="interest" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Intresse
                     </Label>
                     <Select onValueChange={(value) => setValue("interest", value)}>
-                      <SelectTrigger className="bg-background text-sm h-9">
+                      <SelectTrigger className="bg-background text-base h-11">
                         <SelectValue placeholder="Välj..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -113,15 +113,15 @@ const CTA = () => {
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <Label htmlFor="message" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Meddelande
                   </Label>
-                  <Textarea id="message" rows={3} {...register("message")} className="bg-background text-sm resize-none" />
-                  {errors.message && <p className="text-[10px] text-destructive">{errors.message.message}</p>}
+                  <Textarea id="message" rows={4} {...register("message")} className="bg-background text-base resize-none" />
+                  {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <Button type="submit" className="w-full h-12 text-base" disabled={isSubmitting}>
                   {isSubmitting ? "Skickar..." : "Skicka meddelande"}
                 </Button>
               </form>
