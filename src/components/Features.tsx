@@ -1,25 +1,80 @@
 import { Clock, Users, TrendingUp } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const features = [
   {
     icon: Clock,
     title: "Snabbare svarstider",
-    metric: "−70%",
+    prefix: "−",
+    value: 70,
+    suffix: "%",
     description: "Minska genomsnittlig svarstid. Kunder får svar direkt, oavsett kanal.",
   },
   {
     icon: Users,
     title: "Nöjdare kunder",
-    metric: "+40%",
+    prefix: "+",
+    value: 40,
+    suffix: "%",
     description: "Konsekvent support bygger lojalitet. Mätbar förbättring i NPS och CSAT.",
   },
   {
     icon: TrendingUp,
     title: "Skalbar tillväxt",
-    metric: "10×",
+    prefix: "",
+    value: 10,
+    suffix: "×",
     description: "Hantera tio gånger fler ärenden utan proportionell kostnadsökning.",
   },
 ];
+
+const useCountUp = (target: number, duration = 2000) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    const steps = 60;
+    const stepDuration = duration / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current++;
+      const progress = current / steps;
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+
+      if (current >= steps) {
+        setCount(target);
+        clearInterval(timer);
+      }
+    }, stepDuration);
+
+    return () => clearInterval(timer);
+  }, [hasStarted, target, duration]);
+
+  return { count, ref };
+};
 
 const Features = () => {
   return (
@@ -38,31 +93,35 @@ const Features = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {features.map((feature, i) => (
-            <div
-              key={feature.title}
-              className="group border border-border bg-card p-8 transition-all duration-300 hover:elevation-3 hover:-translate-y-1"
-            >
-              <div className="flex items-center justify-between mb-8">
-                <feature.icon className="h-5 w-5 text-muted-foreground" />
-                <span className="font-mono text-[10px] text-muted-foreground/40">
-                  0{i + 1}
-                </span>
+          {features.map((feature, i) => {
+            const { count, ref } = useCountUp(feature.value, 2200);
+            return (
+              <div
+                key={feature.title}
+                ref={ref}
+                className="group border border-border bg-card p-8 transition-all duration-300 hover:elevation-3 hover:-translate-y-1"
+              >
+                <div className="flex items-center justify-between mb-8">
+                  <feature.icon className="h-5 w-5 text-muted-foreground" />
+                  <span className="font-mono text-[10px] text-muted-foreground/40">
+                    0{i + 1}
+                  </span>
+                </div>
+
+                <div className="font-mono text-5xl font-bold text-foreground mb-4 tabular-nums tracking-tighter">
+                  {feature.prefix}{count}{feature.suffix}
+                </div>
+
+                <h3 className="font-mono text-sm font-semibold text-foreground mb-3">
+                  {feature.title}
+                </h3>
+
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-
-              <div className="font-mono text-5xl font-bold text-foreground mb-4 tabular-nums tracking-tighter">
-                {feature.metric}
-              </div>
-
-              <h3 className="font-mono text-sm font-semibold text-foreground mb-3">
-                {feature.title}
-              </h3>
-
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
