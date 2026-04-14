@@ -22,7 +22,7 @@
     --secondary-foreground: 0 0% 20%;
 
     --muted: 0 0% 92%;
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 0 0% 38%;
 
     --accent: 0 0% 94%;
     --accent-foreground: 0 0% 9%;
@@ -63,7 +63,7 @@
     --secondary-foreground: 0 0% 75%;
 
     --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 50%;
+    --muted-foreground: 0 0% 55%;
 
     --accent: 0 0% 14%;
     --accent-foreground: 0 0% 92%;
@@ -95,8 +95,8 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
     font-weight: 400;
-    line-height: 1.5;
-    font-size: 14px;
+    line-height: 1.55;
+    font-size: 15px;
   }
 
   h1, h2, h3, h4, h5, h6 {

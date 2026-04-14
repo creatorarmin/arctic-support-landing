@@ -23,14 +23,14 @@ const Footer = () => {
               <a 
                 key={link.label}
                 href={link.href}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
               </a>
             ))}
           </nav>
           
-          <p className="text-xs text-muted-foreground md:text-right">
+          <p className="text-sm text-muted-foreground md:text-right">
             © 2025 Kundra. Alla rättigheter förbehållna.
           </p>
         </div>
