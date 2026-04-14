@@ -32,7 +32,7 @@ const Features = () => {
             </span>
           </div>
           <h2 className="text-foreground">Mätbara resultat</h2>
-          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+          <p className="mt-4 text-base text-muted-foreground max-w-lg mx-auto leading-relaxed">
             Varje funktion är designad för att ge konkret, mätbar påverkan på er verksamhet.
           </p>
         </div>
@@ -58,7 +58,7 @@ const Features = () => {
                 {feature.title}
               </h3>
 
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
             </div>

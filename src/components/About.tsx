@@ -43,7 +43,7 @@ const About = () => {
         </div>
 
         <div className="grid gap-16 lg:grid-cols-2 items-center">
-          <div className="space-y-5 text-sm text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
+          <div className="space-y-6 text-base text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
             <p>
               Vi startade Kundra för att vi såg hur företag kämpade med samma
               utmaning — ökande kundförväntningar och begränsade resurser.

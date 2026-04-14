@@ -56,7 +56,7 @@ const CTA = () => {
             </span>
           </div>
           <h2 className="text-foreground">Redo att börja?</h2>
-          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
+          <p className="mt-4 text-base text-muted-foreground max-w-lg mx-auto">
             Berätta om ert behov. Vi återkommer med en anpassad lösning.
           </p>
         </div>
@@ -71,7 +71,7 @@ const CTA = () => {
               ].map((item) => (
                 <div key={item.num} className="flex items-start gap-4">
                   <span className="font-mono text-3xl font-bold text-foreground/10 tabular-nums leading-none">{item.num}</span>
-                  <span className="text-sm text-muted-foreground pt-1">{item.text}</span>
+                  <span className="text-base text-muted-foreground pt-1">{item.text}</span>
                 </div>
               ))}
             </div>
