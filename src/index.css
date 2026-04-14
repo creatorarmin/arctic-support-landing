@@ -213,3 +213,41 @@
 .reveal-up {
   animation: reveal-up 0.6s ease-out both;
 }
+
+/* Network texture backgrounds */
+.texture-network-1,
+.texture-network-2 {
+  position: relative;
+}
+
+.texture-network-1::before,
+.texture-network-2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%);
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.texture-network-1::before {
+  background-image: url('/images/texture-network.png');
+}
+
+.texture-network-2::before {
+  background-image: url('/images/texture-digital.webp');
+}
+
+.dark .texture-network-1::before,
+.dark .texture-network-2::before {
+  opacity: 0.06;
+}
+
+.texture-network-1 > *,
+.texture-network-2 > * {
+  position: relative;
+  z-index: 1;
+}
