@@ -6,17 +6,22 @@ const Logo = ({ className = "h-8 w-8" }: { className?: string }) => {
       className={className}
     >
       <rect width="32" height="32" rx="6" fill="hsl(0 0% 92%)" />
-      <text
-        x="16"
-        y="23"
-        textAnchor="middle"
+      {/* Vertical stem */}
+      <path
+        d="M9 7 L12.5 7 L12.5 25 L9 25 Z"
         fill="hsl(0 0% 4%)"
-        fontSize="18"
-        fontFamily="JetBrains Mono, monospace"
-        fontWeight="700"
-      >
-        K
-      </text>
+        rx="1"
+      />
+      {/* Upper diagonal arm */}
+      <path
+        d="M13 16 L22 7 L24 7 L24 9.5 L15.5 17 Z"
+        fill="hsl(0 0% 4%)"
+      />
+      {/* Lower diagonal arm */}
+      <path
+        d="M13 16.5 L15.5 15.5 L24 23 L24 25.5 L22 25.5 Z"
+        fill="hsl(0 0% 4%)"
+      />
     </svg>
   );
 };
