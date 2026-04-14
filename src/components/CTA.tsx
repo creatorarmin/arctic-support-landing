@@ -47,26 +47,22 @@ const CTA = () => {
   };
 
   return (
-    <section id="kontakt" className="py-24 sm:py-32 relative">
-      <div className="absolute top-12 right-8 font-mono text-[12rem] font-bold text-foreground/[0.02] leading-none select-none pointer-events-none hidden lg:block">
-        05
-      </div>
-
+    <section id="kontakt" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
+        <div className="mb-16 text-center">
+          <div className="inline-block border border-border px-3 py-1 mb-4">
+            <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+              Kontakt
+            </span>
+          </div>
+          <h2 className="text-foreground">Redo att börja?</h2>
+          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
+            Berätta om ert behov. Vi återkommer med en anpassad lösning.
+          </p>
+        </div>
+
         <div className="grid gap-16 lg:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <div className="inline-block border border-border px-3 py-1 mb-4 w-fit">
-              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
-                Kontakt
-              </span>
-            </div>
-            <h2 className="mb-5 text-foreground">
-              Redo att<br />börja?
-            </h2>
-            <p className="mb-10 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              Berätta om ert behov. Vi återkommer med en anpassad lösning.
-            </p>
-            
             <div className="space-y-6">
               {[
                 { num: "01", text: "Implementation på dagar, inte månader" },
@@ -89,7 +85,7 @@ const CTA = () => {
                   <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">Kontaktformulär</span>
                   <ArrowRight className="h-3 w-3 text-muted-foreground/40" />
                 </div>
-                
+
                 <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div className="space-y-1.5">
