@@ -8,6 +8,7 @@ const features = [
     prefix: "−",
     value: 70,
     suffix: "%",
+    duration: 1800,
     description: "Minska genomsnittlig svarstid. Kunder får svar direkt, oavsett kanal.",
   },
   {
@@ -16,6 +17,7 @@ const features = [
     prefix: "+",
     value: 40,
     suffix: "%",
+    duration: 2400,
     description: "Konsekvent support bygger lojalitet. Mätbar förbättring i NPS och CSAT.",
   },
   {
@@ -24,6 +26,7 @@ const features = [
     prefix: "",
     value: 10,
     suffix: "×",
+    duration: 3000,
     description: "Hantera tio gånger fler ärenden utan proportionell kostnadsökning.",
   },
 ];
