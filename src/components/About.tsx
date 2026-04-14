@@ -395,7 +395,7 @@ const About = () => {
                       >
                         {/* Screen 1: Voice */}
                         <div className="relative w-full h-full flex-shrink-0">
-                          <VoiceScreen statusIndex={statusIndex} isActive={isActive} callCount={callCount} />
+                          <VoiceScreen statusIndex={statusIndex} isActive={isActive} callCount={callCount} onMicClick={() => setCurrentScreen(1)} />
                         </div>
                         {/* Screen 2: Growth graph */}
                         <div className="relative w-full h-full flex-shrink-0">
