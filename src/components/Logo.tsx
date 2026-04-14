@@ -6,25 +6,21 @@ const Logo = ({ className = "h-8 w-8" }: { className?: string }) => {
       className={className}
     >
       <rect width="32" height="32" rx="6" fill="hsl(0 0% 92%)" />
-      {/* K built from geometric bars */}
-      <rect x="9" y="7" width="3.5" height="18" rx="1" fill="hsl(0 0% 4%)" />
-      <rect
-        x="12"
-        y="14.5"
-        width="3.5"
-        height="12"
-        rx="1"
+      {/* Vertical stem */}
+      <path
+        d="M9 7 L12.5 7 L12.5 25 L9 25 Z"
         fill="hsl(0 0% 4%)"
-        transform="rotate(-52 12 14.5)"
+        rx="1"
       />
-      <rect
-        x="12"
-        y="17"
-        width="3.5"
-        height="12"
-        rx="1"
+      {/* Upper diagonal arm */}
+      <path
+        d="M13 16 L22 7 L24 7 L24 9.5 L15.5 17 Z"
         fill="hsl(0 0% 4%)"
-        transform="rotate(-128 12 17)"
+      />
+      {/* Lower diagonal arm */}
+      <path
+        d="M13 16.5 L15.5 15.5 L24 23 L24 25.5 L22 25.5 Z"
+        fill="hsl(0 0% 4%)"
       />
     </svg>
   );
