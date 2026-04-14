@@ -49,14 +49,14 @@ const CTA = () => {
   return (
     <section id="kontakt" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
-        <div className="mb-16">
+        <div className="mb-16 text-center">
           <div className="inline-block border border-border px-3 py-1 mb-4">
             <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
               Kontakt
             </span>
           </div>
           <h2 className="text-foreground">Redo att börja?</h2>
-          <p className="mt-4 text-sm text-muted-foreground max-w-md">
+          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
             Berätta om ert behov. Vi återkommer med en anpassad lösning.
           </p>
         </div>
@@ -70,8 +70,8 @@ const CTA = () => {
                 { num: "03", text: "14 dagars kostnadsfri testperiod" },
               ].map((item) => (
                 <div key={item.num} className="flex items-start gap-4">
-                  <span className="font-mono text-3xl font-bold text-foreground/15 tabular-nums leading-none">{item.num}</span>
-                  <span className="text-base text-muted-foreground pt-1">{item.text}</span>
+                  <span className="font-mono text-3xl font-bold text-foreground/10 tabular-nums leading-none">{item.num}</span>
+                  <span className="text-sm text-muted-foreground pt-1">{item.text}</span>
                 </div>
               ))}
             </div>
@@ -89,14 +89,14 @@ const CTA = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div className="space-y-1.5">
-                      <Label htmlFor="name" className="text-xs text-muted-foreground uppercase tracking-wider">
+                      <Label htmlFor="name" className="text-[10px] text-muted-foreground uppercase tracking-wider">
                         Namn
                       </Label>
                       <Input id="name" {...register("name")} className="bg-background text-sm h-9" />
                       {errors.name && <p className="text-[10px] text-destructive">{errors.name.message}</p>}
                     </div>
                     <div className="space-y-1.5">
-                      <Label htmlFor="email" className="text-xs text-muted-foreground uppercase tracking-wider">
+                      <Label htmlFor="email" className="text-[10px] text-muted-foreground uppercase tracking-wider">
                         E-post
                       </Label>
                       <Input id="email" type="email" {...register("email")} className="bg-background text-sm h-9" />
@@ -106,13 +106,13 @@ const CTA = () => {
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div className="space-y-1.5">
-                      <Label htmlFor="company" className="text-xs text-muted-foreground uppercase tracking-wider">
+                      <Label htmlFor="company" className="text-[10px] text-muted-foreground uppercase tracking-wider">
                         Företag
                       </Label>
                       <Input id="company" {...register("company")} className="bg-background text-sm h-9" />
                     </div>
                     <div className="space-y-1.5">
-                      <Label htmlFor="interest" className="text-xs text-muted-foreground uppercase tracking-wider">
+                      <Label htmlFor="interest" className="text-[10px] text-muted-foreground uppercase tracking-wider">
                         Intresse
                       </Label>
                       <Select onValueChange={(value) => setValue("interest", value)}>
@@ -130,7 +130,7 @@ const CTA = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="message" className="text-xs text-muted-foreground uppercase tracking-wider">
+                    <Label htmlFor="message" className="text-[10px] text-muted-foreground uppercase tracking-wider">
                       Meddelande
                     </Label>
                     <Textarea id="message" rows={3} {...register("message")} className="bg-background text-sm resize-none" />

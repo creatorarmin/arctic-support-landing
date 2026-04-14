@@ -77,6 +77,9 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center pt-14">
+      <div className="absolute top-20 right-8 font-mono text-[20rem] font-bold text-foreground/[0.02] leading-none select-none pointer-events-none hidden lg:block">
+        01
+      </div>
 
       <div className="container mx-auto px-6">
         <div className="grid gap-16 lg:grid-cols-2 items-center">
@@ -91,14 +94,14 @@ const Hero = () => {
             <h1 className="mb-6 text-foreground">
               Bättre
               <br />
-              <span className="text-foreground/25">support.</span>
+              <span className="text-muted-foreground/30">support.</span>
               <br />
               Lägre
               <br />
-              <span className="text-foreground/25">kostnad.</span>
+              <span className="text-muted-foreground/30">kostnad.</span>
             </h1>
 
-            <p className="mb-10 text-base text-muted-foreground leading-relaxed max-w-lg">
+            <p className="mb-10 text-base text-muted-foreground leading-relaxed max-w-md">
               Automatiserad kundservice för företag som värdesätter
               precision och effektivitet.
             </p>
