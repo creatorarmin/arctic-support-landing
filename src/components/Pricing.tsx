@@ -44,33 +44,25 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section id="priser" className="py-24 sm:py-32 relative">
-      <div className="absolute top-12 left-8 font-mono text-[12rem] font-bold text-foreground/[0.02] leading-none select-none pointer-events-none hidden lg:block">
-        04
-      </div>
-
+    <section id="priser" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <div className="inline-block border border-border px-3 py-1 mb-4">
-              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
-                Priser
-              </span>
-            </div>
-            <h2 className="text-foreground">
-              Tydlig<br />prissättning
-            </h2>
+        <div className="mb-16 text-center">
+          <div className="inline-block border border-border px-3 py-1 mb-4">
+            <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+              Priser
+            </span>
           </div>
-          <p className="hidden md:block text-sm text-muted-foreground max-w-xs text-right">
+          <h2 className="text-foreground">Tydlig prissättning</h2>
+          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
             Inga dolda avgifter. Skala upp eller ner efter behov.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {plans.map((plan, i) => (
+          {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative group border bg-card p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:elevation-3 ${
+              className={`relative border bg-card p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:elevation-3 ${
                 plan.popular ? "border-foreground" : "border-border"
               }`}
             >
