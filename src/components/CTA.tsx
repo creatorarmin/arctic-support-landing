@@ -64,7 +64,7 @@ const CTA = () => {
         <div className="max-w-2xl mx-auto">
           <div className="relative">
             <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
-            <div className="relative border border-border bg-card">
+            <div className="relative border border-border bg-card/20 backdrop-blur-sm">
               <div className="border-b border-border px-8 py-4 flex items-center justify-between">
                 <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.2em]">Kontaktformulär</span>
                 <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
