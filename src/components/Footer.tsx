@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           <div className="flex items-center gap-2.5">
             <Logo className="h-5 w-5" />
-            <span className="font-mono text-sm font-bold text-foreground uppercase tracking-tight">
+            <span className="font-mono text-base font-bold text-foreground uppercase tracking-tight">
               Kundra
             </span>
           </div>

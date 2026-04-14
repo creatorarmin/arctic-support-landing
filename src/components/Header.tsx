@@ -7,7 +7,7 @@ const Header = () => {
       <div className="container mx-auto flex h-14 items-center justify-between px-6">
         <div className="flex items-center gap-2.5">
           <Logo className="h-6 w-6" />
-          <span className="font-mono text-sm font-bold tracking-tight text-foreground uppercase">
+          <span className="font-mono text-base font-bold tracking-tight text-foreground uppercase">
             Kundra
           </span>
         </div>
