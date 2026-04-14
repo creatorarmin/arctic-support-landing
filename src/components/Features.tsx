@@ -84,8 +84,8 @@ const Features = () => {
     <section id="losningar" className="py-24 sm:py-32">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="inline-block border border-border px-3 py-1 mb-4">
-            <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+          <div className="inline-block border-2 border-foreground/30 px-4 py-1.5 mb-4">
+            <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.2em]">
               Funktioner
             </span>
           </div>

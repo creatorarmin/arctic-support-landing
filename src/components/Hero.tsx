@@ -83,8 +83,8 @@ const Hero = () => {
         <div className="grid gap-16 lg:grid-cols-2 items-center">
           {/* Text */}
           <div>
-            <div className="inline-block border border-border px-3 py-1 mb-8">
-              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+            <div className="inline-block border-2 border-foreground/30 px-4 py-1.5 mb-8">
+              <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.2em]">
                 Kundtjänst · Automatisering · AI
               </span>
             </div>
