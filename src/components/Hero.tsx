@@ -91,14 +91,14 @@ const Hero = () => {
             <h1 className="mb-6 text-foreground">
               Bättre
               <br />
-              <span className="text-muted-foreground/30">support.</span>
+              <span className="text-foreground/20">support.</span>
               <br />
               Lägre
               <br />
-              <span className="text-muted-foreground/30">kostnad.</span>
+              <span className="text-foreground/20">kostnad.</span>
             </h1>
 
-            <p className="mb-10 text-base text-muted-foreground leading-relaxed max-w-md">
+            <p className="mb-10 text-lg text-muted-foreground leading-relaxed max-w-lg">
               Automatiserad kundservice för företag som värdesätter
               precision och effektivitet.
             </p>
