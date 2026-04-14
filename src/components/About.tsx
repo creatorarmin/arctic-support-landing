@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Mic } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const statusMessages = [
   { text: "Lyssnar på kund...", color: "text-foreground" },
@@ -181,12 +182,7 @@ const VoiceScreen = ({ statusIndex, isActive, callCount, onMicClick }: { statusI
   <div className="flex flex-col h-full" style={{ background: 'linear-gradient(180deg, hsl(220 15% 97%), hsl(220 10% 95%))' }}>
     {/* App header */}
     <div className="pt-11 pb-3 px-4 text-center" style={{ borderBottom: '0.5px solid hsl(0 0% 85%)' }}>
-      <div
-        className="h-9 w-9 rounded-full mx-auto mb-1.5 flex items-center justify-center"
-        style={{ background: 'linear-gradient(135deg, hsl(199 71% 15%), hsl(199 60% 25%))' }}
-      >
-        <span className="text-xs font-bold font-mono" style={{ color: 'hsl(0 0% 93%)' }}>K</span>
-      </div>
+      <Logo className="h-9 w-9 mx-auto mb-1.5" />
       <p className="text-[11px] font-semibold" style={{ color: 'hsl(0 0% 10%)' }}>Kundra AI</p>
       <div className="flex items-center justify-center gap-1 mt-0.5">
         <span
