@@ -8,13 +8,13 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { endValue: 7, startValue: 1, suffix: "/10", label: "Kunder föredrar AI" },
-  { endValue: 95, suffix: "%", label: "Ökad noggrannhet" },
-  { endValue: 30, suffix: "%", label: "Sänkta kostnader" },
-  { endValue: 24, suffix: "/7", label: "Support dygnet runt", startValue: 24 },
+  { endValue: 7, startValue: 1, suffix: "/10", label: "kunder_föredrar" },
+  { endValue: 95, suffix: "%", label: "noggrannhet" },
+  { endValue: 30, suffix: "%", label: "kostnadsminskning" },
+  { endValue: 24, suffix: "/7", label: "tillgänglighet", startValue: 24 },
 ];
 
-const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 3500 }: {
+const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 2500 }: {
   endValue: number; suffix: string; startValue?: number; duration?: number;
 }) => {
   const [count, setCount] = useState(startValue);
@@ -31,7 +31,7 @@ const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 3500 }: 
         const animate = () => {
           const elapsed = Date.now() - start;
           const progress = Math.min(elapsed / duration, 1);
-          const ease = 1 - Math.pow(1 - progress, 4);
+          const ease = 1 - Math.pow(1 - progress, 3);
           setCount(Math.round(startValue + diff * ease));
           if (progress < 1) requestAnimationFrame(animate);
         };
@@ -44,7 +44,7 @@ const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 3500 }: 
   }, [hasAnimated, endValue, startValue, duration]);
 
   return (
-    <div ref={ref} className="font-serif text-3xl text-foreground sm:text-4xl tracking-tight">
+    <div ref={ref} className="font-mono text-2xl font-bold text-foreground tabular-nums">
       {count}{suffix}
     </div>
   );
@@ -52,14 +52,14 @@ const AnimatedCounter = ({ endValue, suffix, startValue = 0, duration = 3500 }: 
 
 const Stats = () => {
   return (
-    <section className="py-16 relative">
+    <section className="py-12">
       <div className="gradient-divider" />
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 gap-12 md:grid-cols-4">
+      <div className="container mx-auto px-6 py-12">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <AnimatedCounter endValue={stat.endValue} suffix={stat.suffix} startValue={stat.startValue} />
-              <div className="mt-2 text-sm text-muted-foreground">{stat.label}</div>
+              <div className="mt-1 font-mono text-[10px] text-muted-foreground uppercase tracking-wider">{stat.label}</div>
             </div>
           ))}
         </div>

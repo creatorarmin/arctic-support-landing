@@ -1,46 +1,42 @@
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
 
 const plans = [
   {
-    name: "Start",
+    name: "start",
     price: "490",
-    description: "Perfekt för mindre team som vill komma igång med automatisering",
+    description: "Mindre team, grundläggande automatisering",
     features: [
-      "Upp till 500 konversationer/månad",
+      "500 konversationer/mån",
       "Mailsupport",
       "Grundläggande statistik",
-      "2 teammedlemmar",
-      "Standardintegrationer",
+      "2 användare",
     ],
     popular: false,
   },
   {
-    name: "Professionell",
+    name: "pro",
     price: "1 490",
-    description: "För växande företag med högre volym",
+    description: "Växande företag, högre volym",
     features: [
-      "Upp till 5 000 konversationer/månad",
+      "5 000 konversationer/mån",
       "Prioriterad support",
       "Avancerad analys",
-      "10 teammedlemmar",
+      "10 användare",
       "Alla integrationer",
-      "Anpassade arbetsflöden",
+      "Anpassade flöden",
     ],
     popular: true,
   },
   {
-    name: "Företag",
+    name: "enterprise",
     price: "Offert",
-    description: "Skräddarsydda lösningar för större verksamheter",
+    description: "Skräddarsytt för större verksamheter",
     features: [
-      "Obegränsat antal konversationer",
-      "Dedikerad kontaktperson",
-      "Anpassad rapportering",
-      "Obegränsat antal användare",
+      "Obegränsade konversationer",
+      "Dedikerad kontakt",
       "API-åtkomst",
       "SLA-garanti",
-      "On-premise möjlighet",
+      "On-premise",
     ],
     popular: false,
   },
@@ -48,69 +44,64 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section id="priser" className="py-24 sm:py-32 bg-background">
+    <section id="priser" className="py-20 sm:py-24">
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl mb-16">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.15em] text-accent">
-            Priser
+        <div className="mb-12">
+          <p className="mb-3 font-mono text-xs text-muted-foreground tracking-wider">
+            // priser
           </p>
-          <h2 className="text-foreground mb-4">
-            Enkla och tydliga priser
+          <h2 className="text-foreground">
+            Tydlig prissättning
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Välj den plan som passar ert företag. Inga dolda avgifter.
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {plans.map((plan) => (
+        <div className="grid md:grid-cols-3 gap-px border border-border">
+          {plans.map((plan, i) => (
             <div
               key={plan.name}
-              className={`relative rounded-lg border p-8 flex flex-col transition-colors duration-200 ${
-                plan.popular
-                  ? "border-accent bg-card elevation-2"
-                  : "border-border bg-card hover:border-accent/40 elevation-1"
-              }`}
+              className={`bg-card p-8 flex flex-col ${i < 2 ? "md:border-r md:border-border" : ""}`}
             >
-              {plan.popular && (
-                <span className="absolute -top-3 left-6 bg-accent text-accent-foreground text-xs font-medium px-3 py-1 rounded-full">
-                  Mest populär
-                </span>
-              )}
-
-              <div className="mb-8">
-                <h3 className="font-sans text-lg font-semibold text-foreground mb-2">
-                  {plan.name}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-5">
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="font-mono text-sm font-semibold text-foreground">
+                    {plan.name}
+                  </h3>
+                  {plan.popular && (
+                    <span className="font-mono text-[10px] text-muted-foreground border border-border px-1.5 py-0.5">
+                      rec
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground mb-4">
                   {plan.description}
                 </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="font-serif text-4xl text-foreground tracking-tight">
+                  <span className="font-mono text-2xl font-bold text-foreground tabular-nums">
                     {plan.price}
                   </span>
                   {plan.price !== "Offert" && (
-                    <span className="text-muted-foreground text-sm"> kr/mån</span>
+                    <span className="text-xs text-muted-foreground">kr/mån</span>
                   )}
                 </div>
               </div>
 
-              <div className="gradient-divider mb-8" />
+              <div className="gradient-divider mb-6" />
 
-              <ul className="space-y-3.5 mb-8">
+              <ul className="space-y-2.5 mb-8 flex-1">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                    <span className="text-muted-foreground text-sm">{feature}</span>
+                  <li key={feature} className="flex items-start gap-2">
+                    <span className="font-mono text-xs text-muted-foreground/50">—</span>
+                    <span className="text-xs text-muted-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Button
-                className="w-full mt-auto"
+                className="w-full font-mono text-xs"
                 variant={plan.popular ? "default" : "outline"}
+                size="sm"
               >
-                {plan.price === "Offert" ? "Kontakta oss" : "Kom igång"}
+                {plan.price === "Offert" ? "kontakt" : "kom_igång"}
               </Button>
             </div>
           ))}
