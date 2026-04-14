@@ -32,7 +32,7 @@ const Features = () => {
             </span>
           </div>
           <h2 className="text-foreground">Mätbara resultat</h2>
-          <p className="mt-4 text-sm text-muted-foreground max-w-md leading-relaxed">
+          <p className="mt-4 text-sm text-muted-foreground max-w-lg leading-relaxed">
             Varje funktion är designad för att ge konkret, mätbar påverkan på er verksamhet.
           </p>
         </div>
@@ -44,7 +44,7 @@ const Features = () => {
               className="group border border-border bg-card p-8 transition-all duration-300 hover:elevation-3 hover:-translate-y-1"
             >
               <div className="flex items-center justify-between mb-8">
-                <feature.icon className="h-5 w-5 text-muted-foreground" />
+                <feature.icon className="h-5 w-5 text-foreground/40" />
                 <span className="font-mono text-[10px] text-muted-foreground/40">
                   0{i + 1}
                 </span>
@@ -58,7 +58,7 @@ const Features = () => {
                 {feature.title}
               </h3>
 
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
             </div>

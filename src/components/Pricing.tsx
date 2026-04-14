@@ -81,7 +81,7 @@ const Pricing = () => {
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground mb-6">
+                <p className="text-sm text-muted-foreground mb-6">
                   {plan.description}
                 </p>
                 <div className="flex items-baseline gap-1">
@@ -100,7 +100,7 @@ const Pricing = () => {
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <span className="h-1 w-1 rounded-full bg-foreground/30 shrink-0" />
-                    <span className="text-xs text-muted-foreground">{feature}</span>
+                    <span className="text-sm text-muted-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
