@@ -62,7 +62,7 @@ const Pricing = () => {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative border bg-card p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:elevation-3 ${
+              className={`relative border card-gradient p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:elevation-3 ${
                 plan.popular ? "border-foreground" : "border-border"
               }`}
             >

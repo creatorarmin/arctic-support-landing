@@ -110,6 +110,17 @@
   background: hsl(199 15% 80%);
 }
 
+/* Card gradient texture */
+.card-gradient {
+  background: linear-gradient(
+    145deg,
+    hsl(var(--card)) 0%,
+    hsl(355 48% 16% / 0.08) 40%,
+    hsl(355 48% 16% / 0.15) 70%,
+    hsl(355 48% 16% / 0.06) 100%
+  );
+}
+
 /* Elevation */
 .elevation-1 {
   box-shadow: 0 1px 2px 0 hsl(199 71% 15% / 0.04);
