@@ -47,17 +47,7 @@ const CTA = () => {
   };
 
   return (
-    <section id="kontakt" className="py-24 sm:py-32 relative overflow-hidden">
-      {/* Deep blue gradient inspired by globe network */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/20 to-primary/40 pointer-events-none" />
-      {/* Radial glow - center top like the globe horizon */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 120% 60% at 50% 110%, hsl(199 71% 15% / 0.6) 0%, transparent 70%)'
-      }} />
-      {/* Subtle secondary glow */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 80% 50% at 50% 100%, hsl(199 60% 30% / 0.25) 0%, transparent 60%)'
-      }} />
+    <section id="kontakt" className="py-24 sm:py-32 relative overflow-hidden texture-network-3">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
           <div className="inline-block border-2 border-foreground/30 px-4 py-1.5 mb-4">
