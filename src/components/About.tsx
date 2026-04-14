@@ -1,55 +1,34 @@
 import { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { Mic } from "lucide-react";
 
-interface ChatMessage {
-  id: number;
-  type: "user" | "ai";
-  text: string;
-}
-
-const conversation: ChatMessage[] = [
-  { id: 1, type: "user", text: "Hur exporterar jag data?" },
-  { id: 2, type: "ai", text: "Gå till Inställningar → Rapporter." },
-  { id: 3, type: "user", text: "Vilka format stöds?" },
-  { id: 4, type: "ai", text: "Excel, CSV och PDF." },
-  { id: 5, type: "user", text: "Kan jag schemalägga export?" },
-  { id: 6, type: "ai", text: "Ja! Under Automatisering, välj frekvens. 📊" },
+const statusMessages = [
+  { text: "Lyssnar på kund...", color: "text-foreground" },
+  { text: "Analyserar fråga...", color: "text-foreground" },
+  { text: "Genererar svar...", color: "text-foreground" },
+  { text: "Svar levererat ✓", color: "text-foreground" },
+  { text: "Väntar på nästa samtal...", color: "text-muted-foreground" },
 ];
 
 const About = () => {
-  const [visibleMessages, setVisibleMessages] = useState<ChatMessage[]>([]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-  const [cycle, setCycle] = useState(0);
+  const [statusIndex, setStatusIndex] = useState(0);
+  const [isActive, setIsActive] = useState(true);
+  const [callCount, setCallCount] = useState(142);
 
   useEffect(() => {
-    if (currentMessageIndex >= conversation.length) {
-      const timer = setTimeout(() => {
-        setVisibleMessages([]);
-        setCurrentMessageIndex(0);
-        setCycle(c => c + 1);
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
+    const interval = setInterval(() => {
+      setStatusIndex((prev) => {
+        const next = (prev + 1) % statusMessages.length;
+        if (next === 0) setCallCount((c) => c + 1);
+        return next;
+      });
+    }, 2400);
+    return () => clearInterval(interval);
+  }, []);
 
-    const next = conversation[currentMessageIndex];
-
-    if (next.type === "ai") {
-      setIsTyping(true);
-      const timer = setTimeout(() => {
-        setIsTyping(false);
-        setVisibleMessages(prev => [...prev, next]);
-        setCurrentMessageIndex(i => i + 1);
-      }, 1400);
-      return () => clearTimeout(timer);
-    } else {
-      const timer = setTimeout(() => {
-        setVisibleMessages(prev => [...prev, next]);
-        setCurrentMessageIndex(i => i + 1);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [currentMessageIndex, cycle]);
+  useEffect(() => {
+    // Pulse mic active state based on status
+    setIsActive(statusIndex < 3);
+  }, [statusIndex]);
 
   return (
     <section id="om-oss" className="py-24 sm:py-32">
@@ -105,57 +84,83 @@ const About = () => {
                   </div>
 
                   {/* Screen */}
-                  <div className="relative aspect-[9/19.5]">
-                    {/* Chat header */}
-                    <div className="pt-10 pb-2 px-4 border-b border-border flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="h-8 w-8 rounded-full bg-foreground/10 mx-auto mb-1 flex items-center justify-center">
-                          <span className="text-xs font-bold text-foreground font-mono">K</span>
-                        </div>
-                        <p className="text-[11px] font-semibold text-foreground">Kundra</p>
-                        <p className="text-[9px] text-muted-foreground">Online</p>
+                  <div className="relative aspect-[9/19.5] flex flex-col">
+                    {/* App header */}
+                    <div className="pt-10 pb-3 px-4 border-b border-border text-center">
+                      <div className="h-8 w-8 rounded-full bg-foreground/10 mx-auto mb-1 flex items-center justify-center">
+                        <span className="text-xs font-bold text-foreground font-mono">K</span>
+                      </div>
+                      <p className="text-[11px] font-semibold text-foreground">Kundra AI</p>
+                      <div className="flex items-center justify-center gap-1 mt-0.5">
+                        <span className={`h-1.5 w-1.5 rounded-full ${isActive ? 'bg-green-500 animate-pulse' : 'bg-muted-foreground/40'}`} />
+                        <p className="text-[9px] text-muted-foreground">
+                          {isActive ? "Aktiv" : "Standby"}
+                        </p>
                       </div>
                     </div>
 
-                    {/* Messages */}
-                    <div className="flex-1 overflow-hidden px-3 py-3">
-                      <div className="flex flex-col gap-1.5">
-                        {visibleMessages.map((message) => (
+                    {/* Voice visualization area */}
+                    <div className="flex-1 flex flex-col items-center justify-center px-6 gap-6">
+                      {/* Sound wave visualization */}
+                      <div className="flex items-center gap-[3px] h-16">
+                        {Array.from({ length: 24 }).map((_, i) => (
                           <div
-                            key={`${cycle}-${message.id}`}
-                            className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
-                          >
-                            <div
-                              className={`max-w-[80%] px-3 py-1.5 ${
-                                message.type === "user"
-                                  ? "bg-primary text-primary-foreground rounded-[18px] rounded-br-[4px]"
-                                  : "bg-secondary text-secondary-foreground rounded-[18px] rounded-bl-[4px]"
-                              }`}
-                            >
-                              <p className="text-[11px] leading-snug">{message.text}</p>
-                            </div>
-                          </div>
+                            key={i}
+                            className="w-[2.5px] rounded-full bg-foreground/20 transition-all duration-300"
+                            style={{
+                              height: isActive
+                                ? `${12 + Math.sin((i * 0.6) + statusIndex * 1.5) * 18 + Math.cos((i * 0.9) + statusIndex * 2) * 12}px`
+                                : '6px',
+                              opacity: isActive ? 0.3 + Math.sin((i * 0.5) + statusIndex) * 0.3 : 0.15,
+                              animationDelay: `${i * 50}ms`,
+                            }}
+                          />
                         ))}
+                      </div>
 
-                        {isTyping && (
-                          <div className="flex justify-start">
-                            <div className="bg-secondary rounded-[18px] rounded-bl-[4px] px-3.5 py-2.5">
-                              <div className="flex gap-1">
-                                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse" />
-                                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse [animation-delay:150ms]" />
-                                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse [animation-delay:300ms]" />
-                              </div>
-                            </div>
-                          </div>
+                      {/* Mic button */}
+                      <button
+                        className={`relative h-16 w-16 rounded-full flex items-center justify-center transition-all duration-500 ${
+                          isActive
+                            ? 'bg-foreground text-background shadow-lg'
+                            : 'bg-foreground/10 text-foreground/40'
+                        }`}
+                      >
+                        {isActive && (
+                          <>
+                            <span className="absolute inset-0 rounded-full bg-foreground/20 animate-ping" />
+                            <span className="absolute -inset-2 rounded-full border border-foreground/10 animate-pulse" />
+                          </>
                         )}
+                        <Mic className="h-6 w-6 relative z-10" />
+                      </button>
+
+                      {/* Status text */}
+                      <div className="text-center space-y-1 min-h-[40px]">
+                        <p
+                          key={statusIndex}
+                          className={`text-[12px] font-mono font-medium ${statusMessages[statusIndex].color} animate-fade-in`}
+                        >
+                          {statusMessages[statusIndex].text}
+                        </p>
                       </div>
                     </div>
 
-                    {/* Input bar */}
-                    <div className="absolute bottom-4 left-0 right-0 px-3">
-                      <div className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2">
-                        <span className="text-[11px] text-muted-foreground flex-1">Skriv ett meddelande...</span>
-                        <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                    {/* Bottom stats bar */}
+                    <div className="px-4 pb-8 pt-3 border-t border-border">
+                      <div className="flex items-center justify-between">
+                        <div className="text-center">
+                          <p className="text-[10px] font-mono font-bold text-foreground">{callCount}</p>
+                          <p className="text-[8px] text-muted-foreground">Samtal idag</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-[10px] font-mono font-bold text-foreground">1.2s</p>
+                          <p className="text-[8px] text-muted-foreground">Svarstid</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-[10px] font-mono font-bold text-foreground">98%</p>
+                          <p className="text-[8px] text-muted-foreground">Nöjdhet</p>
+                        </div>
                       </div>
                     </div>
                   </div>
