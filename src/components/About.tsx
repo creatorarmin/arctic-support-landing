@@ -177,7 +177,7 @@ const GrowthScreen = () => {
   );
 };
 
-const VoiceScreen = ({ statusIndex, isActive, callCount }: { statusIndex: number; isActive: boolean; callCount: number }) => (
+const VoiceScreen = ({ statusIndex, isActive, callCount, onMicClick }: { statusIndex: number; isActive: boolean; callCount: number; onMicClick?: () => void }) => (
   <div className="flex flex-col h-full" style={{ background: 'linear-gradient(180deg, hsl(220 15% 97%), hsl(220 10% 95%))' }}>
     {/* App header */}
     <div className="pt-11 pb-3 px-4 text-center" style={{ borderBottom: '0.5px solid hsl(0 0% 85%)' }}>
@@ -220,7 +220,8 @@ const VoiceScreen = ({ statusIndex, isActive, callCount }: { statusIndex: number
       </div>
 
       <button
-        className="relative h-16 w-16 rounded-full flex items-center justify-center transition-all duration-500"
+        onClick={onMicClick}
+        className="relative h-16 w-16 rounded-full flex items-center justify-center transition-all duration-500 cursor-pointer"
         style={{
           background: isActive
             ? 'linear-gradient(135deg, hsl(199 71% 15%), hsl(199 60% 22%))'
