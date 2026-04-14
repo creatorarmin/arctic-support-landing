@@ -61,87 +61,70 @@ const CTA = () => {
           </p>
         </div>
 
-        <div className="grid gap-16 lg:grid-cols-2">
-          <div className="flex flex-col justify-center">
-            <div className="space-y-6">
-              {[
-                { num: "01", text: "Implementation på dagar, inte månader" },
-                { num: "02", text: "Personlig demo anpassad för er bransch" },
-                { num: "03", text: "14 dagars kostnadsfri testperiod" },
-              ].map((item) => (
-                <div key={item.num} className="flex items-start gap-4">
-                  <span className="font-mono text-3xl font-bold text-foreground/10 tabular-nums leading-none">{item.num}</span>
-                  <span className="text-base text-muted-foreground pt-1">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
-              <div className="relative border border-border bg-card">
-                <div className="border-b border-border px-6 py-3 flex items-center justify-between">
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">Kontaktformulär</span>
-                  <ArrowRight className="h-3 w-3 text-muted-foreground/40" />
-                </div>
-
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <div className="space-y-1.5">
-                      <Label htmlFor="name" className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        Namn
-                      </Label>
-                      <Input id="name" {...register("name")} className="bg-background text-sm h-9" />
-                      {errors.name && <p className="text-[10px] text-destructive">{errors.name.message}</p>}
-                    </div>
-                    <div className="space-y-1.5">
-                      <Label htmlFor="email" className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        E-post
-                      </Label>
-                      <Input id="email" type="email" {...register("email")} className="bg-background text-sm h-9" />
-                      {errors.email && <p className="text-[10px] text-destructive">{errors.email.message}</p>}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <div className="space-y-1.5">
-                      <Label htmlFor="company" className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        Företag
-                      </Label>
-                      <Input id="company" {...register("company")} className="bg-background text-sm h-9" />
-                    </div>
-                    <div className="space-y-1.5">
-                      <Label htmlFor="interest" className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        Intresse
-                      </Label>
-                      <Select onValueChange={(value) => setValue("interest", value)}>
-                        <SelectTrigger className="bg-background text-sm h-9">
-                          <SelectValue placeholder="Välj..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="demo">Demo</SelectItem>
-                          <SelectItem value="pricing">Priser</SelectItem>
-                          <SelectItem value="partnership">Partnerskap</SelectItem>
-                          <SelectItem value="support">Support</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="message" className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                      Meddelande
-                    </Label>
-                    <Textarea id="message" rows={3} {...register("message")} className="bg-background text-sm resize-none" />
-                    {errors.message && <p className="text-[10px] text-destructive">{errors.message.message}</p>}
-                  </div>
-
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? "Skickar..." : "Skicka meddelande"}
-                  </Button>
-                </form>
+        <div className="max-w-xl mx-auto">
+          <div className="relative">
+            <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
+            <div className="relative border border-border bg-card">
+              <div className="border-b border-border px-6 py-3 flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">Kontaktformulär</span>
+                <ArrowRight className="h-3 w-3 text-muted-foreground/40" />
               </div>
+
+              <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="name" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                      Namn
+                    </Label>
+                    <Input id="name" {...register("name")} className="bg-background text-sm h-9" />
+                    {errors.name && <p className="text-[10px] text-destructive">{errors.name.message}</p>}
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="email" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                      E-post
+                    </Label>
+                    <Input id="email" type="email" {...register("email")} className="bg-background text-sm h-9" />
+                    {errors.email && <p className="text-[10px] text-destructive">{errors.email.message}</p>}
+                  </div>
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="company" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                      Företag
+                    </Label>
+                    <Input id="company" {...register("company")} className="bg-background text-sm h-9" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="interest" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                      Intresse
+                    </Label>
+                    <Select onValueChange={(value) => setValue("interest", value)}>
+                      <SelectTrigger className="bg-background text-sm h-9">
+                        <SelectValue placeholder="Välj..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="demo">Demo</SelectItem>
+                        <SelectItem value="pricing">Priser</SelectItem>
+                        <SelectItem value="partnership">Partnerskap</SelectItem>
+                        <SelectItem value="support">Support</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="message" className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                    Meddelande
+                  </Label>
+                  <Textarea id="message" rows={3} {...register("message")} className="bg-background text-sm resize-none" />
+                  {errors.message && <p className="text-[10px] text-destructive">{errors.message.message}</p>}
+                </div>
+
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Skickar..." : "Skicka meddelande"}
+                </Button>
+              </form>
             </div>
           </div>
         </div>
