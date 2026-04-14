@@ -126,7 +126,7 @@ const Hero = () => {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-foreground">Kundra</p>
-                    <p className="text-[10px] text-muted-foreground">Online</p>
+                    <p className="text-[10px] text-muted-foreground flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-green-500 inline-block" />Online</p>
                   </div>
                 </div>
 
