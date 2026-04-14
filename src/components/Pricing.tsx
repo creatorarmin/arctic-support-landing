@@ -62,12 +62,18 @@ const Pricing = () => {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative border bg-card p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:elevation-3 ${
+              className={`relative border bg-card p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:elevation-3 overflow-hidden ${
                 plan.popular ? "border-foreground" : "border-border"
               }`}
             >
+              {/* Warm accent glow for popular card */}
               {plan.popular && (
-                <div className="absolute -top-px left-0 right-0 h-[2px] bg-foreground" />
+                <div className="absolute inset-0 pointer-events-none" style={{
+                  background: 'linear-gradient(135deg, hsl(34 73% 78% / 0.12) 0%, transparent 50%, hsl(355 48% 16% / 0.06) 100%)',
+                }} />
+              )}
+              {plan.popular && (
+                <div className="absolute -top-px left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, hsl(34 73% 78%), hsl(199 71% 15%), hsl(355 48% 16%))' }} />
               )}
 
               <div className="mb-8">
