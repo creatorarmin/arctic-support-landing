@@ -47,9 +47,8 @@ const CTA = () => {
   };
 
   return (
-    <section id="kontakt" className="py-24 sm:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/15 to-primary/25 pointer-events-none" />
-      <div className="absolute inset-0 texture-network-2 pointer-events-none opacity-40" />
+    <section id="kontakt" className="py-24 sm:py-32 relative overflow-hidden texture-network-1">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/15 to-primary/25 pointer-events-none z-[1]" />
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
           <div className="inline-block border-2 border-foreground/30 px-4 py-1.5 mb-4">
