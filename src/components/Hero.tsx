@@ -152,7 +152,7 @@ const Hero = () => {
 
                     {isTyping && (
                       <div className="flex justify-start">
-                        <div className="bg-primary rounded-2xl rounded-bl-sm px-4 py-3">
+                        <div className="bg-primary/60 rounded-2xl rounded-bl-sm px-4 py-3">
                           <div className="flex gap-1">
                             <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse" />
                             <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50 animate-pulse [animation-delay:150ms]" />
