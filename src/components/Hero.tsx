@@ -121,9 +121,7 @@ const Hero = () => {
               <div className="relative border border-border bg-card/20 backdrop-blur-sm overflow-hidden elevation-3">
                 {/* Chat header */}
                 <div className="border-b border-border px-5 py-3 flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-foreground/10 flex items-center justify-center">
-                    <span className="text-xs font-bold text-foreground font-mono">K</span>
-                  </div>
+                  <Logo className="h-8 w-8" />
                   <div>
                     <p className="text-sm font-semibold text-foreground">Kundra</p>
                     <p className="text-[10px] text-muted-foreground flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-green-500 inline-block" />Online</p>
