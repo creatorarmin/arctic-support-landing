@@ -65,76 +65,95 @@ const Hero = () => {
   }, [currentMessageIndex, currentConversation]);
 
   return (
-    <section className="relative min-h-[80vh] flex items-center pt-12">
+    <section className="relative min-h-screen flex items-center pt-14">
+      {/* Large decorative number */}
+      <div className="absolute top-20 right-8 font-mono text-[20rem] font-bold text-foreground/[0.02] leading-none select-none pointer-events-none hidden lg:block">
+        01
+      </div>
+      
       <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-          <div className="max-w-lg">
-            <p className="mb-3 font-mono text-xs text-muted-foreground tracking-wider">
-              // kundtjänst_automatisering
-            </p>
+        <div className="grid gap-16 lg:grid-cols-5 items-center">
+          <div className="lg:col-span-3">
+            <div className="inline-block border border-border px-3 py-1 mb-8">
+              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+                Kundtjänst · Automatisering · AI
+              </span>
+            </div>
             
-            <h1 className="mb-5 text-foreground">
-              Bättre support.<br />Lägre kostnad.
+            <h1 className="mb-6 text-foreground">
+              Bättre
+              <br />
+              <span className="text-muted-foreground/30">support.</span>
+              <br />
+              Lägre
+              <br />
+              <span className="text-muted-foreground/30">kostnad.</span>
             </h1>
             
-            <p className="mb-8 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              Automatiserad kundservice för företag som värdesätter precision och effektivitet.
+            <p className="mb-10 text-base text-muted-foreground leading-relaxed max-w-md">
+              Automatiserad kundservice för företag som värdesätter 
+              precision och effektivitet.
             </p>
             
-            <div className="flex gap-3">
-              <Button size="sm" className="font-mono text-xs">
-                boka_demo
-                <ArrowRight className="ml-1.5 h-3 w-3" />
+            <div className="flex gap-4 items-center">
+              <Button size="lg" className="text-sm px-8">
+                Boka demo
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" size="sm" className="font-mono text-xs">
-                se_mer
-              </Button>
+              <a href="#losningar" className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4">
+                Läs mer
+              </a>
             </div>
           </div>
 
-          {/* Terminal-style chat */}
-          <div className="hidden lg:block">
-            <div className="max-w-md mx-auto border border-border bg-card overflow-hidden">
-              {/* Terminal bar */}
-              <div className="border-b border-border px-4 py-2 flex items-center gap-2">
-                <div className="flex gap-1.5">
-                  <div className="h-2 w-2 rounded-full bg-muted-foreground/30" />
-                  <div className="h-2 w-2 rounded-full bg-muted-foreground/30" />
-                  <div className="h-2 w-2 rounded-full bg-muted-foreground/30" />
-                </div>
-                <span className="font-mono text-[10px] text-muted-foreground ml-2">kundra_chat.sh</span>
-              </div>
+          {/* Terminal chat — elevated with rotation */}
+          <div className="hidden lg:block lg:col-span-2">
+            <div className="relative">
+              {/* Shadow card behind */}
+              <div className="absolute inset-0 bg-foreground/5 translate-x-3 translate-y-3" />
               
-              {/* Messages */}
-              <div className="h-[380px] overflow-hidden px-4 py-3 font-mono text-xs">
-                <div className="flex flex-col gap-2">
-                  {visibleMessages.map((message) => (
-                    <div key={`${currentConversationIndex}-${message.id}`}>
-                      <span className="text-muted-foreground">
-                        {message.type === "user" ? "usr" : "sys"}
-                      </span>
-                      <span className="text-muted-foreground/50 mx-1">›</span>
-                      <span className={message.type === "user" ? "text-foreground" : "text-muted-foreground"}>
-                        {message.text}
-                      </span>
-                    </div>
-                  ))}
-                  
-                  {isTyping && (
-                    <div>
-                      <span className="text-muted-foreground">sys</span>
-                      <span className="text-muted-foreground/50 mx-1">›</span>
-                      <span className="text-muted-foreground animate-pulse">_</span>
-                    </div>
-                  )}
+              <div className="relative border border-border bg-card overflow-hidden elevation-3">
+                {/* Terminal bar */}
+                <div className="border-b border-border px-4 py-2.5 flex items-center justify-between">
+                  <div className="flex gap-1.5">
+                    <div className="h-2.5 w-2.5 rounded-full bg-foreground/10" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-foreground/10" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-foreground/10" />
+                  </div>
+                  <span className="font-mono text-[10px] text-muted-foreground">live demo</span>
                 </div>
-              </div>
-              
-              {/* Input */}
-              <div className="border-t border-border px-4 py-2.5">
-                <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
-                  <span>usr ›</span>
-                  <span className="animate-pulse">_</span>
+                
+                {/* Messages */}
+                <div className="h-[360px] overflow-hidden px-5 py-4 font-mono text-xs">
+                  <div className="flex flex-col gap-3">
+                    {visibleMessages.map((message) => (
+                      <div key={`${currentConversationIndex}-${message.id}`} className="flex gap-3">
+                        <span className={`shrink-0 w-8 text-right ${message.type === "user" ? "text-foreground" : "text-muted-foreground/50"}`}>
+                          {message.type === "user" ? "du" : "ai"}
+                        </span>
+                        <span className="text-muted-foreground/30">│</span>
+                        <span className={message.type === "user" ? "text-foreground" : "text-muted-foreground"}>
+                          {message.text}
+                        </span>
+                      </div>
+                    ))}
+                    
+                    {isTyping && (
+                      <div className="flex gap-3">
+                        <span className="shrink-0 w-8 text-right text-muted-foreground/50">ai</span>
+                        <span className="text-muted-foreground/30">│</span>
+                        <span className="text-muted-foreground">
+                          <span className="inline-block w-1.5 h-3.5 bg-foreground/60 animate-pulse" />
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Input */}
+                <div className="border-t border-border px-5 py-3 flex items-center gap-3 font-mono text-xs">
+                  <span className="text-muted-foreground/50">›</span>
+                  <span className="text-muted-foreground">Skriv ett meddelande...</span>
                 </div>
               </div>
             </div>
