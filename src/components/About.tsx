@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Mic, Wifi, Signal } from "lucide-react";
+import { Mic } from "lucide-react";
 
 const statusMessages = [
   { text: "Lyssnar på kund...", color: "text-foreground" },
@@ -9,10 +9,276 @@ const statusMessages = [
   { text: "Väntar på nästa samtal...", color: "text-muted-foreground" },
 ];
 
+// Growth graph data points (monthly revenue growth)
+const graphData = [
+  { month: "Jan", value: 12 },
+  { month: "Feb", value: 18 },
+  { month: "Mar", value: 15 },
+  { month: "Apr", value: 28 },
+  { month: "Maj", value: 35 },
+  { month: "Jun", value: 42 },
+  { month: "Jul", value: 48 },
+  { month: "Aug", value: 55 },
+  { month: "Sep", value: 68 },
+  { month: "Okt", value: 75 },
+  { month: "Nov", value: 82 },
+  { month: "Dec", value: 95 },
+];
+
+const GrowthScreen = () => {
+  const [animatedValues, setAnimatedValues] = useState(graphData.map(() => 0));
+  const [showLabels, setShowLabels] = useState(false);
+
+  useEffect(() => {
+    // Animate bars one by one
+    graphData.forEach((point, i) => {
+      setTimeout(() => {
+        setAnimatedValues(prev => {
+          const next = [...prev];
+          next[i] = point.value;
+          return next;
+        });
+      }, 300 + i * 120);
+    });
+    setTimeout(() => setShowLabels(true), 300 + graphData.length * 120 + 200);
+  }, []);
+
+  const maxValue = Math.max(...graphData.map(d => d.value));
+  const chartHeight = 140;
+
+  // Build SVG line path
+  const linePoints = animatedValues.map((val, i) => {
+    const x = 20 + (i / (graphData.length - 1)) * 200;
+    const y = chartHeight - (val / maxValue) * (chartHeight - 20);
+    return `${x},${y}`;
+  });
+  const linePath = `M${linePoints.join(" L")}`;
+  const areaPath = `${linePath} L220,${chartHeight} L20,${chartHeight} Z`;
+
+  return (
+    <div className="flex flex-col h-full" style={{ background: 'linear-gradient(180deg, hsl(220 15% 97%), hsl(220 10% 95%))' }}>
+      {/* Header */}
+      <div className="pt-11 pb-3 px-4 text-center" style={{ borderBottom: '0.5px solid hsl(0 0% 85%)' }}>
+        <p className="text-[11px] font-semibold" style={{ color: 'hsl(0 0% 10%)' }}>Tillväxtanalys</p>
+        <p className="text-[9px] mt-0.5" style={{ color: 'hsl(0 0% 50%)' }}>Senaste 12 månaderna</p>
+      </div>
+
+      {/* KPI row */}
+      <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '0.5px solid hsl(0 0% 90%)' }}>
+        <div>
+          <p className="text-[9px]" style={{ color: 'hsl(0 0% 50%)' }}>Intäkter</p>
+          <p className="text-[14px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>+142%</p>
+        </div>
+        <div className="text-right">
+          <p className="text-[9px]" style={{ color: 'hsl(0 0% 50%)' }}>Ärenden lösta</p>
+          <p className="text-[14px] font-mono font-bold" style={{ color: 'hsl(142 60% 35%)' }}>+89%</p>
+        </div>
+      </div>
+
+      {/* Chart area */}
+      <div className="flex-1 flex flex-col justify-center px-3 py-2">
+        <svg viewBox={`0 0 240 ${chartHeight + 20}`} className="w-full" preserveAspectRatio="xMidYMid meet">
+          {/* Grid lines */}
+          {[0, 0.25, 0.5, 0.75, 1].map((pct) => {
+            const y = chartHeight - pct * (chartHeight - 20);
+            return (
+              <line
+                key={pct}
+                x1="20" y1={y} x2="220" y2={y}
+                stroke="hsl(0 0% 88%)" strokeWidth="0.5"
+              />
+            );
+          })}
+
+          {/* Area fill */}
+          <path
+            d={areaPath}
+            fill="url(#growthGradient)"
+            className="transition-all duration-700"
+          />
+
+          {/* Line */}
+          <path
+            d={linePath}
+            fill="none"
+            stroke="hsl(199 71% 15%)"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="transition-all duration-700"
+          />
+
+          {/* Data points */}
+          {animatedValues.map((val, i) => {
+            const x = 20 + (i / (graphData.length - 1)) * 200;
+            const y = chartHeight - (val / maxValue) * (chartHeight - 20);
+            return (
+              <circle
+                key={i}
+                cx={x} cy={y} r="2.5"
+                fill="hsl(0 0% 97%)"
+                stroke="hsl(199 71% 15%)"
+                strokeWidth="1.5"
+                className="transition-all duration-500"
+                style={{ transitionDelay: `${i * 80}ms` }}
+              />
+            );
+          })}
+
+          {/* Month labels */}
+          {showLabels && graphData.filter((_, i) => i % 2 === 0).map((point, idx) => {
+            const i = idx * 2;
+            const x = 20 + (i / (graphData.length - 1)) * 200;
+            return (
+              <text
+                key={point.month}
+                x={x} y={chartHeight + 14}
+                textAnchor="middle"
+                fontSize="6"
+                fontFamily="'JetBrains Mono', monospace"
+                fill="hsl(0 0% 55%)"
+              >
+                {point.month}
+              </text>
+            );
+          })}
+
+          {/* Gradient definition */}
+          <defs>
+            <linearGradient id="growthGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="hsl(199 71% 15%)" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="hsl(199 71% 15%)" stopOpacity="0.02" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      {/* Bottom stats */}
+      <div className="px-4 pb-8 pt-2" style={{ borderTop: '0.5px solid hsl(0 0% 85%)' }}>
+        <div className="flex items-center justify-between">
+          <div className="text-center">
+            <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>12.4k</p>
+            <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Ärenden</p>
+          </div>
+          <div className="text-center">
+            <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(142 60% 35%)' }}>↑ 34%</p>
+            <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Denna mån</p>
+          </div>
+          <div className="text-center">
+            <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>4.8★</p>
+            <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Betyg</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Home indicator */}
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] rounded-full" style={{ background: 'hsl(0 0% 15% / 0.2)' }} />
+    </div>
+  );
+};
+
+const VoiceScreen = ({ statusIndex, isActive, callCount }: { statusIndex: number; isActive: boolean; callCount: number }) => (
+  <div className="flex flex-col h-full" style={{ background: 'linear-gradient(180deg, hsl(220 15% 97%), hsl(220 10% 95%))' }}>
+    {/* App header */}
+    <div className="pt-11 pb-3 px-4 text-center" style={{ borderBottom: '0.5px solid hsl(0 0% 85%)' }}>
+      <div
+        className="h-9 w-9 rounded-full mx-auto mb-1.5 flex items-center justify-center"
+        style={{ background: 'linear-gradient(135deg, hsl(199 71% 15%), hsl(199 60% 25%))' }}
+      >
+        <span className="text-xs font-bold font-mono" style={{ color: 'hsl(0 0% 93%)' }}>K</span>
+      </div>
+      <p className="text-[11px] font-semibold" style={{ color: 'hsl(0 0% 10%)' }}>Kundra AI</p>
+      <div className="flex items-center justify-center gap-1 mt-0.5">
+        <span
+          className={`h-1.5 w-1.5 rounded-full ${isActive ? 'animate-pulse' : ''}`}
+          style={{ background: isActive ? 'hsl(142 60% 45%)' : 'hsl(0 0% 75%)' }}
+        />
+        <p className="text-[9px]" style={{ color: 'hsl(0 0% 50%)' }}>
+          {isActive ? "Aktiv" : "Standby"}
+        </p>
+      </div>
+    </div>
+
+    {/* Voice visualization area */}
+    <div className="flex-1 flex flex-col items-center justify-center px-6 gap-5">
+      <div className="flex items-center gap-[3px] h-16">
+        {Array.from({ length: 24 }).map((_, i) => (
+          <div
+            key={i}
+            className="w-[2.5px] rounded-full transition-all duration-300"
+            style={{
+              background: isActive
+                ? `hsl(199 71% ${25 + Math.sin(i * 0.5) * 10}%)`
+                : 'hsl(0 0% 80%)',
+              height: isActive
+                ? `${12 + Math.sin((i * 0.6) + statusIndex * 1.5) * 18 + Math.cos((i * 0.9) + statusIndex * 2) * 12}px`
+                : '6px',
+              opacity: isActive ? 0.4 + Math.sin((i * 0.5) + statusIndex) * 0.35 : 0.25,
+            }}
+          />
+        ))}
+      </div>
+
+      <button
+        className="relative h-16 w-16 rounded-full flex items-center justify-center transition-all duration-500"
+        style={{
+          background: isActive
+            ? 'linear-gradient(135deg, hsl(199 71% 15%), hsl(199 60% 22%))'
+            : 'hsl(0 0% 90%)',
+          color: isActive ? 'hsl(0 0% 93%)' : 'hsl(0 0% 60%)',
+          boxShadow: isActive
+            ? '0 4px 20px hsl(199 71% 15% / 0.3), 0 2px 8px hsl(199 71% 15% / 0.2)'
+            : 'none',
+        }}
+      >
+        {isActive && (
+          <>
+            <span className="absolute inset-0 rounded-full animate-ping" style={{ background: 'hsl(199 71% 15% / 0.15)' }} />
+            <span className="absolute -inset-2 rounded-full border animate-pulse" style={{ borderColor: 'hsl(199 71% 15% / 0.1)' }} />
+          </>
+        )}
+        <Mic className="h-6 w-6 relative z-10" />
+      </button>
+
+      <div className="text-center space-y-1 min-h-[40px]">
+        <p
+          key={statusIndex}
+          className="text-[12px] font-mono font-medium animate-fade-in"
+          style={{ color: isActive ? 'hsl(199 71% 15%)' : 'hsl(0 0% 50%)' }}
+        >
+          {statusMessages[statusIndex].text}
+        </p>
+      </div>
+    </div>
+
+    {/* Bottom stats bar */}
+    <div className="px-4 pb-8 pt-3" style={{ borderTop: '0.5px solid hsl(0 0% 85%)' }}>
+      <div className="flex items-center justify-between">
+        <div className="text-center">
+          <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>{callCount}</p>
+          <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Samtal idag</p>
+        </div>
+        <div className="text-center">
+          <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>1.2s</p>
+          <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Svarstid</p>
+        </div>
+        <div className="text-center">
+          <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>98%</p>
+          <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Nöjdhet</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Home indicator */}
+    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] rounded-full" style={{ background: 'hsl(0 0% 15% / 0.2)' }} />
+  </div>
+);
+
 const About = () => {
   const [statusIndex, setStatusIndex] = useState(0);
   const [isActive, setIsActive] = useState(true);
   const [callCount, setCallCount] = useState(142);
+  const [currentScreen, setCurrentScreen] = useState(0); // 0 = voice, 1 = growth
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,6 +294,14 @@ const About = () => {
   useEffect(() => {
     setIsActive(statusIndex < 3);
   }, [statusIndex]);
+
+  // Auto-switch screens every 8 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentScreen((prev) => (prev + 1) % 2);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="om-oss" className="py-24 sm:py-32">
@@ -60,7 +334,7 @@ const About = () => {
           {/* Phone mockup */}
           <div className="flex justify-center">
             <div className="relative mx-auto w-[280px] sm:w-[300px]">
-              {/* Outer phone shell — titanium-like frame */}
+              {/* Outer phone shell */}
               <div
                 className="relative rounded-[3rem] p-[2px]"
                 style={{
@@ -71,9 +345,7 @@ const About = () => {
                 {/* Inner bezel */}
                 <div
                   className="relative rounded-[2.85rem] p-[6px]"
-                  style={{
-                    background: 'linear-gradient(180deg, hsl(199 10% 20%), hsl(199 15% 12%))',
-                  }}
+                  style={{ background: 'linear-gradient(180deg, hsl(199 10% 20%), hsl(199 15% 12%))' }}
                 >
                   {/* Screen glass */}
                   <div className="relative overflow-hidden rounded-[2.4rem]" style={{ background: 'hsl(220 20% 97%)' }}>
@@ -83,7 +355,6 @@ const About = () => {
                         className="h-[22px] w-[90px] rounded-full flex items-center justify-center gap-2"
                         style={{ background: 'hsl(0 0% 5%)' }}
                       >
-                        {/* Camera dot */}
                         <div className="w-[8px] h-[8px] rounded-full ml-6" style={{
                           background: 'radial-gradient(circle, hsl(220 30% 25%) 30%, hsl(0 0% 8%) 70%)',
                           boxShadow: 'inset 0 0 2px hsl(220 40% 40% / 0.5)',
@@ -95,20 +366,17 @@ const About = () => {
                     <div className="absolute top-1.5 left-0 right-0 z-10 flex items-center justify-between px-7 py-1">
                       <span className="text-[10px] font-semibold font-mono" style={{ color: 'hsl(0 0% 15%)' }}>9:41</span>
                       <div className="flex items-center gap-1">
-                        {/* Signal bars */}
                         <div className="flex items-end gap-[1.5px]">
                           <div className="w-[3px] h-[4px] rounded-[1px]" style={{ background: 'hsl(0 0% 15%)' }} />
                           <div className="w-[3px] h-[6px] rounded-[1px]" style={{ background: 'hsl(0 0% 15%)' }} />
                           <div className="w-[3px] h-[8px] rounded-[1px]" style={{ background: 'hsl(0 0% 15%)' }} />
                           <div className="w-[3px] h-[10px] rounded-[1px]" style={{ background: 'hsl(0 0% 15% / 0.3)' }} />
                         </div>
-                        {/* WiFi icon */}
                         <svg width="13" height="10" viewBox="0 0 13 10" className="ml-0.5">
                           <path d="M6.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="hsl(0 0% 15%)" />
                           <path d="M3.8 6.8a3.8 3.8 0 0 1 5.4 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" strokeLinecap="round" />
                           <path d="M1.5 4.5a7 7 0 0 1 10 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" strokeLinecap="round" />
                         </svg>
-                        {/* Battery */}
                         <div className="flex items-center ml-0.5">
                           <div className="w-[22px] h-[10px] rounded-[2.5px] border-[1.5px] p-[1.5px]" style={{ borderColor: 'hsl(0 0% 15%)' }}>
                             <div className="w-[70%] h-full rounded-[1px]" style={{ background: 'hsl(0 0% 15%)' }} />
@@ -118,103 +386,36 @@ const About = () => {
                       </div>
                     </div>
 
-                    {/* Screen content */}
-                    <div className="relative aspect-[9/19.5] flex flex-col" style={{ background: 'linear-gradient(180deg, hsl(220 15% 97%), hsl(220 10% 95%))' }}>
-                      {/* App header */}
-                      <div className="pt-11 pb-3 px-4 text-center" style={{ borderBottom: '0.5px solid hsl(0 0% 85%)' }}>
-                        <div
-                          className="h-9 w-9 rounded-full mx-auto mb-1.5 flex items-center justify-center"
-                          style={{ background: 'linear-gradient(135deg, hsl(199 71% 15%), hsl(199 60% 25%))' }}
-                        >
-                          <span className="text-xs font-bold font-mono" style={{ color: 'hsl(0 0% 93%)' }}>K</span>
+                    {/* Screen content with slide animation */}
+                    <div className="relative aspect-[9/19.5] overflow-hidden">
+                      <div
+                        className="flex h-full transition-transform duration-700 ease-in-out"
+                        style={{ transform: `translateX(-${currentScreen * 100}%)` }}
+                      >
+                        {/* Screen 1: Voice */}
+                        <div className="relative w-full h-full flex-shrink-0">
+                          <VoiceScreen statusIndex={statusIndex} isActive={isActive} callCount={callCount} />
                         </div>
-                        <p className="text-[11px] font-semibold" style={{ color: 'hsl(0 0% 10%)' }}>Kundra AI</p>
-                        <div className="flex items-center justify-center gap-1 mt-0.5">
-                          <span
-                            className={`h-1.5 w-1.5 rounded-full ${isActive ? 'animate-pulse' : ''}`}
-                            style={{ background: isActive ? 'hsl(142 60% 45%)' : 'hsl(0 0% 75%)' }}
+                        {/* Screen 2: Growth graph */}
+                        <div className="relative w-full h-full flex-shrink-0">
+                          {currentScreen === 1 && <GrowthScreen />}
+                        </div>
+                      </div>
+
+                      {/* Page indicator dots */}
+                      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                        {[0, 1].map((i) => (
+                          <div
+                            key={i}
+                            className="rounded-full transition-all duration-300"
+                            style={{
+                              width: currentScreen === i ? '16px' : '5px',
+                              height: '5px',
+                              background: currentScreen === i ? 'hsl(199 71% 15%)' : 'hsl(0 0% 70%)',
+                            }}
                           />
-                          <p className="text-[9px]" style={{ color: 'hsl(0 0% 50%)' }}>
-                            {isActive ? "Aktiv" : "Standby"}
-                          </p>
-                        </div>
+                        ))}
                       </div>
-
-                      {/* Voice visualization area */}
-                      <div className="flex-1 flex flex-col items-center justify-center px-6 gap-5">
-                        {/* Sound wave visualization */}
-                        <div className="flex items-center gap-[3px] h-16">
-                          {Array.from({ length: 24 }).map((_, i) => (
-                            <div
-                              key={i}
-                              className="w-[2.5px] rounded-full transition-all duration-300"
-                              style={{
-                                background: isActive
-                                  ? `hsl(199 71% ${25 + Math.sin(i * 0.5) * 10}%)`
-                                  : 'hsl(0 0% 80%)',
-                                height: isActive
-                                  ? `${12 + Math.sin((i * 0.6) + statusIndex * 1.5) * 18 + Math.cos((i * 0.9) + statusIndex * 2) * 12}px`
-                                  : '6px',
-                                opacity: isActive ? 0.4 + Math.sin((i * 0.5) + statusIndex) * 0.35 : 0.25,
-                              }}
-                            />
-                          ))}
-                        </div>
-
-                        {/* Mic button */}
-                        <button
-                          className="relative h-16 w-16 rounded-full flex items-center justify-center transition-all duration-500"
-                          style={{
-                            background: isActive
-                              ? 'linear-gradient(135deg, hsl(199 71% 15%), hsl(199 60% 22%))'
-                              : 'hsl(0 0% 90%)',
-                            color: isActive ? 'hsl(0 0% 93%)' : 'hsl(0 0% 60%)',
-                            boxShadow: isActive
-                              ? '0 4px 20px hsl(199 71% 15% / 0.3), 0 2px 8px hsl(199 71% 15% / 0.2)'
-                              : 'none',
-                          }}
-                        >
-                          {isActive && (
-                            <>
-                              <span className="absolute inset-0 rounded-full animate-ping" style={{ background: 'hsl(199 71% 15% / 0.15)' }} />
-                              <span className="absolute -inset-2 rounded-full border animate-pulse" style={{ borderColor: 'hsl(199 71% 15% / 0.1)' }} />
-                            </>
-                          )}
-                          <Mic className="h-6 w-6 relative z-10" />
-                        </button>
-
-                        {/* Status text */}
-                        <div className="text-center space-y-1 min-h-[40px]">
-                          <p
-                            key={statusIndex}
-                            className="text-[12px] font-mono font-medium animate-fade-in"
-                            style={{ color: isActive ? 'hsl(199 71% 15%)' : 'hsl(0 0% 50%)' }}
-                          >
-                            {statusMessages[statusIndex].text}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Bottom stats bar */}
-                      <div className="px-4 pb-8 pt-3" style={{ borderTop: '0.5px solid hsl(0 0% 85%)' }}>
-                        <div className="flex items-center justify-between">
-                          <div className="text-center">
-                            <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>{callCount}</p>
-                            <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Samtal idag</p>
-                          </div>
-                          <div className="text-center">
-                            <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>1.2s</p>
-                            <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Svarstid</p>
-                          </div>
-                          <div className="text-center">
-                            <p className="text-[10px] font-mono font-bold" style={{ color: 'hsl(199 71% 15%)' }}>98%</p>
-                            <p className="text-[8px]" style={{ color: 'hsl(0 0% 55%)' }}>Nöjdhet</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Home indicator */}
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] rounded-full" style={{ background: 'hsl(0 0% 15% / 0.2)' }} />
                     </div>
 
                     {/* Screen glass reflection */}
@@ -228,27 +429,11 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Side buttons — more realistic */}
-              {/* Silent switch */}
-              <div
-                className="absolute -left-[3px] top-[72px] h-[14px] w-[4px] rounded-l-[2px]"
-                style={{ background: 'linear-gradient(90deg, hsl(199 10% 55%), hsl(199 10% 65%))' }}
-              />
-              {/* Volume up */}
-              <div
-                className="absolute -left-[3px] top-[100px] h-[28px] w-[4px] rounded-l-[2px]"
-                style={{ background: 'linear-gradient(90deg, hsl(199 10% 55%), hsl(199 10% 65%))' }}
-              />
-              {/* Volume down */}
-              <div
-                className="absolute -left-[3px] top-[136px] h-[28px] w-[4px] rounded-l-[2px]"
-                style={{ background: 'linear-gradient(90deg, hsl(199 10% 55%), hsl(199 10% 65%))' }}
-              />
-              {/* Power button */}
-              <div
-                className="absolute -right-[3px] top-[115px] h-[40px] w-[4px] rounded-r-[2px]"
-                style={{ background: 'linear-gradient(270deg, hsl(199 10% 55%), hsl(199 10% 65%))' }}
-              />
+              {/* Side buttons */}
+              <div className="absolute -left-[3px] top-[72px] h-[14px] w-[4px] rounded-l-[2px]" style={{ background: 'linear-gradient(90deg, hsl(199 10% 55%), hsl(199 10% 65%))' }} />
+              <div className="absolute -left-[3px] top-[100px] h-[28px] w-[4px] rounded-l-[2px]" style={{ background: 'linear-gradient(90deg, hsl(199 10% 55%), hsl(199 10% 65%))' }} />
+              <div className="absolute -left-[3px] top-[136px] h-[28px] w-[4px] rounded-l-[2px]" style={{ background: 'linear-gradient(90deg, hsl(199 10% 55%), hsl(199 10% 65%))' }} />
+              <div className="absolute -right-[3px] top-[115px] h-[40px] w-[4px] rounded-r-[2px]" style={{ background: 'linear-gradient(270deg, hsl(199 10% 55%), hsl(199 10% 65%))' }} />
             </div>
           </div>
         </div>
