@@ -92,7 +92,7 @@ const About = () => {
                       </div>
                       <p className="text-[11px] font-semibold text-foreground">Kundra AI</p>
                       <div className="flex items-center justify-center gap-1 mt-0.5">
-                        <span className={`h-1.5 w-1.5 rounded-full ${isActive ? 'bg-green-500 animate-pulse' : 'bg-muted-foreground/40'}`} />
+                        <span className={`h-1.5 w-1.5 rounded-full ${isActive ? 'bg-accent animate-pulse' : 'bg-muted-foreground/40'}`} />
                         <p className="text-[9px] text-muted-foreground">
                           {isActive ? "Aktiv" : "Standby"}
                         </p>

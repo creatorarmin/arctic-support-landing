@@ -5,45 +5,45 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @layer base {
-  :root, .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 92%;
+  :root {
+    --background: 0 0% 93%;
+    --foreground: 199 71% 15%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 92%;
+    --card: 0 0% 97%;
+    --card-foreground: 199 71% 15%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 92%;
+    --popover: 0 0% 97%;
+    --popover-foreground: 199 71% 15%;
 
-    --primary: 0 0% 92%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 199 71% 15%;
+    --primary-foreground: 0 0% 93%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 75%;
+    --secondary: 34 40% 90%;
+    --secondary-foreground: 199 50% 20%;
 
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 199 10% 86%;
+    --muted-foreground: 199 25% 40%;
 
-    --accent: 0 0% 14%;
-    --accent-foreground: 0 0% 92%;
+    --accent: 34 73% 78%;
+    --accent-foreground: 355 48% 16%;
 
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 355 48% 16%;
+    --destructive-foreground: 0 0% 97%;
 
-    --border: 0 0% 16%;
-    --input: 0 0% 16%;
-    --ring: 0 0% 80%;
+    --border: 199 15% 80%;
+    --input: 199 15% 80%;
+    --ring: 199 71% 15%;
 
     --radius: 0.25rem;
 
-    --sidebar-background: 0 0% 3%;
-    --sidebar-foreground: 0 0% 88%;
-    --sidebar-primary: 0 0% 92%;
-    --sidebar-primary-foreground: 0 0% 4%;
-    --sidebar-accent: 0 0% 10%;
-    --sidebar-accent-foreground: 0 0% 80%;
-    --sidebar-border: 0 0% 14%;
-    --sidebar-ring: 0 0% 40%;
+    --sidebar-background: 199 71% 12%;
+    --sidebar-foreground: 0 0% 93%;
+    --sidebar-primary: 34 73% 78%;
+    --sidebar-primary-foreground: 199 71% 15%;
+    --sidebar-accent: 199 50% 20%;
+    --sidebar-accent-foreground: 0 0% 93%;
+    --sidebar-border: 199 40% 25%;
+    --sidebar-ring: 199 71% 15%;
   }
 }
 
@@ -94,65 +94,39 @@
   }
 
   :focus-visible {
-    outline: 1px solid hsl(0 0% 9%);
+    outline: 1px solid hsl(199 71% 15%);
     outline-offset: 2px;
   }
 
-  .dark :focus-visible {
-    outline-color: hsl(0 0% 80%);
-  }
-
   ::selection {
-    background: hsl(0 0% 9% / 0.15);
-    color: hsl(0 0% 9%);
-  }
-
-  .dark ::selection {
-    background: hsl(0 0% 92% / 0.2);
-    color: hsl(0 0% 92%);
+    background: hsl(34 73% 78% / 0.4);
+    color: hsl(199 71% 15%);
   }
 }
 
 /* Divider */
 .gradient-divider {
   height: 1px;
-  background: hsl(0 0% 85%);
-}
-
-.dark .gradient-divider {
-  background: hsl(0 0% 16%);
+  background: hsl(199 15% 80%);
 }
 
 /* Elevation */
 .elevation-1 {
-  box-shadow: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
+  box-shadow: 0 1px 2px 0 hsl(199 71% 15% / 0.04);
 }
 .elevation-2 {
-  box-shadow: 0 2px 8px 0 hsl(0 0% 0% / 0.06);
+  box-shadow: 0 2px 8px 0 hsl(199 71% 15% / 0.06);
 }
 .elevation-3 {
-  box-shadow: 0 4px 16px 0 hsl(0 0% 0% / 0.08);
+  box-shadow: 0 4px 16px 0 hsl(199 71% 15% / 0.08);
 }
 .elevation-4 {
-  box-shadow: 0 8px 32px 0 hsl(0 0% 0% / 0.1);
-}
-
-.dark .elevation-1,
-.dark .elevation-2,
-.dark .elevation-3,
-.dark .elevation-4 {
-  box-shadow: none;
+  box-shadow: 0 8px 32px 0 hsl(199 71% 15% / 0.1);
 }
 
 /* Glass header */
 .glass {
-  background: hsl(0 0% 98% / 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.dark .glass {
-  background: hsl(0 0% 4% / 0.9);
+  background: hsl(0 0% 93% / 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
