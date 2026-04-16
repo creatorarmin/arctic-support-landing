@@ -320,7 +320,7 @@ const About = () => {
             </p>
             <p>
               Vårt team kombinerar erfarenhet inom kundservice med
-              tekniklösningar. <span className="text-foreground font-medium">Vi ersätter inte människor, vi gör dem effektivare.</span>
+              tekniklösningar. <span className="text-foreground font-semibold">Vi ersätter inte människor, vi gör dem effektivare.</span>
             </p>
             <p>
               Idag arbetar vi med företag i alla storlekar för att skapa
