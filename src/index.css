@@ -6,23 +6,23 @@
 
 @layer base {
   :root {
-    --background: 210 8% 68%;
-    --foreground: 199 71% 12%;
+    --background: 210 10% 22%;
+    --foreground: 0 0% 95%;
 
-    --card: 210 6% 74%;
-    --card-foreground: 199 71% 12%;
+    --card: 210 8% 28%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 210 6% 74%;
-    --popover-foreground: 199 71% 12%;
+    --popover: 210 8% 28%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 199 71% 15%;
-    --primary-foreground: 0 0% 93%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 210 10% 18%;
 
-    --secondary: 34 40% 90%;
-    --secondary-foreground: 199 50% 20%;
+    --secondary: 210 8% 32%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 210 6% 64%;
-    --muted-foreground: 199 60% 18%;
+    --muted: 210 8% 30%;
+    --muted-foreground: 210 6% 70%;
 
     --accent: 34 73% 78%;
     --accent-foreground: 355 48% 16%;
@@ -30,9 +30,9 @@
     --destructive: 355 48% 16%;
     --destructive-foreground: 0 0% 97%;
 
-    --border: 199 15% 80%;
-    --input: 199 15% 80%;
-    --ring: 199 71% 15%;
+    --border: 210 8% 38%;
+    --input: 210 8% 38%;
+    --ring: 0 0% 95%;
 
     --radius: 0.25rem;
 
@@ -107,7 +107,7 @@
 /* Divider */
 .gradient-divider {
   height: 1px;
-  background: hsl(199 15% 80%);
+  background: hsl(210 8% 38%);
 }
 
 /* Card gradient texture */
@@ -137,7 +137,7 @@
 
 /* Glass header */
 .glass {
-  background: hsl(210 8% 68% / 0.9);
+  background: hsl(210 10% 22% / 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
