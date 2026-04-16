@@ -219,16 +219,16 @@
   background-image: url('/images/texture-card.jpg');
   background-size: cover;
   background-position: center;
-  filter: grayscale(100%) contrast(1.1);
-  opacity: 0.1;
+  filter: grayscale(100%) contrast(1.05);
+  opacity: 0.22;
   pointer-events: none;
   z-index: 0;
-  mix-blend-mode: screen;
+  mix-blend-mode: overlay;
   transition: opacity 0.3s ease;
 }
 
 .texture-card:hover::before {
-  opacity: 0.16;
+  opacity: 0.32;
 }
 
 .texture-card > * {
