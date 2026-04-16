@@ -205,10 +205,11 @@
   z-index: 1;
 }
 
-/* Card texture — subtle network blend for boxes */
+/* Card texture — custom topographic blend for boxes */
 .texture-card {
   position: relative;
   overflow: hidden;
+  background-color: hsl(var(--card)) !important;
 }
 
 .texture-card::before {
@@ -218,17 +219,16 @@
   background-image: url('/images/texture-card.jpg');
   background-size: cover;
   background-position: center;
-  filter: grayscale(100%) invert(1);
-  opacity: 0.18;
+  filter: grayscale(100%) invert(1) contrast(1.4);
+  opacity: 0.45;
   pointer-events: none;
   z-index: 0;
-  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+  mix-blend-mode: multiply;
   transition: opacity 0.3s ease;
 }
 
 .texture-card:hover::before {
-  opacity: 0.14;
+  opacity: 0.6;
 }
 
 .texture-card > * {
