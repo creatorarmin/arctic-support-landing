@@ -15,8 +15,8 @@
     --popover: 215 25% 22%;
     --popover-foreground: 210 20% 96%;
 
-    --primary: 190 85% 55%;
-    --primary-foreground: 215 30% 12%;
+    --primary: 205 70% 48%;
+    --primary-foreground: 210 20% 98%;
 
     --secondary: 215 22% 27%;
     --secondary-foreground: 210 20% 96%;
@@ -24,26 +24,26 @@
     --muted: 215 22% 25%;
     --muted-foreground: 210 15% 72%;
 
-    --accent: 190 70% 48%;
-    --accent-foreground: 215 30% 12%;
+    --accent: 205 65% 42%;
+    --accent-foreground: 210 20% 98%;
 
     --destructive: 0 65% 55%;
     --destructive-foreground: 210 20% 96%;
 
     --border: 215 20% 32%;
     --input: 215 20% 32%;
-    --ring: 190 85% 55%;
+    --ring: 205 70% 48%;
 
     --radius: 0.25rem;
 
     --sidebar-background: 215 30% 14%;
     --sidebar-foreground: 210 20% 96%;
-    --sidebar-primary: 190 85% 55%;
-    --sidebar-primary-foreground: 215 30% 12%;
+    --sidebar-primary: 205 70% 48%;
+    --sidebar-primary-foreground: 210 20% 98%;
     --sidebar-accent: 215 22% 27%;
     --sidebar-accent-foreground: 210 20% 96%;
     --sidebar-border: 215 20% 28%;
-    --sidebar-ring: 190 85% 55%;
+    --sidebar-ring: 205 70% 48%;
   }
 }
 
@@ -94,13 +94,13 @@
   }
 
   :focus-visible {
-    outline: 1px solid hsl(190 85% 55%);
+    outline: 1px solid hsl(205 70% 48%);
     outline-offset: 2px;
   }
 
   ::selection {
-    background: hsl(190 85% 55% / 0.4);
-    color: hsl(210 20% 96%);
+    background: hsl(205 70% 48% / 0.4);
+    color: hsl(210 20% 98%);
   }
 }
 
