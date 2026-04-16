@@ -6,44 +6,44 @@
 
 @layer base {
   :root {
-    --background: 210 10% 22%;
-    --foreground: 0 0% 95%;
+    --background: 215 28% 17%;
+    --foreground: 210 20% 96%;
 
-    --card: 210 8% 28%;
-    --card-foreground: 0 0% 95%;
+    --card: 215 25% 22%;
+    --card-foreground: 210 20% 96%;
 
-    --popover: 210 8% 28%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 215 25% 22%;
+    --popover-foreground: 210 20% 96%;
 
-    --primary: 0 0% 95%;
-    --primary-foreground: 210 10% 18%;
+    --primary: 190 85% 55%;
+    --primary-foreground: 215 30% 12%;
 
-    --secondary: 210 8% 32%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 215 22% 27%;
+    --secondary-foreground: 210 20% 96%;
 
-    --muted: 210 8% 30%;
-    --muted-foreground: 210 6% 70%;
+    --muted: 215 22% 25%;
+    --muted-foreground: 210 15% 72%;
 
-    --accent: 34 73% 78%;
-    --accent-foreground: 355 48% 16%;
+    --accent: 190 70% 48%;
+    --accent-foreground: 215 30% 12%;
 
-    --destructive: 355 48% 16%;
-    --destructive-foreground: 0 0% 97%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 210 20% 96%;
 
-    --border: 210 8% 38%;
-    --input: 210 8% 38%;
-    --ring: 0 0% 95%;
+    --border: 215 20% 32%;
+    --input: 215 20% 32%;
+    --ring: 190 85% 55%;
 
     --radius: 0.25rem;
 
-    --sidebar-background: 199 71% 12%;
-    --sidebar-foreground: 0 0% 93%;
-    --sidebar-primary: 34 73% 78%;
-    --sidebar-primary-foreground: 199 71% 15%;
-    --sidebar-accent: 199 50% 20%;
-    --sidebar-accent-foreground: 0 0% 93%;
-    --sidebar-border: 199 40% 25%;
-    --sidebar-ring: 199 71% 15%;
+    --sidebar-background: 215 30% 14%;
+    --sidebar-foreground: 210 20% 96%;
+    --sidebar-primary: 190 85% 55%;
+    --sidebar-primary-foreground: 215 30% 12%;
+    --sidebar-accent: 215 22% 27%;
+    --sidebar-accent-foreground: 210 20% 96%;
+    --sidebar-border: 215 20% 28%;
+    --sidebar-ring: 190 85% 55%;
   }
 }
 
@@ -94,20 +94,20 @@
   }
 
   :focus-visible {
-    outline: 1px solid hsl(199 71% 15%);
+    outline: 1px solid hsl(190 85% 55%);
     outline-offset: 2px;
   }
 
   ::selection {
-    background: hsl(34 73% 78% / 0.4);
-    color: hsl(199 71% 15%);
+    background: hsl(190 85% 55% / 0.4);
+    color: hsl(210 20% 96%);
   }
 }
 
 /* Divider */
 .gradient-divider {
   height: 1px;
-  background: hsl(210 8% 38%);
+  background: hsl(215 20% 32%);
 }
 
 /* Card gradient texture */
@@ -137,7 +137,7 @@
 
 /* Glass header */
 .glass {
-  background: hsl(210 10% 22% / 0.85);
+  background: hsl(215 28% 17% / 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
