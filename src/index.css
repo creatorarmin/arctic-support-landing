@@ -6,14 +6,14 @@
 
 @layer base {
   :root {
-    --background: 210 8% 82%;
-    --foreground: 199 71% 15%;
+    --background: 210 8% 68%;
+    --foreground: 199 71% 12%;
 
-    --card: 210 6% 86%;
-    --card-foreground: 199 71% 15%;
+    --card: 210 6% 74%;
+    --card-foreground: 199 71% 12%;
 
-    --popover: 210 6% 86%;
-    --popover-foreground: 199 71% 15%;
+    --popover: 210 6% 74%;
+    --popover-foreground: 199 71% 12%;
 
     --primary: 199 71% 15%;
     --primary-foreground: 0 0% 93%;
@@ -21,7 +21,7 @@
     --secondary: 34 40% 90%;
     --secondary-foreground: 199 50% 20%;
 
-    --muted: 210 6% 76%;
+    --muted: 210 6% 64%;
     --muted-foreground: 199 25% 40%;
 
     --accent: 34 73% 78%;
@@ -137,7 +137,7 @@
 
 /* Glass header */
 .glass {
-  background: hsl(210 8% 82% / 0.9);
+  background: hsl(210 8% 68% / 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
