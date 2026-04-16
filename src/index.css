@@ -204,3 +204,34 @@
   position: relative;
   z-index: 1;
 }
+
+/* Card texture — subtle network blend for boxes */
+.texture-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.texture-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/texture-network.png');
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+  transition: opacity 0.3s ease;
+}
+
+.texture-card:hover::before {
+  opacity: 0.14;
+}
+
+.texture-card > * {
+  position: relative;
+  z-index: 1;
+}
